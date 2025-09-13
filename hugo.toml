@@ -13,6 +13,10 @@ images = ["/images/profile.jpg"]
 defaultTheme = "auto"
 disableThemeToggle = false
 
+# Google Analytics (méthode PaperMod)
+[params.analytics.google]
+SiteVerificationTag = "G-WHSESG5NQH"
+
 # Profil et réseaux sociaux
 ShowReadingTime = true
 ShowShareButtons = true
