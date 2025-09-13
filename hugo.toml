@@ -3,6 +3,11 @@ languageCode = 'fr'
 title = 'BANGA Romaric | Développeur Spring & Google Cloud | GDG Libreville | Gabon'
 theme = 'PaperMod'
 
+# Configuration Google Analytics (nouvelle méthode Hugo)
+[services]
+    [services.googleAnalytics]
+        id = 'G-WHSESG5NQH'
+
 [params]
 author = "BANGA Romaric"
 description = "Portfolio de BANGA Romaric, développeur Spring/DevOps/Cloud avec 7+ années d'expérience chez ANINF. Expert microservices, Google Cloud Platform et organisateur GDG Libreville."
@@ -13,9 +18,6 @@ images = ["/images/profile.jpg"]
 defaultTheme = "auto"
 disableThemeToggle = false
 
-# Google Analytics (méthode PaperMod)
-[params.analytics.google]
-SiteVerificationTag = "G-WHSESG5NQH"
 
 # Profil et réseaux sociaux
 ShowReadingTime = true
