@@ -10,7 +10,7 @@ TocOpen: false
 
 > **La plus grande communauté de développeurs du Gabon**
 
-Depuis 2021, je suis fier d'organiser et de faire grandir le **Google Developers Group Libreville**, une communauté passionnée de **500+ développeurs, designers et entrepreneurs tech** basés au Gabon et en Afrique centrale.
+Depuis 2021, je suis fier d'organiser et de faire grandir le **Google Developers Group Libreville**, une communauté passionnée de **400+ développeurs, designers et entrepreneurs tech** basés au Gabon et en Afrique centrale.
 
 ---
 
@@ -192,16 +192,15 @@ Nous avons eu l'honneur d'accueillir des experts internationaux :
 
 ## 📞 Contactez-nous
 
-- 🌐 **Site web** : [gdg-libreville.org](https://gdg-libreville.org)
+- 🌐 **Site web officiel** : [gdg.community.dev/gdg-libreville](https://gdg.community.dev/gdg-libreville/)
+- 📧 **Organisateur** : bangaromaric@gmail.com
 - 📧 **Email général** : hello@gdg-libreville.org
-- 📧 **Organisateur** : banga.romaric@gmail.com
-- 📱 **WhatsApp** : +241 XX XX XX XX
 
 ### Réseaux sociaux
-- 🐦 **Twitter** : [@gdg_libreville](https://twitter.com/gdg_libreville)
-- 📘 **Facebook** : [GDG Libreville](https://facebook.com/gdglibreville)
+- 🐦 **Twitter** : [@GDGLibreville](https://www.twitter.com/GDGLibreville)
+- 📘 **Facebook** : [GDG Libreville](https://www.facebook.com/gdglibreville/)
+- 💼 **LinkedIn** : [Google Developer Groups](https://www.linkedin.com/showcase/google-developer-groups/about/)
 - 📸 **Instagram** : [@gdg.libreville](https://instagram.com/gdg.libreville)
-- 💼 **LinkedIn** : [GDG Libreville](https://linkedin.com/company/gdg-libreville)
 
 ---
 

@@ -1,12 +1,12 @@
 baseURL = 'https://banga.github.io'
 languageCode = 'fr'
-title = 'BANGA Romaric Tanguy - Développeur Spring Boot & Organisateur GDG Libreville'
+title = 'BANGA Romaric Tanguy | Développeur Spring & IA | GDG Libreville | Gabon'
 theme = 'PaperMod'
 
 [params]
 author = "BANGA Romaric Tanguy"
-description = "Portfolio de BANGA Romaric Tanguy, développeur Spring Boot expert et organisateur du Google Developers Group Libreville. Spécialisé dans l'architecture microservices et les applications web modernes."
-keywords = ["Spring Boot", "Java", "GDG", "Développeur", "Libreville", "Microservices", "Backend", "Architecture"]
+description = "Portfolio de BANGA Romaric Tanguy, développeur Spring/DevOps/Cloud avec 7+ années d'expérience chez ANINF. Expert microservices, Google Cloud Platform et organisateur GDG Libreville."
+keywords = ["BANGA Romaric", "Développeur Spring", "Intelligence Artificielle", "GDG Libreville", "Gabon", "Java", "Spring Boot", "Android", "ANINF", "Microservices", "DevOps", "Cloud", "Talend", "Assistant IA"]
 
 # SEO et métadonnées
 images = ["/images/profile.jpg"]
@@ -34,22 +34,18 @@ tocopen = false
 [params.profileMode]
 enabled = true
 title = "BANGA Romaric Tanguy"
-subtitle = "Lead Spring Developer | 500K+ Transactions/Mois | Architecte GDG Libreville (500+ Devs)"
+subtitle = "Lead Spring Developer | Google Cloud Platform | Organizer GDG Libreville (400+ Devs)"
 imageUrl = "/images/profile.jpg"
 imageWidth = 200
 imageHeight = 200
 imageTitle = "BANGA Romaric Tanguy - Expert Spring & Leader Tech Africain"
 [[params.profileMode.buttons]]
-name = "🚀 Projets à Impact (GaboMarket, GaboPay)"
+name = "🚀 Projets Innovation IA & Spring"
 url = "/projects"
 
 [[params.profileMode.buttons]]
-name = "💼 Recruter un Expert Spring"
+name = "💼 Services Consultant / Formateur"
 url = "/about"
-
-[[params.profileMode.buttons]]
-name = "🎯 Organiser un Tech Talk / Formation"
-url = "/gdg"
 
 [[params.profileMode.buttons]]
 name = "📚 Articles & Retours d'Expérience"
@@ -57,7 +53,7 @@ url = "/posts"
 
 [[params.socialIcons]]
 name = "email"
-url = "mailto:banga.romaric@gmail.com"
+url = "mailto:bangaromaric@gmail.com"
 
 [[params.socialIcons]]
 name = "linkedin"
@@ -69,7 +65,7 @@ url = "https://github.com/bangaromaric"
 
 [[params.socialIcons]]
 name = "twitter"
-url = "https://twitter.com/banga_romaric"
+url = "https://x.com/bangaromaric"
 
 [[params.socialIcons]]
 name = "rss"

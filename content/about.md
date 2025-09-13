@@ -18,21 +18,35 @@ Contribuer à l'écosystème technologique africain en développant des solution
 ## 🚀 Parcours Professionnel
 
 ### **ANINF - Développeur Web Senior** | *Avril 2020 - Aujourd'hui*
+*Agence Nationale d'Infrastructures Numériques et de Fréquences - Organisme public gabonais*
+
 - **Architecture microservices** avec Spring Boot et Docker
 - **Transformation de données** avec Talend ETL (base à base)
-- **Développement Android** : Application KEWA
+- **Développement Android** : [Application KEWA](https://play.google.com/store/apps/details?id=ga.aninf.examen) (Play Store)
 - **DevOps & Cloud** : Déploiement et orchestration
+- **Solutions numériques** : Applications pour l'administration publique
+- **Modernisation IT** : Migration vers technologies cloud-native
 
 ### **ANINF - Développeur Web** | *Juin 2017 - Juin 2019*
-- **Application de gestion de fréquences** : Développement complet
-- **Gestion parc informatique** : Implémentation GLPI
-- **Maintenance applicative** : Gestion du personnel
-- **Evolution & optimisations** système
+*Développement de solutions pour la gestion des infrastructures numériques nationales*
+
+- **Application de gestion de fréquences** : Système national de régulation
+- **Gestion parc informatique** : Implémentation GLPI pour l'organisme
+- **Maintenance applicative** : Système de gestion du personnel
+- **Evolution & optimisations** : Infrastructure numérique gouvernementale
+
+🌐 **[Site web ANINF](https://aninf.ga/)**
 
 ### **JOBS CONSEIL - Responsable IT** | *Août 2016 - Février 2017*
+*Entreprise spécialisée en conseil RH, formation professionnelle et services aux entreprises*
+
 - **Plans techniques 2D** : Réalisation salles et espaces
-- **Affichage dynamique** : Supports de communication
-- **Management IT** : Coordination projets techniques
+- **Affichage dynamique** : Supports de communication pour événements
+- **Infrastructure IT** : Gestion parc informatique et réseaux
+- **Support technique** : Assistance aux équipes et formations digitales
+- **Projets événementiels** : Solutions techniques pour conférences et formations
+
+🌐 **[Site web JOBS CONSEIL](https://jobs-conseil.com/)**
 
 ### **CAMPUS NUMÉRIQUE - Admin Linux & Dev Android** | *Avril 2016 - Juillet 2016*
 - **Passerelle SMS** : Implémentation Kannel en réseau local
@@ -93,10 +107,17 @@ PHP █████████████████████████�
 
 ## 🏆 Certifications & Formations
 
-- ☁️ **Google Cloud Professional Cloud Architect**
-- ⚡ **Spring Professional Certification**
-- 🐳 **Certified Kubernetes Application Developer (CKAD)**
-- 📱 **Google Associate Android Developer**
+### **Certifications Officielles**
+- ☁️ **Google Certified Associate Cloud Engineer** ✅
+- 📱 **Associate Android Developer** ✅
+
+### **Formation Académique**
+- 🎓 **Master** (2022) - Institut Africain d'Informatique, Libreville
+  - *Option : Conception de Systèmes d'Information*
+- 🎓 **Licence Professionnelle** (2016) - Institut Supérieur de Technologie
+  - *Option : Base de données & Réseaux Web*
+- 🎓 **DUT** (2015) - Institut Supérieur de Technologie  
+  - *Option : Informatique de Gestion*
 
 ---
 
@@ -132,10 +153,10 @@ Site web officiel du GDG Libreville
 
 ## 📞 Restons Connectés
 
-- 📧 **Email** : [banga.romaric@gmail.com](mailto:banga.romaric@gmail.com)
+- 📧 **Email** : [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com)
 - 💼 **LinkedIn** : [linkedin.com/in/banga-romaric-tanguy](https://linkedin.com/in/banga-romaric-tanguy)
 - 🐦 **Twitter** : [@banga_romaric](https://twitter.com/banga_romaric)
-- 💻 **GitHub** : [github.com/banga](https://github.com/banga)
+- 💻 **GitHub** : [github.com/bangaromaric](https://github.com/bangaromaric)
 
 ---
 

@@ -3,14 +3,13 @@ title: "Accueil"
 description: "Portfolio de BANGA Romaric Tanguy, développeur Spring Boot expert et organisateur GDG Libreville"
 ---
 
-## 🚀 Applications en Production
+## 🚀 Innovation IA en Production
 
-**GaboPay** • FinTech • 500K+ transactions/mois  
-**GaboMarket** • E-commerce • 2000+ produits actifs  
+**Assistant IA Gabonais** • Démarches administratives • Spring AI • Reconnaissance vocale  
 
 ## 🌍 Impact Communautaire  
 
-**GDG Libreville** • 500+ développeurs • DevFest 400+ participants  
+**GDG Libreville** • 400+ développeurs • DevFest 400+ participants  
 
 ## 📊 Expertise Technique
 
