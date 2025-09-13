@@ -1,4 +1,4 @@
-baseURL = 'https://github.com/bangaromaric/banga-portfolio.git'
+baseURL = 'https://bangaromaric.dev'
 languageCode = 'fr'
 title = 'BANGA Romaric | Développeur Spring & Google Cloud | GDG Libreville | Gabon'
 theme = 'PaperMod'
