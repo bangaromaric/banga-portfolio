@@ -4,7 +4,3 @@
 </head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 {{- /* Head custom content area end */ -}}
-<!-- layouts/partials/extend_head.html -->
-{{ if not .Site.IsServer }}
-{{ partial "google_analytics.html" . }}
-{{ end }}
