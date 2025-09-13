@@ -1,163 +1,125 @@
 ---
-title: "À propos de moi"
-date: 2024-09-15
-description: "Découvrez mon parcours, mes compétences et ma passion pour le développement et la communauté tech"
+title: "BANGA Romaric - Développeur Spring & Google Cloud | Consultant Technique"
+date: 2025-09-01
+description: "Développeur Spring/DevOps avec 12+ années d'expérience, travail pour l'ANINF, créateur Assistant IA Gabonais, organisateur du GDG Libreville."
 showToc: true
 TocOpen: false
 ---
 
-## 👨‍💻 Mon Histoire
+<div style="text-align: center;">
 
-Basé à **Libreville, Gabon**, je suis un développeur Spring/DevOps/Cloud passionné avec plus de **7 années d'expérience** dans la création d'applications robustes et scalables. Mon parcours combine expertise technique approfondie et engagement communautaire fort.
+# **Développeur Spring & Google Cloud | 12+ Années d'Excellence**
 
-### 🎯 Ma Mission
-Contribuer à l'écosystème technologique africain en développant des solutions innovantes et en partageant mes connaissances avec la communauté des développeurs.
+**Libreville, Gabon** 🇬🇦 | **Consultant/Formateur**
 
----
-
-## 🚀 Parcours Professionnel
-
-### **ANINF - Développeur Web Senior** | *Avril 2020 - Aujourd'hui*
-*Agence Nationale d'Infrastructures Numériques et de Fréquences - Organisme public gabonais*
-
-- **Architecture microservices** avec Spring Boot et Docker
-- **Transformation de données** avec Talend ETL (base à base)
-- **Développement Android** : [Application KEWA](https://play.google.com/store/apps/details?id=ga.aninf.examen) (Play Store)
-- **DevOps & Cloud** : Déploiement et orchestration
-- **Solutions numériques** : Applications pour l'administration publique
-- **Modernisation IT** : Migration vers technologies cloud-native
-
-### **ANINF - Développeur Web** | *Juin 2017 - Juin 2019*
-*Développement de solutions pour la gestion des infrastructures numériques nationales*
-
-- **Application de gestion de fréquences** : Système national de régulation
-- **Gestion parc informatique** : Implémentation GLPI pour l'organisme
-- **Maintenance applicative** : Système de gestion du personnel
-- **Evolution & optimisations** : Infrastructure numérique gouvernementale
-
-🌐 **[Site web ANINF](https://aninf.ga/)**
-
-### **JOBS CONSEIL - Responsable IT** | *Août 2016 - Février 2017*
-*Entreprise spécialisée en conseil RH, formation professionnelle et services aux entreprises*
-
-- **Plans techniques 2D** : Réalisation salles et espaces
-- **Affichage dynamique** : Supports de communication pour événements
-- **Infrastructure IT** : Gestion parc informatique et réseaux
-- **Support technique** : Assistance aux équipes et formations digitales
-- **Projets événementiels** : Solutions techniques pour conférences et formations
-
-🌐 **[Site web JOBS CONSEIL](https://jobs-conseil.com/)**
-
-### **CAMPUS NUMÉRIQUE - Admin Linux & Dev Android** | *Avril 2016 - Juillet 2016*
-- **Passerelle SMS** : Implémentation Kannel en réseau local
-- **Réseaux MPLS** : Environnement Open Source
-- **Application Android** : Inscription + serveur messagerie Linux
+</div>
 
 ---
 
-## 💼 Compétences Techniques
+## **Profil Expert**
 
-### **Langages de Programmation**
-```text
-Java ████████████████████████████████████ 95%
-Kotlin ███████████████████████████████ 85%
-Python █████████████████████████████ 80%
-JavaScript/TypeScript ██████████████████████ 75%
-PHP ██████████████████████████ 70%
-```
+- **Développeur Spring/DevOps**, travaillant sur des applications monolithiques et des microservices à **[l'ANINF](https://aninf.ga/)**  
+- **Pioneer IA Gabonais** avec l'[Assistant administratif](https://www.linkedin.com/posts/romaric-banga_innovationcivique-springai-ai-activity-7298772312009437185-jNP8?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB5TRogB9J0StnV_Vcpl1reDW0P_0GOsLwY) (Spring AI)  
+- **Créateur de l'application Android [KEWA](https://play.google.com/store/apps/details?id=ga.aninf.examen)** - Application éducative Android en production  
+- **Organisateur [Google Developers Group Libreville](https://gdg.community.dev/gdg-libreville/)** - 400+ développeurs, DevFest 400+ participants  
 
-### **Technologies & Frameworks**
-- **Backend** : Spring Boot, Spring Framework
-- **Mobile** : Android Development (Kotlin/Java)
-- **IA Générative** : Spring AI, NLP, Prompt Engineering
-- **Data Integration** : Talend ETL, base à base
-- **Frontend** : JavaScript, TypeScript
-
-### **Cloud & DevOps**
-- **Google Cloud Platform** : Associate Cloud Engineer certifié
-- **Containerisation** : Docker, orchestration
-- **Infrastructure** : Kubernetes, microservices
-- **Systèmes** : Linux, Windows
-
-### **Bases de Données**                                                                                 │ │
-- **Relationnelles** : PostgreSQL, MySQL, Oracle                                                         │ │
-- **NoSQL** : MongoDB, Redis, Firestore                                                                  │ │
-- **Performance** : Optimisation requêtes, indexation, partitioning
+### **Mes Services**
+- **Consulting Technique** : Architecture d'application web, audit code, migration cloud, DevOps
+- **Formation Entreprise** : Spring Framework, IA générative, bonnes pratiques
+- **Conférences & Talks** : Google Cloud, Spring Framework, LLM
 
 ---
 
-## 🌍 Leadership Communautaire
+## **Qualifications & Expertise**
 
-### **Google Developers Group Libreville**
-*Organisateur Principal depuis 2021*
+###  **Certifications Officielles**
+-  **Google Cloud Associate Engineer** (Certifié)
+-  **Associate Android Developer** (Google)
 
-#### 📈 Impact & Chiffres
-- **500+ développeurs** dans la communauté
-- **25+ événements** organisés (meetups, workshops, hackathons)
-- **150+ participants** moyens par événement
-- **30+ speakers** internationaux invités
-
-#### 🎯 Initiatives Phares
-- **DevFest Libreville 2023** : 400+ participants, plus grand événement tech du Gabon
-- **Women Techmakers** : Programme de mentorat pour développeuses
-- **Android Study Jams** : Formation mobile development
-- **Cloud Study Jams** : Certification Google Cloud
+### **Formation Académique Solide**  
+- **Master SI** (2022) - Conception des systèmes d'information
+- **Licence Pro** (2016) - Bases de données & Réseaux
+- **DUT Informatique** (2015) - Informatique de Gestion
 
 ---
 
-## 🏆 Certifications & Formations
+## **Parcours Professionnel**
 
-### **Certifications Officielles**
-- ☁️ **Google Certified Associate Cloud Engineer** ✅
-- 📱 **Associate Android Developer** ✅
+### **[ANINF](https://aninf.ga/) - Développeur Web Senior** | *2017 - Aujourd'hui (7+ ans)*
+*Agence Nationale d'Infrastructures Numériques et de Fréquences*
 
-### **Formation Académique**
-- 🎓 **Master** (2022) - Institut Africain d'Informatique, Libreville
-  - *Option : Conception de Systèmes d'Information*
-- 🎓 **Licence Professionnelle** (2016) - Institut Supérieur de Technologie
-  - *Option : Base de données & Réseaux Web*
-- 🎓 **DUT** (2015) - Institut Supérieur de Technologie  
-  - *Option : Informatique de Gestion*
+- **Architecture microservices** : Spring Boot + Docker pour applications gouvernementales
+- **ETL & Data** : Transformation données avec Talend (base à base)  
+- **App Mobile** : [KEWA Android](https://play.google.com/store/apps/details?id=ga.aninf.examen) en production Play Store
+- **Systèmes critiques** : Gestion fréquences nationales, parc informatique GLPI
 
----
+### **[JOBS CONSEIL](https://jobs-conseil.com/) - Responsable IT** | *2016 - 2017*
+*Tout pour une meilleure communication numérique*
 
-## 🎤 Interventions & Talks
+- **Infrastructure IT** : Plans techniques 2D, affichage dynamique
+- **Support technique** : Assistance équipes et formations digitales
 
-### Conférences Internationales
-- **DevFest West Africa 2023** - "Microservices Architecture Patterns"
-- **GDG Summit 2022** - "Building Scalable Apps with Spring Boot"
-- **Africa Tech Summit 2023** - "Cloud-Native Development in Africa"
+### **CAMPUS NUMÉRIQUE - DevOps & Mobile** | *2016*
 
-### Formations & Workshops
-- **Spring Boot Masterclass** - Formation intensive 40h
-- **Microservices Workshop** - Architecture distribuée
-- **Cloud Migration Strategy** - Entreprises locales
+- **Réseaux** : Passerelle SMS (Kannel), MPLS Open Source
+- **Development** : Application Android + serveur messagerie Linux
+
+### **J&DCONSULTING - Full-Stack Developer** | *2015*
+
+- **Applications métier** : Gestion flotte automobile avec notifications SMS/Email
+- **Projet complexe** : Centre d'appel avec intégrations systèmes
 
 ---
 
-## 🌟 Projets Open Source
+## ⚡ **Stack Technique Expert**
 
-### [spring-boot-gabon-starter](https://github.com/banga/spring-boot-gabon)
-Starter Spring Boot adapté aux spécificités du développement au Gabon
-- **150+ stars** ⭐
-- **30+ forks** 🍴
-- Intégration paiements mobiles locaux
+<div style="text-align: center;">
 
-### [gdg-libreville-website](https://github.com/gdg-libreville/website)
-Site web officiel du GDG Libreville
-- **JAMstack** avec Hugo
-- **CI/CD** automatisé
-- **PWA** optimisée
+### **Technologies Maîtrisées**
 
----
+| **Domaine** | **Technologies** |
+|-------------|------------------|
+| **Backend** | Java, Spring Boot, Microservices |
+| **Sécurité** | Keycloak, Spring Security, OAuth2 |
+| **IA & ML** | Spring AI, NLP, Prompt Engineering |
+| **Mobile** | Android, Kotlin, Firebase |
+| **Cloud** | Google Cloud (Certifié), Docker, K8s |
+| **Data** | Talend ETL, PostgreSQL, MongoDB |
 
-## 📞 Restons Connectés
-
-- 📧 **Email** : [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com)
-- 💼 **LinkedIn** : [linkedin.com/in/banga-romaric-tanguy](https://linkedin.com/in/banga-romaric-tanguy)
-- 🐦 **Twitter** : [@banga_romaric](https://twitter.com/banga_romaric)
-- 💻 **GitHub** : [github.com/bangaromaric](https://github.com/bangaromaric)
+</div>
 
 ---
 
-*"La technologie est un moyen, l'impact humain est le but"*
+## **Collaborons Ensemble !**
+
+<div style="text-align: center;">
+
+### **Mes Services**
+
+</div>
+
+| **Service** | **Description**                                                                               | **Technologies**         |
+|------------|-----------------------------------------------------------------------------------------------|--------------------------|
+| **Consulting Technique** | Architecture d'application web, audit code, migration cloud, DevOps, migration microservices | Spring Boot, Docker, K8s |
+| **Formation** | Spring Framework, IA générative, DevOps                                                       | Spring AI, GCP, Keycloak |
+| **Conférences & Talks** | Dans le domaine du développement                                                              | --------                 |
+
+---
+
+
+<div style="text-align: center;">
+
+## 📞 **Contact Direct**
+
+### **Discutons de Votre Projet**
+
+</div>
+
+| **Canal** | **Lien** |
+|-----------|----------|
+| **📧 Email** | [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com?subject=Demande%20Collaboration%20Technique) |
+| **💼 LinkedIn** | [romaric-banga](https://www.linkedin.com/in/romaric-banga/) |
+| **💻 GitHub** | [bangaromaric](https://github.com/bangaromaric) |
+
+---
+

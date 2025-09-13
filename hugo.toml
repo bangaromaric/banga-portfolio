@@ -1,11 +1,11 @@
 baseURL = 'https://banga.github.io'
 languageCode = 'fr'
-title = 'BANGA Romaric Tanguy | Développeur Spring & IA | GDG Libreville | Gabon'
+title = 'BANGA Romaric | Développeur Spring & Google Cloud | GDG Libreville | Gabon'
 theme = 'PaperMod'
 
 [params]
-author = "BANGA Romaric Tanguy"
-description = "Portfolio de BANGA Romaric Tanguy, développeur Spring/DevOps/Cloud avec 7+ années d'expérience chez ANINF. Expert microservices, Google Cloud Platform et organisateur GDG Libreville."
+author = "BANGA Romaric"
+description = "Portfolio de BANGA Romaric, développeur Spring/DevOps/Cloud avec 7+ années d'expérience chez ANINF. Expert microservices, Google Cloud Platform et organisateur GDG Libreville."
 keywords = ["BANGA Romaric", "Développeur Spring", "Intelligence Artificielle", "GDG Libreville", "Gabon", "Java", "Spring Boot", "Android", "ANINF", "Microservices", "DevOps", "Cloud", "Talend", "Assistant IA"]
 
 # SEO et métadonnées
@@ -33,12 +33,12 @@ tocopen = false
 # Configuration Mode Profile - Page d'accueil avec photo
 [params.profileMode]
 enabled = true
-title = "BANGA Romaric Tanguy"
-subtitle = "Lead Spring Developer | Google Cloud Platform | Organizer GDG Libreville (400+ Devs)"
+title = "BANGA Romaric"
+subtitle = "Lead Spring Developer | Google Cloud | Organizer GDG Libreville (400+ Devs)"
 imageUrl = "/images/profile.jpg"
 imageWidth = 200
 imageHeight = 200
-imageTitle = "BANGA Romaric Tanguy - Expert Spring & Leader Tech Africain"
+imageTitle = "BANGA Romaric - Expert Spring & Google Cloud"
 [[params.profileMode.buttons]]
 name = "🚀 Projets Innovation IA & Spring"
 url = "/projects"
