@@ -1,0 +1,43 @@
+# Hugo build artifacts
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# IDE files
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.pid
+
+# Node.js (if using npm for development)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Hugo cache
+/.hugo_build.lock
+/resources/
+
+# Local environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

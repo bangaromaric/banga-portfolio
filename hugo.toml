@@ -1,0 +1,108 @@
+baseURL = 'https://banga.github.io'
+languageCode = 'fr'
+title = 'BANGA Romaric Tanguy - Développeur Spring Boot & Organisateur GDG Libreville'
+theme = 'PaperMod'
+
+[params]
+author = "BANGA Romaric Tanguy"
+description = "Portfolio de BANGA Romaric Tanguy, développeur Spring Boot expert et organisateur du Google Developers Group Libreville. Spécialisé dans l'architecture microservices et les applications web modernes."
+keywords = ["Spring Boot", "Java", "GDG", "Développeur", "Libreville", "Microservices", "Backend", "Architecture"]
+
+# SEO et métadonnées
+images = ["/images/profile.jpg"]
+defaultTheme = "auto"
+disableThemeToggle = false
+
+# Profil et réseaux sociaux
+ShowReadingTime = true
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+disableSpecial1stPost = false
+disableScrollToTop = false
+comments = false
+hidemeta = false
+hideSummary = false
+showtoc = false
+tocopen = false
+
+# Configuration Mode Profile - Page d'accueil avec photo
+[params.profileMode]
+enabled = true
+title = "BANGA Romaric Tanguy"
+subtitle = "Lead Spring Developer | 500K+ Transactions/Mois | Architecte GDG Libreville (500+ Devs)"
+imageUrl = "/images/profile.jpg"
+imageWidth = 200
+imageHeight = 200
+imageTitle = "BANGA Romaric Tanguy - Expert Spring & Leader Tech Africain"
+[[params.profileMode.buttons]]
+name = "🚀 Projets à Impact (GaboMarket, GaboPay)"
+url = "/projects"
+
+[[params.profileMode.buttons]]
+name = "💼 Recruter un Expert Spring"
+url = "/about"
+
+[[params.profileMode.buttons]]
+name = "🎯 Organiser un Tech Talk / Formation"
+url = "/gdg"
+
+[[params.profileMode.buttons]]
+name = "📚 Articles & Retours d'Expérience"
+url = "/posts"
+
+[[params.socialIcons]]
+name = "email"
+url = "mailto:banga.romaric@gmail.com"
+
+[[params.socialIcons]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/romaric-banga/"
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/bangaromaric"
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/banga_romaric"
+
+[[params.socialIcons]]
+name = "rss"
+url = "/posts/index.xml"
+
+# Menu principal
+[[menu.main]]
+name = "Accueil"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "À propos"
+url = "/about/"
+weight = 2
+
+[[menu.main]]
+name = "Projets"
+url = "/projects/"
+weight = 3
+
+[[menu.main]]
+name = "Blog"
+url = "/posts/"
+weight = 4
+
+[[menu.main]]
+name = "GDG Libreville"
+url = "/gdg/"
+weight = 5
+
+# Configuration pour GitHub Pages
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
