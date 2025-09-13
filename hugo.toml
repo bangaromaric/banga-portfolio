@@ -19,6 +19,13 @@ defaultTheme = "auto"
 disableThemeToggle = false
 
 
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
+
+
 # Profil et réseaux sociaux
 ShowReadingTime = true
 ShowShareButtons = true
