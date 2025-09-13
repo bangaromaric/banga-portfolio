@@ -8,7 +8,7 @@ TocOpen: false
 
 ## 👨‍💻 Mon Histoire
 
-Basé à **Libreville, Gabon**, je suis un développeur Spring Boot passionné avec plus de **5 années d'expérience** dans la création d'applications web robustes et scalables. Mon parcours combine expertise technique approfondie et engagement communautaire fort.
+Basé à **Libreville, Gabon**, je suis un développeur Spring/DevOps/Cloud passionné avec plus de **7 années d'expérience** dans la création d'applications robustes et scalables. Mon parcours combine expertise technique approfondie et engagement communautaire fort.
 
 ### 🎯 Ma Mission
 Contribuer à l'écosystème technologique africain en développant des solutions innovantes et en partageant mes connaissances avec la communauté des développeurs.
@@ -17,45 +17,57 @@ Contribuer à l'écosystème technologique africain en développant des solution
 
 ## 🚀 Parcours Professionnel
 
-### **Lead Developer Backend** | *2022 - Présent*
-- Direction d'équipes de 5+ développeurs
-- Architecture et développement de 15+ microservices
-- Amélioration des performances : réduction de 60% des temps de réponse
-- Mentoring et formation des développeurs juniors
+### **ANINF - Développeur Web Senior** | *Avril 2020 - Aujourd'hui*
+- **Architecture microservices** avec Spring Boot et Docker
+- **Transformation de données** avec Talend ETL (base à base)
+- **Développement Android** : Application KEWA
+- **DevOps & Cloud** : Déploiement et orchestration
 
-### **Senior Spring Boot Developer** | *2020 - 2022*
-- Développement d'applications e-commerce haute disponibilité
-- Migration vers architecture cloud-native (GCP)
-- Implémentation CI/CD et DevOps practices
-- Réduction des bugs en production de 80%
+### **ANINF - Développeur Web** | *Juin 2017 - Juin 2019*
+- **Application de gestion de fréquences** : Développement complet
+- **Gestion parc informatique** : Implémentation GLPI
+- **Maintenance applicative** : Gestion du personnel
+- **Evolution & optimisations** système
 
-### **Full-Stack Java Developer** | *2019 - 2020*
-- Applications web avec Spring Boot + Angular
-- Intégration APIs tier et systèmes de paiement
-- Optimisation bases de données et requêtes SQL
+### **JOBS CONSEIL - Responsable IT** | *Août 2016 - Février 2017*
+- **Plans techniques 2D** : Réalisation salles et espaces
+- **Affichage dynamique** : Supports de communication
+- **Management IT** : Coordination projets techniques
+
+### **CAMPUS NUMÉRIQUE - Admin Linux & Dev Android** | *Avril 2016 - Juillet 2016*
+- **Passerelle SMS** : Implémentation Kannel en réseau local
+- **Réseaux MPLS** : Environnement Open Source
+- **Application Android** : Inscription + serveur messagerie Linux
 
 ---
 
 ## 💼 Compétences Techniques
 
-### **Backend & Architecture**
+### **Langages de Programmation**
 ```text
-Java 17+ ████████████████████████████████ 95%
-Spring Boot ██████████████████████████████ 95%
-Spring Security ███████████████████████████ 90%
-Microservices ██████████████████████████████ 90%
-JPA/Hibernate ████████████████████████████ 88%
+Java ████████████████████████████████████ 95%
+Kotlin ███████████████████████████████ 85%
+Python █████████████████████████████ 80%
+JavaScript/TypeScript ██████████████████████ 75%
+PHP ██████████████████████████ 70%
 ```
 
-### **Cloud & DevOps**
-- **Google Cloud Platform** : Compute Engine, Cloud SQL, Kubernetes Engine
-- **Containerisation** : Docker, Kubernetes, Cloud Run
-- **CI/CD** : Jenkins, GitLab CI, GitHub Actions
-- **Monitoring** : Prometheus, Grafana, Cloud Monitoring
+### **Technologies & Frameworks**
+- **Backend** : Spring Boot, Spring Framework
+- **Mobile** : Android Development (Kotlin/Java)
+- **IA Générative** : Spring AI, NLP, Prompt Engineering
+- **Data Integration** : Talend ETL, base à base
+- **Frontend** : JavaScript, TypeScript
 
-### **Bases de Données**
-- **Relationnelles** : PostgreSQL, MySQL, Oracle
-- **NoSQL** : MongoDB, Redis, Firestore
+### **Cloud & DevOps**
+- **Google Cloud Platform** : Associate Cloud Engineer certifié
+- **Containerisation** : Docker, orchestration
+- **Infrastructure** : Kubernetes, microservices
+- **Systèmes** : Linux, Windows
+
+### **Bases de Données**                                                                                 │ │
+- **Relationnelles** : PostgreSQL, MySQL, Oracle                                                         │ │
+- **NoSQL** : MongoDB, Redis, Firestore                                                                  │ │
 - **Performance** : Optimisation requêtes, indexation, partitioning
 
 ---
