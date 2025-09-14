@@ -34,6 +34,11 @@ ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowWordCount = true
 ShowRssButtonInSectionTermList = true
+
+# Footer personnalisé
+label.text = "© 2024 BANGA Romaric - Expert Spring & Google Cloud"
+label.icon = ""
+label.iconHeight = 0
 UseHugoToc = true
 disableSpecial1stPost = false
 disableScrollToTop = false
