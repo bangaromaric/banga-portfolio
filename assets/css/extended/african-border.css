@@ -1,0 +1,103 @@
+/* ===== BORDURE AFRICAINE POUR PHOTO PROFIL ===== */
+
+:root {
+    /* Couleurs inspirées du drapeau gabonais */
+    --african-green: #56a672;
+    --african-yellow: #f4da6d;
+    --african-blue: #6791c8;
+    
+    /* Motif de pagne africain en SVG Data URI - Ultra léger */
+    --pagne-pattern: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3C!-- Motif tissage pagne --%3E%3Cpath d='M0 10 L10 0 L20 10 L10 20 Z' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='0.4'/%3E%3Cpath d='M5 5 L15 5 M5 15 L15 15' stroke='%23ffffff' stroke-width='0.3' stroke-opacity='0.3'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%23ffffff' fill-opacity='0.2'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ===== BORDURE TRICOLORE AVEC MOTIFS PAGNE ===== */
+.profile img {
+    /* Bordure tricolore gabonaise */
+    border: 3px solid transparent;
+    background: 
+        /* Motif pagne par-dessus */
+        var(--pagne-pattern),
+        /* Gradient tricolore gabonais */
+        linear-gradient(45deg,
+            var(--african-blue) 0%,
+            var(--african-blue) 33%,
+            var(--african-yellow) 33%, 
+            var(--african-yellow) 66%, 
+            var(--african-green) 66%, 
+            var(--african-green) 100%
+        );
+    background-clip: border-box;
+    background-origin: border-box;
+    background-size: 12px 12px, 100% 100%;
+    
+    /* Ombre subtile pour effet de profondeur */
+    box-shadow: 
+        0 0 0 2px rgba(255, 255, 255, 0.1),
+        0 4px 20px rgba(0, 150, 57, 0.2);
+    
+    /* Transition douce */
+    transition: all 0.3s ease;
+}
+
+/* Effet hover subtil */
+.profile img:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 0 0 2px rgba(255, 255, 255, 0.2),
+        0 6px 30px rgba(0, 150, 57, 0.3);
+}
+
+/* ===== OPTIMISATIONS PERFORMANCE ===== */
+
+/* Désactivation hover sur mobile */
+@media (hover: none) {
+    .profile img:hover {
+        transform: none;
+    }
+}
+
+/* Adaptation responsive */
+@media (max-width: 768px) {
+    .profile img {
+        border-width: 4px;
+        background-size: 8px 8px, 100% 100%;
+    }
+}
+
+/* Réduction mouvement si demandée */
+@media (prefers-reduced-motion: reduce) {
+    .profile img {
+        transition: none;
+    }
+    
+    .profile img:hover {
+        transform: none;
+    }
+}
+
+/* ===== DARK MODE ADAPTATION ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Motif pagne adapté au dark mode */
+        --pagne-pattern: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3C!-- Motif tissage pagne --%3E%3Cpath d='M0 10 L10 0 L20 10 L10 20 Z' stroke='%23000000' stroke-width='0.5' stroke-opacity='0.3'/%3E%3Cpath d='M5 5 L15 5 M5 15 L15 15' stroke='%23000000' stroke-width='0.3' stroke-opacity='0.2'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%23000000' fill-opacity='0.15'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .profile img {
+        box-shadow: 
+            0 0 0 2px rgba(0, 0, 0, 0.1),
+            0 4px 20px rgba(0, 150, 57, 0.15);
+    }
+    
+    .profile img:hover {
+        box-shadow: 
+            0 0 0 2px rgba(0, 0, 0, 0.2),
+            0 6px 30px rgba(0, 150, 57, 0.25);
+    }
+}
+
+/* ===== ACCESSIBILITÉ ===== */
+/* Focus visible pour navigation clavier */
+.profile img:focus-visible {
+    outline: 3px solid var(--african-yellow);
+    outline-offset: 4px;
+}
