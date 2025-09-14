@@ -58,15 +58,15 @@ imageWidth = 200
 imageHeight = 200
 imageTitle = "BANGA Romaric - Expert Spring & Google Cloud"
 [[params.profileMode.buttons]]
-name = "🚀 Projets Innovation IA & Spring"
+name = " Projets Innovation IA & Spring"
 url = "/projects"
 
 [[params.profileMode.buttons]]
-name = "💼 Services Consultant / Formateur"
+name = " Services Consultant / Formateur"
 url = "/about"
 
 [[params.profileMode.buttons]]
-name = "📚 Articles & Retours d'Expérience"
+name = " Articles & Retours d'Expérience"
 url = "/posts"
 
 [[params.socialIcons]]
