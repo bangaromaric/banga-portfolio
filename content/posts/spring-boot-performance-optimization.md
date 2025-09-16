@@ -13,7 +13,7 @@ TocOpen: false
 
 Après 5 années de développement Spring Boot et des dizaines d'applications déployées en production, j'ai compilé les techniques les plus efficaces pour optimiser les performances de vos applications.
 
-## 🚀 Optimisations JVM
+## Optimisations JVM
 
 ### Configuration mémoire
 ```bash
@@ -29,7 +29,7 @@ Après 5 années de développement Spring Boot et des dizaines d'applications d�
 - **JProfiler** pour le profiling
 - **GC logs** pour l'analyse garbage collection
 
-## 🗄️ Optimisations Base de Données
+##  Optimisations Base de Données
 
 ### Connection Pool
 ```yaml
@@ -47,12 +47,12 @@ spring:
 - **Batch processing** pour les insertions
 - **N+1 queries** évitées avec `@EntityGraph`
 
-## 📊 Résultats obtenus
+##  Résultats obtenus
 
 Sur une application e-commerce traitant 10K req/min :
-- ⚡ **Temps de réponse** : -60% (800ms → 320ms)
-- 💾 **Consommation mémoire** : -40%
-- 🔄 **Throughput** : +150%
+-  **Temps de réponse** : -60% (800ms → 320ms)
+-  **Consommation mémoire** : -40%
+-  **Throughput** : +150%
 
 ## Conclusion
 
