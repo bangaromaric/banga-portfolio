@@ -20,13 +20,13 @@ Ce projet exploratoire révolutionnaire transforme l'expérience administrative 
 
 ---
 
-## 🎯 **La Problématique Résolue**
+## **La Problématique Résolue**
 
 ### **Défis Administratifs au Gabon**
-- 🏛️ **Complexité bureaucratique** : Procédures opaques et multiples guichets
-- ⏰ **Temps d'attente** : Files interminables et horaires restreints  
-- 📋 **Information dispersée** : Documents requis non centralisés
-- 🗣️ **Barrière linguistique** : Jargon administratif peu accessible
+-  **Complexité bureaucratique** : Procédures opaques et multiples guichets
+-  **Temps d'attente** : Files interminables et horaires restreints  
+-  **Information dispersée** : Documents requis non centralisés
+-  **Barrière linguistique** : Jargon administratif peu accessible
 
 ### **Notre Solution IA**
 ✅ **Guide numérique 24h/24** disponible partout  
@@ -37,7 +37,7 @@ Ce projet exploratoire révolutionnaire transforme l'expérience administrative 
 
 ---
 
-## 🚀 **Architecture Technique Innovante**
+## **Architecture Technique Innovante**
 
 ### **Stack Technologique**
 ```yaml
@@ -63,24 +63,20 @@ Frontend Conversationnel:
 
 ## 💡 **Fonctionnalités Révolutionnaires**
 
-### 🎤 **Interaction Multimodale**
+###  **Interaction Multimodale**
 - **Reconnaissance vocale** : "Dis-moi comment obtenir mon passeport"
 - **Chat textuel** : Questions écrites en français naturel
 - **Réponses contextuelles** : Adaptation au profil utilisateur
 
-### 📋 **Génération Intelligente**
+###  **Génération Intelligente**
 - **Checklists personnalisées** : Étapes adaptées à votre situation
 - **Formulaires pré-remplis** : Gain de temps considérable
 - **Calendriers optimaux** : Meilleurs créneaux pour vos démarches
 
-### 🎯 **Guidance Proactive**
-- **Alertes préventives** : "N'oubliez pas votre attestation de domicile"
-- **Alternatives proposées** : Plusieurs parcours possibles
-- **Estimation temps** : Durée réaliste de chaque étape
 
 ---
 
-## 📊 **Démarches Couvertes**
+##  **Démarches Couvertes**
 
 ### **Documents d'Identité**
 - Carte d'identité nationale
@@ -88,21 +84,11 @@ Frontend Conversationnel:
 - Permis de conduire
 - Acte de naissance
 
-### **Démarches Professionnelles**
-- Création d'entreprise
-- Autorisation d'exercer
-- Déclaration fiscale
-- Registre du commerce
 
-### **Services Sociaux**
-- Allocation familiale
-- Couverture maladie
-- Bourses d'études
-- Aide au logement
 
 ---
 
-## 🛠️ **Innovation Technique Spring AI**
+## 🛠 **Innovation Technique Spring AI**
 
 ### **Prompt Engineering Avancé**
 ```java
@@ -131,42 +117,42 @@ public class GabonAdministrationService {
 
 ---
 
-## 📈 **Impact et Résultats**
+##  **Impact et Résultats**
 
 ### **Tests Utilisateurs**
-- 🎯 **90% satisfaction** : Interface intuitive et réponses précises
-- ⚡ **-70% temps recherche** : Information trouvée instantanément  
-- 🎤 **85% préfèrent vocal** : Interaction plus naturelle
-- 📱 **100% mobile-ready** : Accessible partout
+-  **90% satisfaction** : Interface intuitive et réponses précises
+-  **-70% temps recherche** : Information trouvée instantanément  
+-  **85% préfèrent vocal** : Interaction plus naturelle
+-  **100% mobile-ready** : Accessible partout
 
 ### **Métriques Techniques**
-- ⚡ **Latence < 2s** : Réponses IA quasi-instantanées
-- 🔍 **95% précision** : Informations administratives correctes
-- 🗣️ **98% reconnaissance vocale** : Compréhension accent local
-- 📊 **20+ démarches** : Couverture administrative large
+-  **Latence < 2s** : Réponses IA quasi-instantanées
+-  **95% précision** : Informations administratives correctes
+-  **98% reconnaissance vocale** : Compréhension accent local
+-  **20+ démarches** : Couverture administrative large
 
 ---
 
-## 🌍 **Vision et Impact Social**
+##  **Vision et Impact Social**
 
 ### **Inclusion Numérique**
-- 👩‍🦳 **Seniors** : Interface vocale simple et guidée
-- 🎓 **Jeunes** : Première expérience administrative facilitée
-- 🌾 **Zones rurales** : Accès 24h/24 sans déplacement
-- 🤝 **Citoyens vulnérables** : Accompagnement personnalisé
+-  **Seniors** : Interface vocale simple et guidée
+-  **Jeunes** : Première expérience administrative facilitée
+-  **Zones rurales** : Accès 24h/24 sans déplacement
+-  **Citoyens vulnérables** : Accompagnement personnalisé
 
 ### **Transformation Digitale**
-- 🏛️ **Modernisation services publics** : Référence innovation
-- 📊 **Données anonymisées** : Amélioration continue processus  
-- 🤖 **IA responsable** : Transparence et explicabilité
-- 🇬🇦 **Fierté nationale** : Solution 100% made in Gabon
+- ️ **Modernisation services publics** : Référence innovation
+-  **Données anonymisées** : Amélioration continue processus  
+-  **IA responsable** : Transparence et explicabilité
+-  **Fierté nationale** : Solution 100% made in Gabon
 
 ---
 
 ## 🎥 **Démonstration Technique**
 
 ### **Vidéo Demo Live**
-📺 **[Voir la démonstration complète](https://lnkd.in/eVx6Gxpi)**
+📺 **[Voir la démonstration complète](https://www.youtube.com/watch?v=nS9LKyFFRYk)**
 
 **Scénarios testés :**
 - Demande vocale : "Comment obtenir mon passeport ?"
@@ -179,7 +165,7 @@ public class GabonAdministrationService {
 ## 📚 **Documentation & Ressources**
 
 ### **Article Technique Complet**
-📖 **[Lire l'article sur Medium](https://lnkd.in/eUfVSPeW)**
+📖 **[Lire l'article sur Medium](https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7)**
 
 **Sujets couverts :**
 - Architecture Spring AI détaillée
@@ -196,37 +182,6 @@ public class GabonAdministrationService {
 - Base de données démarches administratives
 - Documentation API et déploiement
 
----
-
-## 🔮 **Roadmap Innovation**
-
-### **Version 2.0 - Q1 2025**
-- 🤖 **Agents IA spécialisés** : Expert par domaine administratif
-- 📱 **App mobile native** : iOS/Android avec notifications
-- 🔗 **Intégrations APIs** : Connexion systèmes gouvernementaux
-- 🌍 **Multilingue** : Support Fang, Punu, anglais
-
-### **Vision Long Terme**
-- 🏛️ **Adoption institutionnelle** : Partenariat gouvernement
-- 🌍 **Expansion régionale** : Cameroun, Congo, Tchad
-- 🎓 **IA éducative** : Formation citoyens démarches
-- 📊 **Analytics prédictives** : Anticipation besoins administratifs
-
----
-
-## 🏆 **Reconnaissance & Médias**
-
-### **Réactions Communauté**
-> *"Innovation exceptionnelle qui va transformer l'expérience citoyenne au Gabon !"*  
-> **- Dr. Pascaline MBA, Ministre Économie Numérique**
-
-> *"Projet inspirant qui démontre le potentiel de l'IA pour l'Afrique"*  
-> **- Samuel Bamba, Flutter GDE & Tech Leader**
-
-### **Couverture Médias**
-- 📺 **Gabon Télévision** : Interview innovation IA publique
-- 📰 **L'Union** : "L'IA au service du citoyen gabonais"  
-- 🌐 **Africa Tech** : "Spring AI transforme l'administration"
 
 ---
 
@@ -234,13 +189,13 @@ public class GabonAdministrationService {
 
 **Envie d'en savoir plus ?** Je vous invite à :
 
-1️⃣ **Lire l'article complet** : [Medium](https://lnkd.in/eUfVSPeW)  
-2️⃣ **Tester la démo** : [Vidéo démonstration](https://lnkd.in/eVx6Gxpi)  
+1️⃣ **Lire l'article complet** : [Medium](https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7)  
+2️⃣ **Tester la démo** : [Vidéo démonstration](https://www.youtube.com/watch?v=nS9LKyFFRYk)  
 3️⃣ **Explorer le code** : [GitHub](https://github.com/bangaromaric/spring-ai)  
 4️⃣ **Me partager vos retours** : [LinkedIn](https://www.linkedin.com/in/romaric-banga/)  
 
 ---
 
-*"Un projet qui prouve que l'IA générative peut être un accélérateur d'inclusion et de modernisation pour l'Afrique"* 🚀
+*"Un projet qui prouve que l'IA générative peut être un accélérateur d'inclusion et de modernisation pour l'Afrique"*
 
 **L'avenir de l'administration gabonaise commence aujourd'hui !** 🇬🇦
