@@ -71,31 +71,31 @@ TocOpen: false
 
 ---
 
-## 🌍 **Leadership Communautaire - GDG Libreville**
+## **Leadership Communautaire - GDG Libreville**
 
 ### **Organisateur Principal Google Developers Group Libreville** | *2021 - Aujourd'hui*
 *[La plus grande communauté de développeurs du Gabon](https://gdg.community.dev/gdg-libreville/)*
 
-**🎯 Mission :** Démocratiser l'accès aux technologies Google et favoriser l'innovation en Afrique centrale
+**Mission :** Démocratiser l'accès aux technologies Google et favoriser l'innovation en Afrique centrale
 
-**📊 Impact & Chiffres :**
+**Impact & Chiffres :**
 - **400+ développeurs** actifs dans la communauté
 - **25+ événements** organisés (meetups, workshops, hackathons)
 - **DevFest Libreville 2023** : 400+ participants, plus grand événement tech du Gabon
 - **Women Techmakers** : Programme de mentorat pour 50+ développeuses
 
-**⚡ Initiatives Phares :**
+**Initiatives Phares :**
 - **DevFest annuel** : Conférence internationale avec speakers de renommée
 - **Study Jams** : Formations certifiantes Google Cloud et Android
 - **Tech Talks mensuels** : Sessions sur les dernières innovations
 - **Hackathons** : Compétitions de développement avec prix
 
-**🏆 Reconnaissance :**
+**Reconnaissance :**
 - **Partner of the Year** - Programme Google for Developers
 - **Couverture médias** : Gabon Télévision, L'Union, Africa Tech News
 - **Speaker international** : DevFest West Africa, Africa Tech Summit
 
-**🌟 Témoignages :**
+**Témoignages :**
 > *"GDG Libreville transforme l'écosystème tech gabonais"* - **Dr. Pascaline MBA, Ministre Économie Numérique**
 
 ---

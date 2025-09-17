@@ -18,14 +18,6 @@ images = ["/images/profile.jpg"]
 defaultTheme = "auto"
 disableThemeToggle = false
 
-
-
-[sitemap]
-changefreq = "weekly"
-priority = 0.5
-filename = "sitemap.xml"
-
-
 # Profil et réseaux sociaux
 ShowReadingTime = true
 ShowShareButtons = true
@@ -36,7 +28,7 @@ ShowWordCount = true
 ShowRssButtonInSectionTermList = true
 
 # Footer personnalisé
-label.text = "© 2024 BANGA Romaric - Expert Spring & Google Cloud"
+label.text = "© 2025 BANGA Romaric - Expert Spring & Google Cloud"
 label.icon = ""
 label.iconHeight = 0
 UseHugoToc = true
@@ -47,6 +39,11 @@ hidemeta = false
 hideSummary = false
 showtoc = false
 tocopen = false
+
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
 
 # Configuration Mode Profile - Page d'accueil avec photo
 [params.profileMode]
