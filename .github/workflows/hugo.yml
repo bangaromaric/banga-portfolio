@@ -30,10 +30,20 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.146.0'
           extended: true
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        with:
+          path: |
+            resources
+            .hugo_build.lock
+          key: hugo-${{ hashFiles('hugo.toml', 'content/**', 'assets/**', 'layouts/**') }}
+          restore-keys: |
+            hugo-
 
       - name: Setup Pages
         id: pages
@@ -47,6 +57,7 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --enableGitInfo \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact

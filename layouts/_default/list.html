@@ -2,7 +2,10 @@
 
 <section class="list-page">
     <header class="list-page__head">
-        <h1 class="list-page__title">{{ .Title }}</h1>
+        <h1 class="list-page__title">
+            {{- $title := .Params.heroTitle | default .Title -}}
+            {{ $title | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+        </h1>
         {{- with .Description }}
         <p class="list-page__lede">{{ . | markdownify }}</p>
         {{- end }}

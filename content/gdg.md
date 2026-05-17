@@ -1,8 +1,10 @@
 ---
-title: "GDG [Libreville]"
-description: "Google Developers Group Libreville — la plus grande communauté de développeurs du Gabon. Organisée par BANGA Romaric depuis 2021. 400+ membres, DevFest annuel, Women Techmakers."
+title: "Google Developers Group Libreville — Communauté tech du Gabon"
+description: "Google Developers Group Libreville — la plus grande communauté de développeurs du Gabon. Organisée par BANGA Romaric depuis 2021. 500+ membres, DevFest annuel, Women Techmakers."
 date: 2024-09-15
+lastmod: 2025-05-17
 kicker: "§ Communauté"
+heroTitle: "GDG [Libreville]"
 sidebarNav:
   - { label: "Mission", anchor: "mission" }
   - { label: "Chiffres", anchor: "chiffres" }
@@ -12,7 +14,7 @@ sidebarNav:
 
 > *La plus grande communauté de développeurs du Gabon.*
 
-Depuis 2021, j'organise et fais grandir le **Google Developers Group Libreville** — une communauté de **400+ développeurs, designers et entrepreneurs tech** basés au Gabon.
+Depuis 2021, j'organise et fais grandir le **Google Developers Group Libreville** — une communauté de **500+ développeurs, designers et entrepreneurs tech** basés au Gabon.
 
 ## Mission {#mission}
 

@@ -44,6 +44,43 @@
         <a class="meta-link" href="/posts/">← Tous les articles</a>
     </footer>
 
+    {{- $related := site.RegularPages.Related $p | first 3 }}
+    {{- with $related }}
+    <section class="post-related" aria-labelledby="related-title">
+        <h2 id="related-title" class="post-related__title">
+            <span class="section-mark"><span class="section-mark__numeral">§</span> — Articles connexes</span>
+        </h2>
+        <ul class="post-related__list">
+            {{- range . }}
+            <li class="post-related__item">
+                <time class="post-related__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+                <h3 class="post-related__entry"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                {{- with .Description }}
+                <p class="post-related__desc">{{ . | plainify | truncate 140 }}</p>
+                {{- end }}
+            </li>
+            {{- end }}
+        </ul>
+    </section>
+    {{- end }}
+
+    {{- if or $p.PrevInSection $p.NextInSection }}
+    <nav class="post-nav" aria-label="Navigation entre articles">
+        {{- with $p.PrevInSection }}
+        <a class="post-nav__link post-nav__prev" href="{{ .RelPermalink }}">
+            <span class="post-nav__direction">← Article précédent</span>
+            <span class="post-nav__title">{{ .Title }}</span>
+        </a>
+        {{- end }}
+        {{- with $p.NextInSection }}
+        <a class="post-nav__link post-nav__next" href="{{ .RelPermalink }}">
+            <span class="post-nav__direction">Article suivant →</span>
+            <span class="post-nav__title">{{ .Title }}</span>
+        </a>
+        {{- end }}
+    </nav>
+    {{- end }}
+
     {{- if (.Param "ShowShareButtons") }}
     <div style="max-width: 720px; margin: 0 auto var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--rule);">
         {{- partial "share_icons.html" . -}}

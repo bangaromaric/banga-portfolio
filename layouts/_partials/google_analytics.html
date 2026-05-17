@@ -15,6 +15,24 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', '{{ . }}');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="mailto:"]').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    gtag('event', 'contact_click', { method: 'email', label: a.href });
+                });
+            });
+            document.querySelectorAll('a.btn--primary').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    gtag('event', 'cta_primary_click', { label: (a.textContent || '').trim() });
+                });
+            });
+            document.querySelectorAll('a[href^="http"]:not([href*="ban.ga"])').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    gtag('event', 'outbound_click', { destination: a.hostname, label: a.href });
+                });
+            });
+        });
     }
 </script>
 {{- end }}

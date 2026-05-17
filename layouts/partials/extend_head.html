@@ -19,3 +19,91 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..600&display=swap">
 <meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e0e0c" media="(prefers-color-scheme: dark)">
+
+{{- if hugo.IsProduction | or (eq site.Params.env "production") }}
+<meta name="twitter:creator" content="@bangaromaric">
+<meta name="twitter:site" content="@bangaromaric">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+{{- end }}
+
+{{- if .IsHome }}
+<link rel="preload" as="image" href="{{ "/images/profile.jpg" | absURL }}" fetchpriority="high">
+{{- end }}
+
+{{- if eq .RelPermalink "/about/" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "BANGA Romaric Tanguy",
+  "alternateName": "Romaric Banga",
+  "url": "https://ban.ga/about/",
+  "image": "https://ban.ga/images/profile.jpg",
+  "jobTitle": "Lead Spring Developer & Architecte Cloud",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "ANINF",
+    "url": "https://aninf.ga"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Libreville",
+    "addressCountry": "GA"
+  },
+  "knowsLanguage": ["fr", "en"],
+  "knowsAbout": [
+    "Spring Framework", "Spring Boot", "Spring AI",
+    "Google Cloud Platform", "Android Kotlin",
+    "Microservices", "DevOps", "Architecture Cloud"
+  ],
+  "hasCredential": [
+    {"@type": "EducationalOccupationalCredential", "name": "VMware Spring Certified Professional 2024 [v2]"},
+    {"@type": "EducationalOccupationalCredential", "name": "Google Cloud Associate Cloud Engineer"},
+    {"@type": "EducationalOccupationalCredential", "name": "Google Certified Associate Android Developer (Kotlin)"}
+  ],
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Google Developers Group Libreville",
+    "url": "https://ban.ga/gdg/"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/romaric-banga/",
+    "https://github.com/bangaromaric",
+    "https://x.com/bangaromaric"
+  ]
+}
+</script>
+{{- end }}
+
+{{- if eq .RelPermalink "/gdg/" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Google Developers Group Libreville",
+  "alternateName": "GDG Libreville",
+  "url": "https://ban.ga/gdg/",
+  "logo": "https://ban.ga/images/og-default.jpg",
+  "description": "Plus grande communauté de développeurs du Gabon. 500+ membres, DevFest annuel, Women Techmakers, Study Jams.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Libreville",
+    "addressCountry": "GA"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "BANGA Romaric Tanguy",
+    "url": "https://ban.ga/about/"
+  },
+  "foundingDate": "2021",
+  "sameAs": [
+    "https://gdg.community.dev/gdg-libreville/",
+    "https://linkedin.com/company/gdg-libreville",
+    "https://twitter.com/GDGLibreville",
+    "https://www.facebook.com/gdglibreville/",
+    "https://instagram.com/gdg.libreville"
+  ]
+}
+</script>
+{{- end }}

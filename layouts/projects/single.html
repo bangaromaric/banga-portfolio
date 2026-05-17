@@ -3,6 +3,28 @@
 {{- $p := . }}
 {{- $stack := $p.Params.stack | default $p.Params.technologies }}
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ $p.Params.appType | default "CreativeWork" }}",
+  "name": "{{ $p.Title | plainify }}",
+  "headline": "{{ $p.Params.tagline | default $p.Description | plainify }}",
+  "description": "{{ $p.Description | plainify }}",
+  "url": "{{ $p.Permalink }}",
+  "image": "{{ with $p.Params.cover.image }}{{ . | absURL }}{{ else }}{{ "/images/og-default.jpg" | absURL }}{{ end }}",
+  "creator": {
+    "@type": "Person",
+    "name": "BANGA Romaric",
+    "url": "https://ban.ga/about/"
+  },
+  "dateCreated": "{{ $p.Params.year | default ($p.Date.Format "2006") }}",
+  "datePublished": "{{ $p.Date.Format "2006-01-02" }}",
+  "dateModified": "{{ $p.Lastmod.Format "2006-01-02" }}",
+  "inLanguage": "fr"{{ if $stack }},
+  "keywords": "{{ delimit $stack ", " }}"{{ end }}
+}
+</script>
+
 <article class="project-single">
     <header class="project-single__header">
         <div class="project-single__intro">
@@ -88,10 +110,22 @@
             {{ .Content }}
 
             <hr class="rule" style="margin-top: var(--s-7);">
-            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); letter-spacing: 0.04em;">
+
+            <section class="project-cta" aria-labelledby="project-cta-title">
+                <h2 id="project-cta-title" class="project-cta__title">
+                    Besoin d'expertise <em>{{ with $p.Params.stack }}{{ index . 0 }}{{ else }}technique{{ end }}</em> ?
+                </h2>
+                <p class="project-cta__lede">
+                    Consulting, formation entreprise, ou conférence — discutons d'un projet ou d'une intervention.
+                </p>
+                <div class="project-cta__buttons">
+                    <a class="btn btn--primary no-arrow" href="mailto:bangaromaric@gmail.com?subject=Collaboration%20technique">Discutons d'un projet</a>
+                    <a class="btn no-arrow" href="/about/#services">Mes services →</a>
+                </div>
+            </section>
+
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); letter-spacing: 0.04em; margin-top: var(--s-7);">
                 ← <a href="/projects/" class="no-arrow">Retour aux projets</a>
-                &nbsp;·&nbsp;
-                Une question sur ce travail ? <a href="mailto:bangaromaric@gmail.com">Écrivez-moi</a>.
             </p>
         </div>
     </div>

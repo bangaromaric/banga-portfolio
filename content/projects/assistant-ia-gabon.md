@@ -10,6 +10,7 @@ duration: "3 mois"
 status: "Démo en ligne"
 stack: ["Spring AI", "Spring Boot", "Spring Data JPA", "H2", "JavaScript", "Web Speech API"]
 technologies: ["Spring AI", "Spring Boot", "H2 Database", "JavaScript", "Spring Data JPA"]
+appType: "WebApplication"
 github: "https://github.com/bangaromaric/spring-ai"
 demo: "https://lnkd.in/eVx6Gxpi"
 article: "https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7"

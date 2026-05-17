@@ -9,7 +9,7 @@
                 {{ $p.Params.kicker | default (printf "§ %s" $p.Section) | default "§ Page" }}
             </span>
             <h1 class="page-editorial__title">
-                {{- $title := $p.Title -}}
+                {{- $title := $p.Params.heroTitle | default $p.Title -}}
                 {{ $title | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
             </h1>
         </div>

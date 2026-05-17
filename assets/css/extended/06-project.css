@@ -170,3 +170,42 @@
 }
 
 .project-list-page__head { padding: var(--s-7) 0 var(--s-5); border-bottom: 1px solid var(--rule); }
+
+.project-cta {
+    margin-top: var(--s-7);
+    padding: var(--s-6) var(--s-5);
+    background: var(--paper-2);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 2px;
+}
+
+.project-cta__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    font-weight: 380;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 0 0 var(--s-3);
+}
+
+.project-cta__title em {
+    font-style: italic;
+    color: var(--terracotta);
+    font-weight: 420;
+}
+
+.project-cta__lede {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0 0 var(--s-5);
+    max-width: 50ch;
+}
+
+.project-cta__buttons {
+    display: flex;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+}

@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Pages taxonomy générées (thin content) — pas d'index
+Disallow: /tags/
+Disallow: /categories/
+Disallow: /search/
+
+# Permettre les images
+Allow: /images/
+
+Sitemap: https://ban.ga/sitemap.xml

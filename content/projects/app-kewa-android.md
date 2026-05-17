@@ -10,6 +10,7 @@ duration: "Depuis 2020 — maintenance continue"
 status: "Production · Play Store"
 stack: ["Android", "Kotlin", "Java", "Firebase", "Material Design"]
 technologies: ["Android", "Kotlin", "Java", "Firebase", "Material Design"]
+appType: "MobileApplication"
 playstore: "https://play.google.com/store/apps/details?id=ga.aninf.examen"
 featured: false
 weight: 2
