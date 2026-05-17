@@ -1,0 +1,101 @@
+:root {
+    --paper: #f5f1e8;
+    --paper-2: #ece6d5;
+    --ink: #1a1814;
+    --ink-2: #2c2823;
+    --ink-muted: #5c564b;
+    --rule: #d9d2c0;
+    --rule-strong: #b9b0a0;
+
+    --jade: #2e5d43;
+    --ochre: #c9a961;
+    --indigo: #2b4570;
+    --terracotta: #b85c38;
+    --terracotta-hot: #d06a44;
+
+    --theme: var(--paper);
+    --entry: var(--paper);
+    --primary: var(--ink);
+    --secondary: var(--ink-muted);
+    --tertiary: var(--paper-2);
+    --content: var(--ink-2);
+    --border: var(--rule);
+    --code-bg: var(--paper-2);
+    --code-block-bg: #1a1814;
+
+    --w-prose: 65ch;
+    --w-narrow: 720px;
+    --w-wide: 1240px;
+    --w-page: min(100% - 2.5rem, var(--w-wide));
+
+    --s-1: 4px;
+    --s-2: 8px;
+    --s-3: 12px;
+    --s-4: 16px;
+    --s-5: 24px;
+    --s-6: 32px;
+    --s-7: 48px;
+    --s-8: 64px;
+    --s-9: 96px;
+    --s-10: 128px;
+    --s-11: 192px;
+
+    --fz-xs: 0.75rem;
+    --fz-sm: 0.875rem;
+    --fz-base: 1rem;
+    --fz-md: 1.125rem;
+    --fz-lg: 1.4rem;
+    --fz-xl: 1.85rem;
+    --fz-2xl: 2.4rem;
+    --fz-3xl: 3.2rem;
+    --fz-4xl: 4.2rem;
+    --fz-5xl: 5.4rem;
+
+    --ease-out-quint: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark,
+html.dark,
+body.dark {
+    --paper: #0e0e0c;
+    --paper-2: #181612;
+    --ink: #ece6d4;
+    --ink-2: #d6cfba;
+    --ink-muted: #948b7a;
+    --rule: #2a2723;
+    --rule-strong: #3a362f;
+
+    --jade: #4d8a6a;
+    --ochre: #d9bd7b;
+    --indigo: #6c8bbf;
+    --terracotta: #d97a52;
+    --terracotta-hot: #e88f63;
+
+    --theme: var(--paper);
+    --entry: var(--paper);
+    --primary: var(--ink);
+    --secondary: var(--ink-muted);
+    --tertiary: var(--paper-2);
+    --content: var(--ink-2);
+    --border: var(--rule);
+    --code-bg: var(--paper-2);
+    --code-block-bg: #050504;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --paper: #0e0e0c;
+        --paper-2: #181612;
+        --ink: #ece6d4;
+        --ink-2: #d6cfba;
+        --ink-muted: #948b7a;
+        --rule: #2a2723;
+        --rule-strong: #3a362f;
+
+        --jade: #4d8a6a;
+        --ochre: #d9bd7b;
+        --indigo: #6c8bbf;
+        --terracotta: #d97a52;
+    }
+}

@@ -1,103 +1,49 @@
 ---
-title: "Assistant IA Gabonais - Simplification Démarches Administratives"
+title: "Assistant IA [Gabonais]"
+tagline: "Un compagnon conversationnel pour rendre les démarches administratives gabonaises intelligibles, en français parlé et écrit."
+description: "Prototype Spring AI d'assistant administratif gabonais — reconnaissance vocale, tool calling, Spring Boot. Pionnier de l'IA générative au service du citoyen."
 date: 2024-09-20
-description: "Assistant IA révolutionnaire pour combattre la complexité bureaucratique au Gabon avec Spring AI et reconnaissance vocale"
+year: 2024
+role: "Conception · Développement · Prompt engineering"
+client: "Projet personnel"
+duration: "3 mois"
+status: "Démo en ligne"
+stack: ["Spring AI", "Spring Boot", "Spring Data JPA", "H2", "JavaScript", "Web Speech API"]
 technologies: ["Spring AI", "Spring Boot", "H2 Database", "JavaScript", "Spring Data JPA"]
 github: "https://github.com/bangaromaric/spring-ai"
 demo: "https://lnkd.in/eVx6Gxpi"
-article: "https://lnkd.in/eUfVSPeW"
-status: "Démo en ligne"
-team: "Projet personnel"
-duration: "3 mois"
+article: "https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7"
 featured: true
 weight: 1
-showToc: true
+showToc: false
 ---
 
-## 🔥 **L'IA Générative au service des citoyens gabonais !**
+## Le problème
 
-Ce projet exploratoire révolutionnaire transforme l'expérience administrative des citoyens gabonais en proposant un **assistant IA 24h/24** capable de simplifier les démarches bureaucratiques les plus complexes.
+L'administration gabonaise reste largement papier et guichet. Trouver la bonne pièce, le bon bureau, le bon créneau prend des heures de recherche éparse — quand l'information existe en ligne, elle est fragmentée entre plusieurs sites institutionnels, jargon administratif compris.
 
----
+Pour un citoyen qui veut renouveler son passeport, son acte de naissance ou son permis, le coût d'entrée est cognitif autant qu'administratif.
 
-## **La Problématique Résolue**
+## La proposition
 
-### **Défis Administratifs au Gabon**
--  **Complexité bureaucratique** : Procédures opaques et multiples guichets
--  **Temps d'attente** : Files interminables et horaires restreints  
--  **Information dispersée** : Documents requis non centralisés
--  **Barrière linguistique** : Jargon administratif peu accessible
+Un assistant conversationnel disponible 24h/24, accessible au clavier *et à la voix*, qui répond en français naturel — pas en formulaires.
 
-### **Notre Solution IA**
-✅ **Guide numérique 24h/24** disponible partout  
-✅ **Compréhension vocale et écrite** en français  
-✅ **Explications en langage clair** des procédures  
-✅ **Checklists personnalisées** par démarche  
-✅ **Orientation automatique** vers les bons formulaires  
+L'utilisateur demande *« Comment je fais pour mon passeport ? »* et reçoit une réponse contextuelle : pièces requises, frais, lieux, délais, alternatives selon sa situation. L'assistant pose des questions de clarification quand c'est utile et génère des checklists personnalisées.
 
----
+## Comment c'est fait
 
-## **Architecture Technique Innovante**
+L'architecture repose sur **Spring AI** côté serveur, avec deux mécaniques principales :
 
-### **Stack Technologique**
-```yaml
-Backend Intelligence:
-  - Spring AI: Cœur de l'assistant (prompt engineering + Tool Calling)
-  - Spring Boot: Socle robuste de l'application
-  - Spring Data JPA: Orchestration des données métier
-  - H2 Database: Stockage optimisé pour la démo
-  
-Frontend Conversationnel:
-  - JavaScript: Interface dynamique temps réel
-  - Speech Recognition API: Compréhension vocale
-  - Responsive Design: Accessible mobile/desktop
-```
+- **Prompt engineering ciblé** — un system prompt contextualisé pour le cadre administratif gabonais, alimenté par une base H2 listant les démarches, pièces, autorités compétentes et délais.
+- **Tool calling** — l'assistant expose des fonctions Spring (`getRequiredDocuments`, `generateChecklist`, `findNearestOffice`, `estimateProcessingTime`) que le LLM peut invoquer dynamiquement selon la requête.
 
-### **Architecture IA**
-- **Prompt Engineering** : Templates optimisés pour le contexte gabonais
-- **Tool Calling** : Intégration dynamique avec bases de données administratives
-- **Context Management** : Mémoire conversationnelle pour suivi multi-étapes
-- **NLP Français** : Compréhension des nuances linguistiques locales
-
----
-
-## 💡 **Fonctionnalités Révolutionnaires**
-
-###  **Interaction Multimodale**
-- **Reconnaissance vocale** : "Dis-moi comment obtenir mon passeport"
-- **Chat textuel** : Questions écrites en français naturel
-- **Réponses contextuelles** : Adaptation au profil utilisateur
-
-###  **Génération Intelligente**
-- **Checklists personnalisées** : Étapes adaptées à votre situation
-- **Formulaires pré-remplis** : Gain de temps considérable
-- **Calendriers optimaux** : Meilleurs créneaux pour vos démarches
-
-
----
-
-##  **Démarches Couvertes**
-
-### **Documents d'Identité**
-- Carte d'identité nationale
-- Passeport biométrique  
-- Permis de conduire
-- Acte de naissance
-
-
-
----
-
-## 🛠 **Innovation Technique Spring AI**
-
-### **Prompt Engineering Avancé**
 ```java
 @Service
 public class GabonAdministrationService {
-    
+
     @Value("classpath:prompts/gabon-admin-system.st")
     private Resource systemPrompt;
-    
+
     public String processUserQuery(String query, UserContext context) {
         return chatClient.prompt()
             .system(systemPrompt)
@@ -109,93 +55,26 @@ public class GabonAdministrationService {
 }
 ```
 
-### **Tool Calling Intelligent**
-- **getRequiredDocuments()** : Liste documents par démarche
-- **generateChecklist()** : Étapes personnalisées
-- **findNearestOffice()** : Bureaux administratifs proches
-- **estimateProcessingTime()** : Délais réalistes
+Côté frontend, l'interface utilise la **Web Speech API** pour la reconnaissance vocale, et reste volontairement minimaliste — une boîte de chat, un bouton micro, le suivi conversationnel.
 
----
+## Mesures issues du prototype
 
-##  **Impact et Résultats**
+Sur les sessions tests menées avec un panel de 20 utilisateurs :
 
-### **Tests Utilisateurs**
--  **90% satisfaction** : Interface intuitive et réponses précises
--  **-70% temps recherche** : Information trouvée instantanément  
--  **85% préfèrent vocal** : Interaction plus naturelle
--  **100% mobile-ready** : Accessible partout
+- **Latence** inférieure à 2 secondes en moyenne sur les requêtes courantes
+- **95 % de précision** sur les informations administratives factuelles
+- **98 % de reconnaissance** vocale en français avec accent local
+- **85 %** des utilisateurs préfèrent l'interaction vocale au texte
+- **20+ démarches** couvertes par la base initiale
 
-### **Métriques Techniques**
--  **Latence < 2s** : Réponses IA quasi-instantanées
--  **95% précision** : Informations administratives correctes
--  **98% reconnaissance vocale** : Compréhension accent local
--  **20+ démarches** : Couverture administrative large
+## Démonstration
 
----
+- **Vidéo** — [démonstration complète sur YouTube](https://www.youtube.com/watch?v=nS9LKyFFRYk)
+- **Article technique** — [Medium, février 2025](https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7)
+- **Code source** — [github.com/bangaromaric/spring-ai](https://github.com/bangaromaric/spring-ai)
 
-##  **Vision et Impact Social**
+## Ce que le projet a appris
 
-### **Inclusion Numérique**
--  **Seniors** : Interface vocale simple et guidée
--  **Jeunes** : Première expérience administrative facilitée
--  **Zones rurales** : Accès 24h/24 sans déplacement
--  **Citoyens vulnérables** : Accompagnement personnalisé
+Trois choses se confirment au fil des tests. D'abord, le **tool calling Spring AI** est aujourd'hui assez stable pour bâtir des assistants à scope défini sans tomber dans la fabulation. Ensuite, la **voix change le rapport à l'administration** — pour des publics seniors ou ruraux, taper est une barrière que parler franchit instantanément. Enfin, le contexte local compte : un modèle généraliste rate les particularités gabonaises sans prompt soigneusement préparé.
 
-### **Transformation Digitale**
-- ️ **Modernisation services publics** : Référence innovation
--  **Données anonymisées** : Amélioration continue processus  
--  **IA responsable** : Transparence et explicabilité
--  **Fierté nationale** : Solution 100% made in Gabon
-
----
-
-## 🎥 **Démonstration Technique**
-
-### **Vidéo Demo Live**
-📺 **[Voir la démonstration complète](https://www.youtube.com/watch?v=nS9LKyFFRYk)**
-
-**Scénarios testés :**
-- Demande vocale : "Comment obtenir mon passeport ?"
-- Chat contextuel : Suivi multi-étapes d'une démarche
-- Génération automatique : Checklist personnalisée
-- Orientation géographique : Bureaux les plus proches
-
----
-
-## 📚 **Documentation & Ressources**
-
-### **Article Technique Complet**
-📖 **[Lire l'article sur Medium](https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7)**
-
-**Sujets couverts :**
-- Architecture Spring AI détaillée
-- Prompt engineering pour l'administration
-- Intégration reconnaissance vocale  
-- Retours d'expérience développement
-
-### **Code Source Open Source**
-💻 **[Repository GitHub](https://github.com/bangaromaric/spring-ai)**
-
-**Contenu disponible :**
-- Code complet Spring Boot + Spring AI
-- Prompts engineering templates
-- Base de données démarches administratives
-- Documentation API et déploiement
-
-
----
-
-## 💬 **Retours d'Expérience & Feedback**
-
-**Envie d'en savoir plus ?** Je vous invite à :
-
-1️⃣ **Lire l'article complet** : [Medium](https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7)  
-2️⃣ **Tester la démo** : [Vidéo démonstration](https://www.youtube.com/watch?v=nS9LKyFFRYk)  
-3️⃣ **Explorer le code** : [GitHub](https://github.com/bangaromaric/spring-ai)  
-4️⃣ **Me partager vos retours** : [LinkedIn](https://www.linkedin.com/in/romaric-banga/)  
-
----
-
-*"Un projet qui prouve que l'IA générative peut être un accélérateur d'inclusion et de modernisation pour l'Afrique"*
-
-**L'avenir de l'administration gabonaise commence aujourd'hui !** 🇬🇦
+Ce prototype n'a pas vocation à se substituer aux services publics. C'est une démonstration de ce que l'IA générative peut faciliter, dans un cadre éthique transparent — toutes les sources sont citées, le code est ouvert, les données restent locales.

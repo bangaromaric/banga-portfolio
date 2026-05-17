@@ -1,0 +1,26 @@
+{{- $items := site.Params.tickerItems }}
+{{- if not $items }}
+    {{- $items = slice
+        (dict "label" "VMware Spring Certified" "value" "Spring Pro 2024 v2")
+        (dict "label" "7+ ans Spring" "value" "Backend production")
+        (dict "label" "KEWA Android" "value" "100k+ téléchargements")
+        (dict "label" "GDG Libreville" "value" "400+ développeurs")
+        (dict "label" "DevFest 2023" "value" "400+ participants")
+        (dict "label" "Google Cloud" "value" "Associate Engineer")
+        (dict "label" "Uptime ANINF" "value" "99.9%")
+    }}
+{{- end }}
+
+<div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+        {{- range seq 2 }}
+            {{- range $items }}
+            <span class="ticker__item">
+                <strong>{{ .value }}</strong>
+                <span>{{ .label }}</span>
+                <span class="ticker__sep">◆</span>
+            </span>
+            {{- end }}
+        {{- end }}
+    </div>
+</div>

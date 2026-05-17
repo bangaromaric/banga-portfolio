@@ -1,0 +1,54 @@
+{{- define "main" }}
+
+{{- $p := . }}
+
+<article class="post-single-editorial">
+    <header class="post-single-editorial__header">
+        {{- with index $p.Params.categories 0 }}
+        <span class="post-single-editorial__category">{{ . }}</span>
+        {{- end }}
+
+        <h1 class="post-single-editorial__title">{{ $p.Title }}</h1>
+
+        {{- with $p.Description }}
+        <p class="post-single-editorial__lede">{{ . }}</p>
+        {{- end }}
+
+        <div class="post-single-editorial__meta">
+            <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02 janvier 2006" }}</time>
+            <span>·</span>
+            <span>{{ $p.ReadingTime }} min de lecture</span>
+            <span>·</span>
+            <span>BANGA Romaric</span>
+        </div>
+    </header>
+
+    {{- with $p.Params.cover }}
+    {{- with .image }}
+    <figure class="post-single-editorial__cover">
+        <img src="{{ . | absURL }}" alt="{{ $p.Params.cover.alt | default $p.Title }}" loading="eager" decoding="async">
+    </figure>
+    {{- end }}
+    {{- end }}
+
+    <div class="post-single-editorial__body">
+        {{ .Content }}
+    </div>
+
+    <footer class="post-single-editorial__footer">
+        <ul class="post-single-editorial__tags">
+            {{- range $p.GetTerms "tags" }}
+            <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+            {{- end }}
+        </ul>
+        <a class="meta-link" href="/posts/">← Tous les articles</a>
+    </footer>
+
+    {{- if (.Param "ShowShareButtons") }}
+    <div style="max-width: 720px; margin: 0 auto var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--rule);">
+        {{- partial "share_icons.html" . -}}
+    </div>
+    {{- end }}
+</article>
+
+{{- end }}

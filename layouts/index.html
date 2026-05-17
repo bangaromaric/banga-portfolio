@@ -1,0 +1,166 @@
+{{- define "main" }}
+
+{{- $p := site.Params }}
+{{- $home := . }}
+
+<section class="home-hero stagger" aria-labelledby="hero-title">
+    <div class="home-hero__grid">
+        <div class="home-hero__main">
+            <span class="home-hero__kicker">
+                {{ $home.Params.kicker | default "§ I — In residence at Libreville" }}
+            </span>
+
+            <h1 id="hero-title" class="home-hero__title">
+                {{- $title := $home.Params.heroTitle | default "Je conçois des [systèmes Spring] qui tournent en production sur des [services publics] gabonais." -}}
+                {{ $title | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+            </h1>
+
+            <p class="home-hero__lede">
+                {{ $home.Params.heroLede | default "Développeur Spring senior et architecte Cloud à l’ANINF depuis 7+ ans. Organisateur du Google Developers Group Libreville — la plus grande communauté tech du pays." }}
+            </p>
+
+            <div class="home-hero__ctas">
+                <a class="btn btn--primary no-arrow" href="mailto:bangaromaric@gmail.com?subject=Collaboration%20technique">Discutons d’un projet</a>
+                <a class="btn no-arrow" href="/about/">Mon parcours</a>
+            </div>
+
+            <div class="availability" role="status" aria-live="polite">
+                <span class="availability__dot" aria-hidden="true"></span>
+                <span>{{ $home.Params.availability | default "Disponible pour consulting & formation — Q3 2026" }}</span>
+            </div>
+        </div>
+
+        <aside class="home-hero__aside">
+            <figure class="portrait profile">
+                <img src="{{ "/images/profile.jpg" | absURL }}" alt="BANGA Romaric en intervention au DevFest GDG Libreville 2025" width="380" height="253" loading="eager" decoding="async">
+            </figure>
+
+            <div class="bio-card">
+                <div class="bio-card__row">
+                    <span class="bio-card__label">Lieu</span>
+                    <span class="bio-card__value">Libreville, Gabon</span>
+                </div>
+                <div class="bio-card__row">
+                    <span class="bio-card__label">Rôle</span>
+                    <span class="bio-card__value">Lead Spring Developer — <em>ANINF</em></span>
+                </div>
+                <div class="bio-card__row">
+                    <span class="bio-card__label">Stack</span>
+                    <span class="bio-card__value">Spring · AI · GCP · Android</span>
+                </div>
+                <div class="bio-card__row">
+                    <span class="bio-card__label">Certifié</span>
+                    <span class="bio-card__value"><strong>Spring Pro 2024 [v2]</strong> · GCP Cloud Engineer · Android Kotlin</span>
+                </div>
+                <div class="bio-card__row">
+                    <span class="bio-card__label">Récent</span>
+                    <span class="bio-card__value bio-card__value--accent"><em>Spring Certified — Janvier 2026</em></span>
+                </div>
+                <div class="bio-card__row">
+                    <span class="bio-card__label">Communauté</span>
+                    <span class="bio-card__value">GDG Libreville — <em>400+ devs</em></span>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+
+{{- partial "ticker.html" . }}
+
+<section class="home-projects" aria-labelledby="works-title">
+    <div class="section__head">
+        <h2 id="works-title">
+            <span class="section-mark"><span class="section-mark__numeral">§ II</span> — Travaux sélectionnés</span>
+        </h2>
+        <a class="meta-link" href="/projects/">Tous les projets →</a>
+    </div>
+
+    <div class="project-list">
+        {{- $projects := where site.RegularPages "Section" "projects" }}
+        {{- $projects = sort $projects "Params.weight" }}
+        {{- range $index, $project := first 3 $projects }}
+            {{- partial "project-card.html" (dict "page" $project "num" (add $index 1)) }}
+        {{- end }}
+    </div>
+</section>
+
+<div class="ornament" aria-hidden="true"></div>
+
+<section class="home-posts" aria-labelledby="writing-title">
+    <div class="section__head">
+        <h2 id="writing-title">
+            <span class="section-mark"><span class="section-mark__numeral">§ III</span> — Écriture</span>
+        </h2>
+        <a class="meta-link" href="/posts/">Voir tous les articles →</a>
+    </div>
+
+    <div>
+        {{- $posts := where site.RegularPages "Section" "posts" }}
+        {{- $posts = sort $posts "Date" "desc" }}
+        {{- range first 4 $posts }}
+            {{- partial "post-card.html" . }}
+        {{- end }}
+    </div>
+</section>
+
+<section class="home-services" aria-labelledby="services-title">
+    <div class="home-services__grid">
+        <div>
+            <span class="kicker">§ IV — Collaborons</span>
+            <p class="home-services__pitch">
+                Trois manières de travailler ensemble — toutes ancrées dans la <em>production</em>, pas la théorie.
+            </p>
+
+            <div class="contact-block">
+                <span class="contact-block__lead">Écrivez-moi.</span>
+                <a href="mailto:bangaromaric@gmail.com" class="no-arrow">bangaromaric@gmail.com&nbsp;↗</a>
+                <a href="https://www.linkedin.com/in/romaric-banga/" class="no-arrow">LinkedIn&nbsp;↗</a>
+                <a href="https://github.com/bangaromaric" class="no-arrow">GitHub&nbsp;↗</a>
+            </div>
+        </div>
+
+        <ul class="service-list" id="services-title">
+            <li>
+                <span class="service-list__num">01</span>
+                <div>
+                    <div class="service-list__label">Consulting technique</div>
+                    <p class="service-list__detail">Architecture d’applications Spring, audit code, migration cloud, mise en place DevOps & microservices.</p>
+                </div>
+            </li>
+            <li>
+                <span class="service-list__num">02</span>
+                <div>
+                    <div class="service-list__label">Formation entreprise</div>
+                    <p class="service-list__detail">Spring Framework, IA générative avec Spring AI, bonnes pratiques GCP — formats sur mesure 1 à 5 jours.</p>
+                </div>
+            </li>
+            <li>
+                <span class="service-list__num">03</span>
+                <div>
+                    <div class="service-list__label">Conférences &amp; talks</div>
+                    <p class="service-list__detail">Interventions techniques sur Spring, l’IA générative et les écosystèmes cloud — en français ou en anglais.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<script>
+(function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-in, .home-projects, .home-posts, .home-services').forEach(function(el) {
+        el.classList.add('fade-in');
+        io.observe(el);
+    });
+})();
+</script>
+
+{{- end }}

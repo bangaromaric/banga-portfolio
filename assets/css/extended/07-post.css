@@ -1,0 +1,176 @@
+.post-single-editorial {
+    max-width: var(--w-wide);
+    margin: 0 auto;
+}
+
+.post-single-editorial__header {
+    padding: var(--s-7) 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-4);
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.post-single-editorial__category {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+}
+
+.post-single-editorial__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.06;
+    font-weight: 340;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin: 0;
+}
+
+.post-single-editorial__lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 350;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 50ch;
+}
+
+.post-single-editorial__meta {
+    display: flex;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    margin-top: var(--s-3);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--rule);
+}
+
+.post-single-editorial__cover {
+    margin: 0 0 0;
+    max-width: var(--w-wide);
+    padding-top: var(--s-5);
+}
+
+.post-single-editorial__cover img {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.post-single-editorial__body {
+    max-width: 720px;
+    margin: var(--s-8) auto;
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--ink-2);
+}
+
+.post-single-editorial__body p,
+.post-single-editorial__body ul,
+.post-single-editorial__body ol { margin: 0 0 1.3em; }
+
+.post-single-editorial__body h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    line-height: 1.18;
+    font-weight: 420;
+    letter-spacing: -0.018em;
+    margin: 2em 0 0.4em;
+    color: var(--ink);
+}
+
+.post-single-editorial__body h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 480;
+    margin: 1.6em 0 0.4em;
+    color: var(--ink);
+}
+
+.post-single-editorial__body h2::before {
+    content: "§ ";
+    color: var(--terracotta);
+    font-style: italic;
+    font-weight: 380;
+}
+
+.post-single-editorial__body blockquote {
+    border-left: 2px solid var(--terracotta);
+    padding-left: var(--s-4);
+    margin: var(--s-6) 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 36em;
+}
+
+.post-single-editorial__body pre {
+    background: var(--code-block-bg);
+    color: #e8e2d2;
+    padding: var(--s-4);
+    border-radius: 3px;
+    overflow-x: auto;
+    font-size: 0.86rem;
+    border-left: 2px solid var(--terracotta);
+}
+
+.post-single-editorial__body img {
+    margin: var(--s-6) auto;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+}
+
+.post-single-editorial__body hr {
+    border: 0;
+    text-align: center;
+    margin: var(--s-7) 0;
+}
+
+.post-single-editorial__body hr::after {
+    content: "❦";
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--terracotta);
+    font-size: 1.2rem;
+}
+
+.post-single-editorial__footer {
+    max-width: 720px;
+    margin: var(--s-8) auto var(--s-7);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+}
+
+.post-single-editorial__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; padding: 0; margin: 0; }
+.post-single-editorial__tags a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background-image: none !important;
+    padding: 0.3em 0.7em;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink-muted);
+    border-radius: 2px;
+    transition: color 200ms, border-color 200ms;
+}
+.post-single-editorial__tags a:hover { color: var(--terracotta); border-color: var(--terracotta); }

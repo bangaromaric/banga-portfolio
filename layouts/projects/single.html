@@ -1,0 +1,100 @@
+{{- define "main" }}
+
+{{- $p := . }}
+{{- $stack := $p.Params.stack | default $p.Params.technologies }}
+
+<article class="project-single">
+    <header class="project-single__header">
+        <div class="project-single__intro">
+            <span class="project-single__kicker">
+                {{- with $p.Params.client }}{{ . }}{{- else }}Projet{{- end }}
+                {{- with $p.Params.year | default ($p.Date.Format "2006") }} · {{ . }}{{- end }}
+                {{- with $p.Params.status }} · {{ . }}{{- end }}
+            </span>
+            <h1 class="project-single__title">{{ $p.Title }}</h1>
+            {{- with $p.Params.tagline | default $p.Description }}
+            <p class="project-single__tagline">{{ . }}</p>
+            {{- end }}
+        </div>
+
+        <div>
+            <div class="project-meta">
+                {{- with $p.Params.role }}
+                <div class="project-meta__row">
+                    <span class="project-meta__label">Rôle</span>
+                    <span class="project-meta__value">{{ . }}</span>
+                </div>
+                {{- end }}
+                {{- with $p.Params.client | default $p.Params.company }}
+                <div class="project-meta__row">
+                    <span class="project-meta__label">Client</span>
+                    <span class="project-meta__value">{{ . }}</span>
+                </div>
+                {{- end }}
+                {{- with $p.Params.duration }}
+                <div class="project-meta__row">
+                    <span class="project-meta__label">Durée</span>
+                    <span class="project-meta__value">{{ . }}</span>
+                </div>
+                {{- end }}
+                {{- with $p.Params.year | default ($p.Date.Format "2006") }}
+                <div class="project-meta__row">
+                    <span class="project-meta__label">Année</span>
+                    <span class="project-meta__value">{{ . }}</span>
+                </div>
+                {{- end }}
+                {{- if $stack }}
+                <div class="project-meta__row">
+                    <span class="project-meta__label">Stack</span>
+                    <span class="project-meta__value">{{ delimit $stack " · " }}</span>
+                </div>
+                {{- end }}
+                {{- with $p.Params.status }}
+                <div class="project-meta__row">
+                    <span class="project-meta__label">Statut</span>
+                    <span class="project-meta__value"><strong>{{ . }}</strong></span>
+                </div>
+                {{- end }}
+            </div>
+
+            <div class="project-links">
+                {{- with $p.Params.github }}
+                <a class="btn no-arrow" href="{{ . }}" rel="noopener">Code source ↗</a>
+                {{- end }}
+                {{- with $p.Params.demo }}
+                <a class="btn btn--primary no-arrow" href="{{ . }}" rel="noopener">Démo en ligne ↗</a>
+                {{- end }}
+                {{- with $p.Params.playstore }}
+                <a class="btn btn--primary no-arrow" href="{{ . }}" rel="noopener">Play Store ↗</a>
+                {{- end }}
+                {{- with $p.Params.article }}
+                <a class="btn no-arrow" href="{{ . }}" rel="noopener">Article technique ↗</a>
+                {{- end }}
+            </div>
+        </div>
+    </header>
+
+    <div class="project-single__body">
+        <aside class="project-single__sidebar">
+            <h4>Repères</h4>
+            <ul>
+                <li>{{ $p.WordCount }} mots</li>
+                <li>{{ $p.ReadingTime }} min de lecture</li>
+                {{- with $p.Lastmod }}<li>Maj. {{ .Format "Jan 2006" }}</li>{{- end }}
+            </ul>
+        </aside>
+
+        <div class="project-single__content">
+            {{ .Content }}
+
+            <hr class="rule" style="margin-top: var(--s-7);">
+            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); letter-spacing: 0.04em;">
+                ← <a href="/projects/" class="no-arrow">Retour aux projets</a>
+                &nbsp;·&nbsp;
+                Une question sur ce travail ? <a href="mailto:bangaromaric@gmail.com">Écrivez-moi</a>.
+            </p>
+        </div>
+    </div>
+</article>
+
+{{- end }}

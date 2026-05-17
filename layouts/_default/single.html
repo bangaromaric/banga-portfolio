@@ -1,0 +1,51 @@
+{{- define "main" }}
+
+{{- $p := . }}
+
+<article class="page-editorial">
+    <header class="page-editorial__head">
+        <div>
+            <span class="page-editorial__kicker">
+                {{ $p.Params.kicker | default (printf "§ %s" $p.Section) | default "§ Page" }}
+            </span>
+            <h1 class="page-editorial__title">
+                {{- $title := $p.Title -}}
+                {{ $title | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+            </h1>
+        </div>
+        {{- with $p.Description }}
+        <p class="page-editorial__lede">{{ . | markdownify }}</p>
+        {{- end }}
+    </header>
+
+    <div class="page-editorial__body">
+        <aside class="page-editorial__sidebar">
+            {{- with $p.Params.sidebarNav }}
+            <h4>Sommaire</h4>
+            <nav>
+                <ul>
+                    {{- range . }}
+                    <li><a href="#{{ .anchor }}" class="no-arrow">{{ .label }}</a></li>
+                    {{- end }}
+                </ul>
+            </nav>
+            {{- else }}
+            <h4>À lire ensuite</h4>
+            <nav>
+                <ul>
+                    <li><a href="/projects/" class="no-arrow">→ Projets</a></li>
+                    <li><a href="/posts/" class="no-arrow">→ Articles</a></li>
+                    <li><a href="/about/" class="no-arrow">→ À propos</a></li>
+                    <li><a href="mailto:bangaromaric@gmail.com" class="no-arrow">→ Contact</a></li>
+                </ul>
+            </nav>
+            {{- end }}
+        </aside>
+
+        <div class="page-editorial__content">
+            {{ .Content }}
+        </div>
+    </div>
+</article>
+
+{{- end }}

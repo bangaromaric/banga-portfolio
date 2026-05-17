@@ -1,0 +1,95 @@
+body {
+    background: var(--paper);
+    color: var(--ink);
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.42 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+}
+
+.dark body::before,
+body.dark::before {
+    mix-blend-mode: screen;
+    opacity: 0.06;
+}
+
+img, svg, video {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+hr, .rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: var(--s-7) 0;
+}
+
+.rule--thick { border-top-color: var(--rule-strong); }
+
+* {
+    box-sizing: border-box;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 3px;
+    border-radius: 1px;
+}
+
+a[href^="http"]:not(.no-arrow)::after,
+a[href^="mailto"]:not(.no-arrow)::after {
+    content: " ↗";
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+    color: var(--terracotta);
+    display: inline-block;
+    transform: translateY(-0.05em);
+    margin-left: 0.12em;
+    transition: transform 200ms var(--ease-out-soft);
+}
+
+a[href^="http"]:hover::after,
+a[href^="mailto"]:hover::after {
+    transform: translate(0.15em, -0.2em);
+}
+
+.nav a::after,
+.social-icons a::after,
+.entry-link::after,
+.post-card a::after,
+.project-card__link::after,
+.header__brand::after,
+.button-inner a::after,
+.footer__inner a::after,
+.toc a::after { content: none !important; }
+
+main.main {
+    max-width: var(--w-page);
+    margin: 0 auto;
+    padding: var(--s-7) 0 var(--s-10);
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 720px) {
+    main.main { padding: var(--s-5) 0 var(--s-8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

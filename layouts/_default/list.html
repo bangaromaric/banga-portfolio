@@ -1,0 +1,44 @@
+{{- define "main" }}
+
+<section class="list-page">
+    <header class="list-page__head">
+        <h1 class="list-page__title">{{ .Title }}</h1>
+        {{- with .Description }}
+        <p class="list-page__lede">{{ . | markdownify }}</p>
+        {{- end }}
+    </header>
+
+    {{- if .Content }}
+    <div class="prose" style="padding: var(--s-6) 0; max-width: var(--w-prose);">
+        {{ .Content }}
+    </div>
+    {{- end }}
+
+    {{- $pages := union .RegularPages .Sections }}
+    {{- $pages = sort $pages "Date" "desc" }}
+
+    <div class="list-grid">
+        {{- range $index, $p := $pages }}
+        <article class="list-row">
+            <div class="list-row__num">No. {{ printf "%02d" (add $index 1) }}</div>
+            <div>
+                <h2 class="list-row__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+                {{- with $p.Params.tagline | default $p.Description | default $p.Summary }}
+                <p class="list-row__desc">{{ . | plainify | truncate 180 }}</p>
+                {{- end }}
+            </div>
+            <div class="list-row__tags">
+                {{- with $p.Params.stack | default $p.Params.technologies | default $p.Params.tags }}
+                {{ delimit (first 3 .) " · " }}
+                {{- end }}
+            </div>
+            <time class="list-row__date" datetime="{{ $p.Date.Format "2006-01-02" }}">
+                {{ $p.Date.Format "Jan 2006" }}
+            </time>
+            <a class="list-row__link" href="{{ $p.RelPermalink }}" aria-label="Voir {{ $p.Title }}"></a>
+        </article>
+        {{- end }}
+    </div>
+</section>
+
+{{- end }}

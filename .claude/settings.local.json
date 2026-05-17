@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk find *)",
+      "Bash(rtk ls *)",
+      "Bash(rtk wc *)",
+      "Bash(rtk read *)",
+      "Bash(rtk grep *)",
+      "Bash(identify BDG_CERT_Generic_Associate_Cloud_RGB.png VCP-Spring-2024-color.png)"
+    ]
+  }
+}

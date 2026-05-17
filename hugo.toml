@@ -10,11 +10,12 @@ theme = 'PaperMod'
 
 [params]
 author = "BANGA Romaric"
-description = "Portfolio de BANGA Romaric, développeur Spring/DevOps/Cloud avec 7+ années d'expérience chez ANINF. Expert microservices, Google Cloud Platform et organisateur GDG Libreville."
-keywords = ["BANGA Romaric", "Développeur Spring", "Intelligence Artificielle", "GDG Libreville", "Gabon", "Java", "Spring Boot", "Android", "ANINF", "Microservices", "DevOps", "Cloud", "Talend", "Assistant IA"]
+description = "Portfolio de BANGA Romaric Tanguy — VMware Spring Certified Professional 2024 v2, Google Cloud Associate Engineer, lead Spring developer à l'ANINF, organisateur du Google Developers Group Libreville."
+keywords = ["BANGA Romaric", "Spring Certified Professional", "VMware Spring Certified", "Broadcom Spring", "Spring Pro Gabon", "Spring developer Gabon", "Spring AI", "Google Cloud Gabon", "GDG Libreville", "Libreville", "ANINF", "Microservices", "Java Spring Boot", "Android Kotlin", "DevFest Gabon", "consulting Spring Afrique", "formation Spring AI"]
+env = "production"
 
 # SEO et métadonnées
-images = ["/images/profile.jpg"]
+images = ["/images/og-default.jpg"]
 defaultTheme = "auto"
 disableThemeToggle = false
 
@@ -45,26 +46,12 @@ changefreq = "weekly"
 priority = 0.5
 filename = "sitemap.xml"
 
-# Configuration Mode Profile - Page d'accueil avec photo
+# Sections affichées sur la home et dans les listings
+mainSections = ["posts", "projects"]
+
+# Mode profile désactivé — la home est gérée par layouts/index.html (override éditorial)
 [params.profileMode]
-enabled = true
-title = "BANGA Romaric"
-subtitle = "Lead Spring Developer | Google Cloud | Organizer GDG Libreville (400+ Devs)"
-imageUrl = "/images/profile.jpg"
-imageWidth = 200
-imageHeight = 200
-imageTitle = "BANGA Romaric - Expert Spring & Google Cloud"
-[[params.profileMode.buttons]]
-name = " Projets Innovation IA & Spring"
-url = "/projects"
-
-[[params.profileMode.buttons]]
-name = " Services Consultant / Formateur"
-url = "/about"
-
-[[params.profileMode.buttons]]
-name = " Articles & Retours d'Expérience"
-url = "/posts"
+enabled = false
 
 [[params.socialIcons]]
 name = "email"

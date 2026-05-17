@@ -1,0 +1,24 @@
+{{- $p := .page }}
+{{- $num := .num }}
+{{- $stack := $p.Params.stack | default $p.Params.technologies }}
+<article class="project-card">
+    <div class="project-card__num">No. {{ printf "%02d" $num }}</div>
+    <div class="project-card__body">
+        <h3 class="project-card__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+        {{- with $p.Params.tagline | default $p.Description }}
+        <p class="project-card__desc">{{ . }}</p>
+        {{- end }}
+    </div>
+    <div class="project-card__meta">
+        {{- with $p.Params.year | default ($p.Date.Format "2006") }}
+        <span class="project-card__year">{{ . }}</span>
+        {{- end }}
+        {{- with $p.Params.status }}
+        <span class="project-card__tag">{{ . }}</span>
+        {{- end }}
+        {{- if $stack }}
+        <span class="project-card__tag">{{ delimit (first 3 $stack) " · " }}</span>
+        {{- end }}
+    </div>
+    <a class="project-card__link" href="{{ $p.RelPermalink }}" aria-label="Lire le projet {{ $p.Title }}" style="position:absolute;inset:0;"></a>
+</article>

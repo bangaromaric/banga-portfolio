@@ -1,7 +1,145 @@
 {{- if not (.Param "hideFooter") }}
-<footer class="footer">
-    <div class="footer__inner">
-        <span>© {{ now.Format "2006" }} BANGA Romaric - Expert Spring & Google Cloud | Développeur Passionné</span>
+<footer class="site-footer">
+    <div class="ornament site-footer__ornament" aria-hidden="true"></div>
+
+    <div class="site-footer__inner">
+        <div class="site-footer__col site-footer__col--brand">
+            <a href="{{ "/" | absURL }}" class="site-footer__brand no-arrow">
+                <span class="brand__mark">B</span>
+                <span>Romaric <em>Banga</em></span>
+            </a>
+            <p class="site-footer__pitch">
+                Développeur Spring &amp; Google Cloud à Libreville. Consulting, formation, conférences — disponible pour des collaborations en 2026.
+            </p>
+            <div class="availability">
+                <span class="availability__dot" aria-hidden="true"></span>
+                <span>Ouvert aux missions</span>
+            </div>
+        </div>
+
+        <div class="site-footer__col">
+            <h4 class="site-footer__head">Navigation</h4>
+            <ul>
+                <li><a href="/" class="no-arrow">Accueil</a></li>
+                <li><a href="/projects/" class="no-arrow">Travaux</a></li>
+                <li><a href="/posts/" class="no-arrow">Carnet</a></li>
+                <li><a href="/about/" class="no-arrow">À propos</a></li>
+                <li><a href="/gdg/" class="no-arrow">GDG Libreville</a></li>
+            </ul>
+        </div>
+
+        <div class="site-footer__col">
+            <h4 class="site-footer__head">Réseaux</h4>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/romaric-banga/" class="no-arrow" rel="noopener">LinkedIn ↗</a></li>
+                <li><a href="https://github.com/bangaromaric" class="no-arrow" rel="noopener">GitHub ↗</a></li>
+                <li><a href="https://x.com/bangaromaric" class="no-arrow" rel="noopener">Twitter ↗</a></li>
+                <li><a href="https://gdg.community.dev/gdg-libreville/" class="no-arrow" rel="noopener">GDG Libreville ↗</a></li>
+                <li><a href="/posts/index.xml" class="no-arrow">Flux RSS</a></li>
+            </ul>
+        </div>
+
+        <div class="site-footer__col">
+            <h4 class="site-footer__head">Contact</h4>
+            <ul>
+                <li><a href="mailto:bangaromaric@gmail.com" class="no-arrow">bangaromaric@gmail.com</a></li>
+                <li>Libreville, Gabon · UTC+1</li>
+                <li>Réponse sous 48h ouvrées</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="site-footer__bar">
+        <span>© {{ now.Format "2006" }} BANGA Romaric Tanguy. Tous droits réservés.</span>
+        <span class="site-footer__signature"><em>Conçu à Libreville</em> · Hugo &amp; un peu d'âme.</span>
     </div>
 </footer>
+
+<style>
+.site-footer {
+    margin-top: var(--s-9);
+    background: var(--paper-2);
+    border-top: 1px solid var(--rule);
+    position: relative;
+    z-index: 3;
+}
+.site-footer__ornament { margin: 0; padding-top: var(--s-4); }
+.site-footer__inner {
+    max-width: var(--w-page);
+    margin: 0 auto;
+    padding: var(--s-6) 0 var(--s-7);
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: var(--s-7);
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .site-footer__inner { grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+    .site-footer__col--brand { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+    .site-footer__inner { grid-template-columns: 1fr; }
+}
+.site-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-3);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+    background-image: none !important;
+    margin-bottom: var(--s-4);
+}
+.site-footer__brand em { font-style: italic; font-weight: 380; color: var(--ink-muted); }
+.site-footer__pitch {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0 0 var(--s-4);
+    max-width: 38ch;
+}
+.site-footer__head {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin: 0 0 var(--s-3);
+    font-weight: 500;
+}
+.site-footer__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    font-size: 0.92rem;
+    color: var(--ink-2);
+}
+.site-footer__col a {
+    background-image: none !important;
+    color: var(--ink-2);
+    transition: color 200ms;
+}
+.site-footer__col a:hover { color: var(--terracotta); }
+.site-footer__bar {
+    max-width: var(--w-page);
+    margin: 0 auto;
+    border-top: 1px solid var(--rule);
+    padding: var(--s-4) 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+}
+.site-footer__signature em { color: var(--terracotta); font-style: italic; }
+</style>
 {{- end }}
