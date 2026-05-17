@@ -129,9 +129,10 @@
     transition: border-color 200ms, color 200ms, transform 200ms;
 }
 .site-header__util button:hover { border-color: var(--ink); transform: rotate(15deg); }
-.site-header__util #moon { display: none; }
-.dark .site-header__util #moon { display: inline-block; }
-.dark .site-header__util #sun { display: none; }
+body:not(.dark) .site-header__util #moon { display: none; }
+body:not(.dark) .site-header__util #sun { display: inline-block; }
+body.dark .site-header__util #moon { display: inline-block; }
+body.dark .site-header__util #sun { display: none; }
 
 @media (max-width: 720px) {
     .site-header__inner { flex-wrap: wrap; gap: var(--s-3); padding: var(--s-3) 0; }

@@ -1,3 +1,18 @@
+<script>
+    (function() {
+        var pref = localStorage.getItem('pref-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (pref === 'dark' || (!pref && prefersDark)) {
+            document.documentElement.classList.add('dark');
+            var apply = function() { if (document.body) document.body.classList.add('dark'); };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', apply);
+            } else {
+                apply();
+            }
+        }
+    })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=JetBrains+Mono:ital,wght@0,400..700;1,400..600&display=swap">
