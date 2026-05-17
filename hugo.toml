@@ -22,14 +22,12 @@ defaultTheme = "auto"
 disableThemeToggle = false
 
 # Search Console & Webmaster verification
-# TODO: remplacer ces placeholders par les vrais tokens
-# 1) https://search.google.com/search-console → ajouter ban.ga → HTML tag → copier le content
-# 2) https://www.bing.com/webmasters → idem
+# Google Search Console : déjà vérifié via DNS (propriété de type "Domaine") — pas de meta tag nécessaire.
+# Bing Webmaster Tools (optionnel) : https://www.bing.com/webmasters → ajouter ban.ga
+#   → choisir "Meta tag" → copier le content → remplacer le placeholder ci-dessous, ou retirer le bloc si non utilisé.
 [params.analytics]
-  [params.analytics.google]
-  SiteVerificationTag = "TODO_GOOGLE_VERIFICATION_TOKEN"
   [params.analytics.bing]
-  SiteVerificationTag = "TODO_BING_VERIFICATION_TOKEN"
+  SiteVerificationTag = "308BF07CFE01FB477AA7479FC7ABA3A4"
 
 # Schema.org — portfolio personnel, donc publisherType = Person (au lieu d'Organization par défaut)
 [params.schema]
