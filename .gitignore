@@ -10,6 +10,13 @@
 *.swo
 *~
 
+# Claude Code & AI assistants
+.claude/
+CLAUDE.md
+.mcp.json
+.cursor/
+.aider*
+
 # OS files
 .DS_Store
 .DS_Store?
