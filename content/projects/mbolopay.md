@@ -13,6 +13,8 @@ stack: ["Spring Boot 4", "Spring Modulith", "Java 25", "jMolecules", "ArchUnit",
 technologies: ["Spring Boot 4.0", "Spring Modulith 2.0", "Java 25", "jMolecules", "ArchUnit 1.4", "Lit 3", "Material Web", "TypeScript 5", "H2", "Hibernate"]
 appType: "WebApplication"
 github: "https://github.com/bangaromaric/mbolopay"
+demo: "https://mbolopay.banga.ga/"
+article: "https://medium.com/@bangaromaric/moussavou-apprend-ddd-le-guide-pratique-du-dev-qui-veut-%C3%A9crire-du-code-qui-tient-07a9192a3a42"
 featured: true
 weight: 1
 showToc: false
