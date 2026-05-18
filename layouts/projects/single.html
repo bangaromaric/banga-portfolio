@@ -33,7 +33,10 @@
                 {{- with $p.Params.year | default ($p.Date.Format "2006") }} · {{ . }}{{- end }}
                 {{- with $p.Params.status }} · {{ . }}{{- end }}
             </span>
-            <h1 class="project-single__title">{{ $p.Title }}</h1>
+            <h1 class="project-single__title">
+                {{- $heroTitle := $p.Params.heroTitle | default $p.Title -}}
+                {{ $heroTitle | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+            </h1>
             {{- with $p.Params.tagline | default $p.Description }}
             <p class="project-single__tagline">{{ . }}</p>
             {{- end }}

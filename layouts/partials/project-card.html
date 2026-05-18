@@ -4,7 +4,8 @@
 <article class="project-card">
     <div class="project-card__num">No. {{ printf "%02d" $num }}</div>
     <div class="project-card__body">
-        <h3 class="project-card__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+        {{- $cardTitle := $p.Params.heroTitle | default $p.Title -}}
+        <h3 class="project-card__title"><a href="{{ $p.RelPermalink }}">{{ $cardTitle | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}</a></h3>
         {{- with $p.Params.tagline | default $p.Description }}
         <p class="project-card__desc">{{ . }}</p>
         {{- end }}

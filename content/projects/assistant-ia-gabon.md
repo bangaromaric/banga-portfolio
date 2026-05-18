@@ -15,7 +15,7 @@ github: "https://github.com/bangaromaric/spring-ai"
 demo: "https://lnkd.in/eVx6Gxpi"
 article: "https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-g%C3%A9n%C3%A9rative-spring-ai-et-tool-calling-fc9fe16cd8e7"
 featured: true
-weight: 1
+weight: 2
 showToc: false
 ---
 

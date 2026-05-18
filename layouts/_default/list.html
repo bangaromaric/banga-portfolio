@@ -25,7 +25,8 @@
         <article class="list-row">
             <div class="list-row__num">No. {{ printf "%02d" (add $index 1) }}</div>
             <div>
-                <h2 class="list-row__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>
+                {{- $rowTitle := $p.Params.heroTitle | default $p.Title -}}
+                <h2 class="list-row__title"><a href="{{ $p.RelPermalink }}">{{ $rowTitle | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}</a></h2>
                 {{- with $p.Params.tagline | default $p.Description | default $p.Summary }}
                 <p class="list-row__desc">{{ . | plainify | truncate 180 }}</p>
                 {{- end }}

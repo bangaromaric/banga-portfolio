@@ -8,7 +8,10 @@
         <span class="post-single-editorial__category">{{ . }}</span>
         {{- end }}
 
-        <h1 class="post-single-editorial__title">{{ $p.Title }}</h1>
+        <h1 class="post-single-editorial__title">
+            {{- $heroTitle := $p.Params.heroTitle | default $p.Title -}}
+            {{ $heroTitle | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+        </h1>
 
         {{- with $p.Description }}
         <p class="post-single-editorial__lede">{{ . }}</p>
