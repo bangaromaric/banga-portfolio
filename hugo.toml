@@ -13,7 +13,7 @@ enableGitInfo = true
 [params]
 author = "BANGA Romaric"
 description = "Portfolio de BANGA Romaric Tanguy — VMware Spring Certified Professional 2024 v2, Google Cloud Associate Engineer, lead Spring developer à l'ANINF, organisateur du Google Developers Group Libreville."
-keywords = ["BANGA Romaric", "Romaric Banga", "Spring Certified Professional", "VMware Spring Certified", "Broadcom Spring", "Spring Pro Gabon", "Spring developer Gabon", "développeur Spring Gabon", "Spring Boot Libreville", "Spring AI", "Spring AI Gabon", "Google Cloud Gabon", "Google Cloud engineer Gabon", "architecte cloud Gabon", "GDG Libreville", "DevFest Libreville", "Libreville", "ANINF", "Microservices", "Java Spring Boot", "Android Kotlin", "DevFest Gabon", "consulting Spring Afrique", "consulting IA générative Afrique", "formation Spring AI", "formation Spring Boot Gabon", "VMware Spring expert Afrique"]
+keywords = ["BANGA Romaric", "Romaric Banga", "Spring Certified Professional", "VMware Spring Certified", "Broadcom Spring", "Spring Pro Gabon", "Spring developer Gabon", "développeur Spring Gabon", "Spring Boot Libreville", "Spring AI", "Spring AI Gabon", "Google Cloud Gabon", "GCP Cloud Engineer Gabon", "architecte cloud Gabon", "GDG Libreville", "DevFest Libreville", "Libreville", "ANINF", "Microservices", "Java Spring Boot", "Android Kotlin", "DevFest Gabon", "consulting Spring Afrique", "consulting IA générative Afrique", "formation Spring AI", "formation Spring Boot Gabon", "VMware Spring expert Afrique"]
 env = "production"
 
 # SEO et métadonnées

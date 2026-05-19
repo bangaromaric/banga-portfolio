@@ -1,5 +1,5 @@
 ---
-title: "Romaric BANGA — Développeur Spring Certifié & Architecte Cloud | Gabon"
+title: "Romaric BANGA — Développeur Spring Certifié & GCP Cloud Engineer | Gabon"
 description: "Lead Spring developer à l'ANINF, VMware Spring Certified Professional 2024 v2, Google Cloud Associate Engineer, créateur de l'Assistant IA Gabonais, organisateur du Google Developers Group Libreville."
 date: 2025-09-01
 kicker: "§ À propos"
