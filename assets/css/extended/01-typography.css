@@ -1,5 +1,25 @@
+@font-face {
+    font-family: "Fraunces-fallback";
+    src: local("Iowan Old Style"), local("Georgia"), local("Times New Roman");
+    font-style: italic;
+    size-adjust: 104%;
+    ascent-override: 96%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: "Fraunces-fallback";
+    src: local("Iowan Old Style"), local("Georgia"), local("Times New Roman");
+    font-style: normal;
+    size-adjust: 102%;
+    ascent-override: 94%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+}
+
 :root {
-    --font-display: "Fraunces", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+    --font-display: "Fraunces", "Fraunces-fallback", "Iowan Old Style", "Apple Garamond", Georgia, serif;
     --font-body: "Newsreader", "Iowan Old Style", Georgia, serif;
     --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
