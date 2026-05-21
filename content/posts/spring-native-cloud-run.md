@@ -8,7 +8,7 @@ categories: ["Architecture"]
 draft: false
 showToc: true
 cover:
-    image: "/images/spring-native-cloud-run-cover.png"
+    image: "/images/spring-native-cloud-run-cover.jpg"
     alt: "Architecture Spring Native + GraalVM + Google Cloud Run — flow de compilation AOT vers déploiement serverless, par Romaric BANGA"
     caption: "Spring → GraalVM AOT → image OCI → Cloud Run serverless"
 ---
@@ -227,18 +227,7 @@ Décortiquons. **CPU 1 / Memory 512Mi** suffit largement pour le binaire natif (
 
 Le workflow conceptuel ressemble à ça :
 
-```
-   ┌─────────────┐      ┌──────────────────┐      ┌─────────────┐
-   │  Code Spring│ ───► │ Paketo Buildpack │ ───► │  Image OCI  │
-   │   + pom.xml │      │ (build natif)    │      │ (~180 Mo)   │
-   └─────────────┘      └──────────────────┘      └──────┬──────┘
-                                                         │
-                                                         ▼
-   ┌─────────────┐      ┌──────────────────┐      ┌─────────────┐
-   │  Cloud Run  │ ◄─── │  gcloud run      │ ◄─── │  Artifact   │
-   │  (service)  │      │     deploy       │      │  Registry   │
-   └─────────────┘      └──────────────────┘      └─────────────┘
-```
+{{< figure src="/images/spring-native-cloud-run-workflow.jpg" alt="Pipeline CI/CD Spring Native vers Cloud Run en six étapes : code Spring + pom.xml, build via Paketo Buildpack, génération d'une image OCI stratifiée, stockage sur Artifact Registry, déploiement par gcloud run deploy, exécution sur Cloud Run serverless — illustration isométrique avec motif pagne ouest-africain par Romaric BANGA" caption="Du code Spring au service Cloud Run : six stations, un artefact qui voyage de gauche à droite puis revient se déployer." loading="lazy" >}}
 
 Pour MboloPay, le service tourne dans **une région européenne**, avec un **custom domain mappé** sur `mbolopay.banga.ga`. Le mapping DNS prend ~5 minutes à propager la première fois, puis c'est invisible.
 
