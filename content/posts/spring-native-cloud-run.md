@@ -204,7 +204,7 @@ L'AOT processing tourne **avant** la compilation native. Si ton code a une erreu
 
 L'erreur typique ressemble à ça :
 
-```
+```text
 [ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.2:process-aot
 [ERROR] Caused by: java.lang.IllegalStateException: Failed to read candidate component class
 ```
@@ -219,7 +219,7 @@ Celui-là, c'est le grand classique qui fait perdre une demi-journée parce qu'o
 
 Spring Boot 4 demande Java 17 au minimum, mais MboloPay tourne sur **Java 25** pour profiter des dernières optimisations JVM — et surtout pour s'aligner avec Liberica NIK 25, ce qui simplifie l'installation à un seul package au lieu de gérer deux JDK distinctes. Tu as donc installé Liberica JDK 25. Tu lances `./mvnw -Pnative native:compile`. Tu obtiens :
 
-```
+```text
 native-image is not installed in your JAVA_HOME
 ```
 
@@ -243,7 +243,7 @@ Et sous Windows uniquement, prévois **Visual Studio Build Tools** en plus : Gra
 
 Celui-là, je l'ai vécu douloureusement la première fois que j'ai voulu pousser une image native sur Artifact Registry depuis Windows. Tu as `gcloud` installé. Tu as fait `gcloud auth login`. Tu lances `./mvnw -Pnative spring-boot:build-image` qui prend 5-10 minutes à compiler. À la toute fin, au moment du push, l'erreur tombe :
 
-```
+```text
 Cannot run program "docker-credential-gcloud": CreateProcess error=2
 ```
 
