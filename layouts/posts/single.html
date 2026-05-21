@@ -18,7 +18,7 @@
         {{- end }}
 
         <div class="post-single-editorial__meta">
-            <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02 janvier 2006" }}</time>
+            <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format ":date_long" }}</time>
             <span>·</span>
             <span>{{ $p.ReadingTime }} min de lecture</span>
             <span>·</span>
@@ -56,7 +56,7 @@
         <ul class="post-related__list">
             {{- range . }}
             <li class="post-related__item">
-                <time class="post-related__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2006" }}</time>
+                <time class="post-related__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01/2006" }}</time>
                 <h3 class="post-related__entry"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
                 {{- with .Description }}
                 <p class="post-related__desc">{{ . | plainify | truncate 140 }}</p>

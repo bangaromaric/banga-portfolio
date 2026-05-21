@@ -105,7 +105,7 @@
             <ul>
                 <li>{{ $p.WordCount }} mots</li>
                 <li>{{ $p.ReadingTime }} min de lecture</li>
-                {{- with $p.Lastmod }}<li>Maj. {{ .Format "Jan 2006" }}</li>{{- end }}
+                {{- with $p.Lastmod }}<li>Maj. {{ .Format "01/2006" }}</li>{{- end }}
             </ul>
         </aside>
 

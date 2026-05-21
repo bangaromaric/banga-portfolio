@@ -100,6 +100,8 @@ Trois certifications officielles qui valident la maîtrise du stack Spring, du c
 
 </div>
 
+<p class="credentials__aggregate"><em>Profil agrégé sur <a href="https://g.dev/romaricbanga" rel="noopener">g.dev/romaricbanga ↗</a> — toutes mes certifications Google, badges GDG et contributions communauté en un seul endroit.</em></p>
+
 ## Expertise {#expertise}
 
 ### Formation
@@ -153,4 +155,5 @@ Le plus simple est l'email. Je réponds sous 48h ouvrées.
 - **Email** — [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com?subject=Collaboration%20technique)
 - **LinkedIn** — [linkedin.com/in/romaric-banga](https://www.linkedin.com/in/romaric-banga/)
 - **GitHub** — [github.com/bangaromaric](https://github.com/bangaromaric)
+- **Profil Google Developer** — [g.dev/romaricbanga](https://g.dev/romaricbanga)
 - **Localisation** — Libreville, Gabon (UTC+1)

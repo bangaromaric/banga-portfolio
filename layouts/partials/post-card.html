@@ -1,7 +1,7 @@
 {{- $p := . }}
 <article class="post-card">
     <time class="post-card__date" datetime="{{ $p.Date.Format "2006-01-02" }}">
-        {{ $p.Date.Format "02 Jan 2006" }}
+        {{ $p.Date | time.Format ":date_long" }}
     </time>
     <h3 class="post-card__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
     {{- with index $p.Params.categories 0 }}

@@ -240,6 +240,18 @@
     flex-direction: column;
 }
 
+.credentials__aggregate {
+    margin: calc(var(--s-5) * -1) 0 var(--s-6);
+    padding-top: var(--s-4);
+    font-size: var(--fz-sm);
+    color: var(--ink-2);
+    text-align: right;
+}
+
+.credentials__aggregate em {
+    font-variation-settings: "SOFT" 100;
+}
+
 .credential-card {
     display: grid;
     grid-template-columns: 132px minmax(0, 1fr) auto;
