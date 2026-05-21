@@ -49,6 +49,8 @@ Spring Native, c'est Spring qui dit à GraalVM : *« regarde mon code, devine TO
 
 Sous le capot, c'est **GraalVM Native Image**. Un compilateur AOT — *Ahead-of-Time* — qui prend ton bytecode Java et le transforme en exécutable natif (`.exe` sous Windows, ELF sous Linux). Plus de JVM au runtime. Plus de JIT. Plus de classpath scan. Plus de réflexion paresseuse. Tout est résolu à la compilation.
 
+> 📝 **Note de terminologie**. *« Spring Native »* était à l'origine un projet incubator séparé (le module `spring-native`, 2021-2022) qui prototypait le support GraalVM. Depuis **Spring Boot 3 (novembre 2022)**, ce support a été **intégré directement au core Spring Boot** et le module séparé a été déprécié — la doc officielle parle désormais de *« GraalVM Native Image support »*. Le nom *« Spring Native »* reste largement utilisé par habitude dans la communauté (et dans cet article) comme raccourci pour désigner *« la compilation native d'une appli Spring Boot via GraalVM + Spring AOT »*. C'est cette intégration qu'on décortique ici, pas un projet séparé.
+
 Le compilateur fait ce qu'on appelle de la **closed-world analysis** : il considère que ton application est fermée, qu'aucune classe ne sera ajoutée au runtime, qu'aucun proxy dynamique ne sera créé à la volée. À partir de là, il peut suivre toutes les références depuis le `main()`, marquer les classes utilisées, jeter le reste, et compiler le minimum vital.
 
 L'image native qui en sort est plus grosse en taille (~180 Mo vs ~50 Mo pour le JAR) parce qu'elle embarque la libc, les libs JDK essentielles, ses propres routines de garbage collection. Mais elle démarre **instantanément** parce qu'il n'y a plus rien à initialiser : tout est déjà initialisé en mémoire au moment où le binaire commence à exécuter `main()`.
@@ -168,7 +170,7 @@ C'est un faux ami : tu crois que c'est un problème natif, c'est en réalité un
 
 Celui-là, c'est le grand classique qui fait perdre une demi-journée parce qu'on ne comprend pas le message d'erreur.
 
-Spring Boot 4 exige Java 25 baseline. Tu as installé Liberica JDK 25. Tu lances `./mvnw -Pnative native:compile`. Tu obtiens :
+Spring Boot 4 demande Java 17 au minimum, mais MboloPay tourne sur **Java 25** pour profiter des dernières optimisations JVM — et surtout pour s'aligner avec Liberica NIK 25, ce qui simplifie l'installation à un seul package au lieu de gérer deux JDK distinctes. Tu as donc installé Liberica JDK 25. Tu lances `./mvnw -Pnative native:compile`. Tu obtiens :
 
 ```
 native-image is not installed in your JAVA_HOME
