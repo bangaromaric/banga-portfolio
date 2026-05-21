@@ -8,7 +8,7 @@ categories: ["Architecture"]
 draft: false
 showToc: false
 cover:
-    image: "/images/hexagonal-architecture.png"
+    image: "/images/hexagonal-architecture.jpg"
     alt: "Schéma de l'architecture hexagonale en 4 couches — Primary (incoming adapters), Application (orchestration), Domain (core business logic), Secondary (outgoing adapters) — Romaric BANGA"
     caption: "Architecture hexagonale — domaine au centre, adaptateurs interchangeables"
 ---
