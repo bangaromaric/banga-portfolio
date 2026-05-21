@@ -129,6 +129,83 @@
     border-left: 2px solid var(--terracotta);
 }
 
+/* Tableaux éditoriaux dans le corps de l'article — style §11 :
+   séparateurs fins (pas de bordures verticales), header mono uppercase
+   comme les kickers, dernière colonne monospace pour les chiffres alignés,
+   accent terracotta sur le strong (ex. ligne Total). Responsive scroll
+   horizontal sur mobile plutôt que squish. */
+.post-single-editorial__body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--s-6) 0;
+    font-size: 0.96rem;
+    line-height: 1.5;
+}
+
+.post-single-editorial__body thead {
+    border-bottom: 2px solid var(--rule-strong);
+}
+
+.post-single-editorial__body th {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-align: left;
+    padding: var(--s-3) var(--s-4) var(--s-3) 0;
+    white-space: nowrap;
+}
+
+.post-single-editorial__body th:last-child,
+.post-single-editorial__body td:last-child {
+    padding-right: 0;
+    text-align: right;
+}
+
+.post-single-editorial__body td {
+    padding: var(--s-3) var(--s-4) var(--s-3) 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-2);
+    vertical-align: top;
+}
+
+.post-single-editorial__body td:first-child {
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.post-single-editorial__body td:last-child {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.post-single-editorial__body tr:last-child td {
+    border-bottom: none;
+}
+
+/* Cellules en gras (ex. ligne Total) : accent renforcé */
+.post-single-editorial__body td strong {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.post-single-editorial__body td:last-child strong {
+    color: var(--terracotta);
+}
+
+/* Mobile : scroll horizontal plutôt que compression illisible */
+@media (max-width: 720px) {
+    .post-single-editorial__body table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+}
+
 .post-single-editorial__body img {
     margin: var(--s-6) auto;
     border-radius: 2px;

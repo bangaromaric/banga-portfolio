@@ -1,0 +1,25 @@
+{{- /*
+  Render hook : liens markdown.
+
+  Stratégie hybride contextuelle :
+  - Liens internes ban.ga, ancres #..., mailto: et tel: → même onglet
+  - Tous les autres (http://, https:// vers domaines tiers) → nouvel onglet
+    avec rel="noopener noreferrer" pour bloquer le tabnabbing
+
+  ATTENTION sur la distinction des domaines :
+  - `ban.ga` = le portfolio (site éditorial principal) → traité comme INTERNE
+  - `banga.ga` = domaine séparé qui héberge les démos projets
+    (mbolopay.banga.ga, futurs.banga.ga, etc.) → traité comme EXTERNE
+  Le check `in $url "ban.ga"` ne matche PAS `banga.ga` parce que la séquence
+  exacte « ban.ga » (avec le point après le n) n'apparaît pas dans la chaîne
+  « banga.ga » (qui a un g après le n). C'est volontaire : les démos s'ouvrent
+  en parallèle de l'article qu'on lit, ce qu'on veut côté UX.
+*/ -}}
+{{- $url := .Destination -}}
+{{- $isExternal := false -}}
+{{- if (or (hasPrefix $url "http://") (hasPrefix $url "https://")) -}}
+  {{- if not (or (in $url "ban.ga") (in $url "banga.github.io") (in $url "localhost") (in $url "127.0.0.1")) -}}
+    {{- $isExternal = true -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $url | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

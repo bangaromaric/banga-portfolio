@@ -143,6 +143,53 @@ C'est le piège qui pique. En mode JVM, `http://localhost:8080/h2-console` te do
 
 > **Solution honnête** : pour la dev locale, utilise la JVM standard (`./mvnw spring-boot:run`). Le mode natif est pour la prod ou pour mesurer le cold-start. Si tu veux vraiment l'h2-console en natif, il faut écrire un `RuntimeHintsRegistrar` custom qui enregistre toutes les classes de la servlet H2 — quelques dizaines de lignes, faisable mais pénible.
 
+**Pour les curieux qui veulent quand même essayer**, voici le squelette minimal du registrar à placer dans `src/main/java/.../config/H2ConsoleHints.java` :
+
+```java
+package com.bangaromaric.mbolopay.config;
+
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
+import org.springframework.aot.hint.TypeReference;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportRuntimeHints;
+
+@Configuration
+@ImportRuntimeHints(H2ConsoleHints.Registrar.class)
+public class H2ConsoleHints {
+
+    static class Registrar implements RuntimeHintsRegistrar {
+        @Override
+        public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+            // 1. La servlet H2 instanciée par réflexion par Spring Boot
+            hints.reflection().registerType(
+                TypeReference.of("org.h2.server.web.JakartaWebServlet"),
+                MemberCategory.INVOKE_DECLARED_CONSTRUCTORS,
+                MemberCategory.INVOKE_PUBLIC_METHODS);
+
+            // 2. Ressources statiques (HTML/JS/CSS) embeddées dans h2-*.jar
+            hints.resources()
+                .registerPattern("org/h2/server/web/*")
+                .registerPattern("org/h2/util/data.zip");
+
+            // 3. Driver JDBC chargé dynamiquement par Class.forName
+            hints.reflection().registerType(
+                TypeReference.of("org.h2.Driver"),
+                MemberCategory.INVOKE_DECLARED_CONSTRUCTORS);
+        }
+    }
+}
+```
+
+Trois registrations, trois raisons distinctes :
+
+- **`reflection.registerType(JakartaWebServlet)`** : Spring Boot 4 utilise Jakarta EE, la servlet H2 correspondante est `JakartaWebServlet` (pas `WebServlet`, qui était la version `javax` de Spring Boot 2). GraalVM doit la connaître à la compilation parce que Spring l'instancie via réflexion au démarrage.
+- **`resources.registerPattern("org/h2/server/web/*")`** : la console est une SPA dont le HTML/CSS/JS vivent **dans le JAR `h2-*.jar`**. Sans cette ligne, l'UI s'ouvre mais charge un 404 sur chaque ressource — d'où la fameuse « page blanche ».
+- **`reflection.registerType("org.h2.Driver")`** : appelé via `Class.forName("org.h2.Driver")` par certaines configs JPA. Sans le hint, `ClassNotFoundException` au premier accès BDD.
+
+> ⚠️ **Note de réalisme** : ce squelette suffit à *afficher* la console et à *ouvrir une connexion*. Mais la H2 Console utilise une cinquantaine de classes internes (formateurs SQL, parser, session manager) que tu découvriras au fur et à mesure des `ClassNotFoundException` qui pop dans les logs Cloud Run. C'est exactement ce que je voulais dire par *« faisable mais pénible »* : tu construis ton registrar **incrémentalement, en réagissant aux erreurs runtime**. Plan une demi-journée si tu veux vraiment.
+
 ### Piège 2 — Spring Boot DevTools est ignoré
 
 Tu as ajouté `spring-boot-devtools` à ton pom.xml. En JVM, il te donne du hot-reload : tu sauvegardes un fichier, l'app redémarre toute seule en 2 secondes. En natif, DevTools est **ignoré silencieusement**. Pas d'erreur, pas de log. Juste : ton hot-reload ne marche pas.
@@ -307,6 +354,8 @@ MOUSSAVOU a poussé son MVP natif en prod. Cold-start mesuré : 187 ms. Facture 
 - **Fiche projet MboloPay** : [/projects/mbolopay/]({{< ref "/projects/mbolopay" >}}) — résumé technique, stack complète, démo en ligne.
 
 ---
+
+*Merci à [Yannick Serge Obam](https://www.linkedin.com/in/yannick-serge-obam/) pour sa relecture exigeante qui a rendu cet article plus juste.*
 
 > *Le repo MboloPay est ouvert sur GitHub ([github.com/bangaromaric/mbolopay](https://github.com/bangaromaric/mbolopay)), la démo tourne sur [https://mbolopay.banga.ga](https://mbolopay.banga.ga), et si tu veux qu'on parle de ton archi Spring/GCP — mission consulting, coaching d'équipe, ou juste un café au prochain meetup GDG Libreville — écris-moi via [https://ban.ga/](https://ban.ga/). Mbolo.*
 
