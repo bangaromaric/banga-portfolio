@@ -14,7 +14,7 @@
     <changefreq>{{ $changefreq }}</changefreq>
     {{- $priority := 0.5 }}
     {{- if .IsHome }}{{ $priority = 1.0 }}{{ end }}
-    {{- if in (slice "/about/" "/gdg/" "/projects/" "/posts/") .RelPermalink }}{{ $priority = 0.8 }}{{ end }}
+    {{- if in (slice "/about/" "/gdg/" "/projects/" "/posts/" "/newsletter/") .RelPermalink }}{{ $priority = 0.8 }}{{ end }}
     {{- if and (.IsPage) (eq .Section "projects") }}{{ $priority = 0.7 }}{{ end }}
     {{- if and (.IsPage) (eq .Section "posts") }}{{ $priority = 0.6 }}{{ end }}
     <priority>{{ $priority }}</priority>

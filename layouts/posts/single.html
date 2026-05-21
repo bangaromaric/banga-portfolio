@@ -47,6 +47,8 @@
         <a class="meta-link" href="/posts/">← Tous les articles</a>
     </footer>
 
+    {{ partial "newsletter-signup" (dict "placement" "post-end") }}
+
     {{- $related := site.RegularPages.Related $p | first 3 }}
     {{- with $related }}
     <section class="post-related" aria-labelledby="related-title">

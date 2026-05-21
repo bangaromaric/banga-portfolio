@@ -1,0 +1,2 @@
+{{- $placement := .Get "placement" | default "page" -}}
+{{ partial "newsletter-signup" (dict "placement" $placement) }}

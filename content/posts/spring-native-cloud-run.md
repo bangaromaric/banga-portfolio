@@ -17,7 +17,9 @@ cover:
 
 Pas un crash franc, propre, qu'on lit dans une stack-trace. Le pire genre de crash : un crash *silencieux*. L'API tourne. Les endpoints répondent. Mais une requête sur trois retourne un timeout côté mobile. Les utilisateurs entrent leur OTP, attendent 4 secondes, voient *« Connexion impossible »*, ferment l'app. MOUSSAVOU regarde les logs : `Started PayAppApplication in 3.842 seconds`. À chaque cold-start. Cloud Run scale à zéro quand personne ne se connecte la nuit ; au premier appel du matin, l'instance met **presque 4 secondes** à booter, et l'OTP arrive avant que Spring soit prêt à le valider.
 
-Le lundi matin, premier dépassement du free tier. Quelques milliers de FCFA. Pour PayApp, c'est rien. Pour MOUSSAVOU qui paye son cloud avec sa bourse de fin d'études, c'est un choc. Sa première vraie facture cloud, et elle ne comprend pas pourquoi.
+Et c'est là que ça pique économiquement. Un cold-start de 3,8 secondes, c'est **3,8 secondes de vCPU et de RAM facturées par Cloud Run** — qu'il y ait une transaction qui aboutisse au bout, ou pas. Chaque utilisateur qui timeout retry. Chaque retry réveille une nouvelle instance, donc un nouveau cold-start. La nuit où personne ne se connecte, `min-instances=0` maintient bien le coût à zéro — comme prévu. Mais le matin, 200 utilisateurs qui re-tentent leur OTP trois fois chacun, ça fait 600 cold-starts × 3,8 s = **2 280 vCPU-secondes brûlées avant qu'une seule transaction ne réussisse**. Plus 182 GB-secondes de RAM, pour la même raison. Le scale-to-zero protège la facture la nuit ; il ne fait rien contre les pics d'échec en cascade le matin.
+
+Le lundi matin, premier dépassement du free tier. Quelques milliers de FCFA. Pour PayApp, c'est rien. Pour MOUSSAVOU qui paye son cloud avec sa bourse de fin d'études, c'est un choc. Sa première vraie facture cloud, et elle ne comprend pas encore pourquoi.
 
 C'est cette histoire que je raconte ici. Comment passer d'un cold-start Spring Boot de **3 740 ms** à **205 ms**. Comment diviser la RAM par 3. Comment ramener une facture Cloud Run à zéro. Pas avec une astuce. Avec un compilateur qui s'appelle GraalVM et un projet qui s'appelle **Spring Native**.
 
@@ -204,7 +206,7 @@ docker-credential-gcr configure-docker --registries=<region>-docker.pkg.dev
 
 Et au passage, ne pas oublier de faire `gcloud auth application-default login` (ADC) en plus de `gcloud auth login`. Ce sont **deux mécanismes d'authentification distincts**. Le premier authentifie la CLI `gcloud`. Le second écrit les credentials que les SDKs et helpers (comme docker-credential-gcr) utilisent. Sans les deux, le push échoue avec `auth: "invalid_grant" "Bad Request"` — **après 10 minutes de build**. C'est rageant.
 
-La dernière fois que j'ai déployé une appli Spring interne à l'**ANINF**, l'agence où je travaille depuis 7 ans, j'ai perdu une matinée entière sur exactement cette histoire d'ADC. Aujourd'hui, c'est la première chose que mon script vérifie avant de lancer `mvnw build-image` — pas le luxe d'attendre 10 minutes pour découvrir que les credentials sont expirés.
+Quand MOUSSAVOU m'a envoyé le screenshot de l'erreur sur WhatsApp, j'ai souri tristement — parce qu'elle venait de vivre, à la lettre, ce que j'avais vécu un an plus tôt en déployant une appli Spring interne à l'**ANINF**, l'agence où je travaille depuis 7 ans. Exactement la même matinée perdue, exactement la même erreur cryptique d'ADC. Sauf que MOUSSAVOU, elle, n'a pas eu à creuser 4 heures pour comprendre : je lui ai juste envoyé le petit garde-fou que cette expérience m'avait poussé à coder, un script qui vérifie l'ADC avant tout `mvnw build-image` — pas le luxe d'attendre 10 minutes pour découvrir que les credentials sont expirés. Elle l'a immédiatement reproduit dans son propre pipeline PayApp. C'est ce script-là qu'on va décortiquer maintenant.
 
 ## Le déploiement sur Cloud Run
 
@@ -239,7 +241,7 @@ Pour les permissions, le service tourne sous un service account dédié (placeho
 
 ## Le pipeline automatisé
 
-Sur MboloPay, j'ai un script PowerShell (~200 lignes) à la racine du repo qui enchaîne toute la séquence sans intervention manuelle. Je ne vais pas le coller verbatim ici — la logique d'auth, les variables d'environnement projet, ce sont des choses qui restent en local. Mais conceptuellement, voici ce qu'il fait, dans l'ordre :
+Justement, ce script. Sur MboloPay, c'est [~200 lignes de PowerShell à la racine du repo](https://github.com/bangaromaric/mbolopay/blob/main/cloudRunDeploy.ps1) qui enchaînent toute la séquence sans intervention manuelle. Le code complet est public sur GitHub — forkable tel quel, il suffit d'y mettre tes propres project ID, region et nom d'image en haut du fichier. Conceptuellement, voici ce qu'il fait, dans l'ordre — la même séquence que MOUSSAVOU a finalement adaptée pour PayApp :
 
 1. **Vérifications prérequises** : Docker Desktop tourne, `gcloud auth` est valide, ADC est en place, `docker-credential-gcr` est dans le PATH. Si l'un manque, échec immédiat — pas 10 minutes plus tard.
 
@@ -294,6 +296,7 @@ MOUSSAVOU a poussé son MVP natif en prod. Cold-start mesuré : 187 ms. Facture 
 ## Ressources
 
 - **Repo MboloPay** : [github.com/bangaromaric/mbolopay](https://github.com/bangaromaric/mbolopay) — l'app de démo dont le bench est extrait, avec son `pom.xml`, ses tests d'architecture ArchUnit, sa doc native-image.
+- **Script de déploiement Cloud Run** : [cloudRunDeploy.ps1](https://github.com/bangaromaric/mbolopay/blob/main/cloudRunDeploy.ps1) — le pipeline PowerShell détaillé dans la section *« Le pipeline automatisé »*. Forkable tel quel, à adapter avec tes propres variables d'environnement en haut du fichier.
 - **Démo en ligne** : [mbolopay.banga.ga](https://mbolopay.banga.ga) — tourne sur Cloud Run en mode natif, `min-instances=0`. Cold-start le matin, 200 ms le reste du temps.
 - **GraalVM Native Image** : [graalvm.org](https://www.graalvm.org/) — la doc officielle, dense mais complète.
 - **Spring Boot AOT** : [docs.spring.io/spring-boot/reference/packaging/native-image/](https://docs.spring.io/spring-boot/reference/packaging/native-image/) — guide officiel Spring sur la compilation native.

@@ -152,6 +152,8 @@ Interventions techniques au DevFest, dans les meetups GDG d'Afrique centrale, da
 
 Le plus simple est l'email. Je réponds sous 48h ouvrées.
 
+{{< newsletter-signup placement="about" >}}
+
 - **Email** — [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com?subject=Collaboration%20technique)
 - **LinkedIn** — [linkedin.com/in/romaric-banga](https://www.linkedin.com/in/romaric-banga/)
 - **GitHub** — [github.com/bangaromaric](https://github.com/bangaromaric)

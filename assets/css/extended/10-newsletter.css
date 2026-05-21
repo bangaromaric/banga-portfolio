@@ -1,0 +1,118 @@
+/* Newsletter signup — partial used at post-end, about Contact section, and /newsletter/ page.
+   Aligned with §11 design system: pagne accent, Fraunces title with SOFT italic, terracotta CTA. */
+
+.newsletter-signup {
+    margin: var(--s-7) 0;
+    padding: var(--s-6) var(--s-5);
+    background: var(--paper-2);
+    border-left: 3px solid var(--terracotta);
+}
+
+.newsletter-signup__inner {
+    max-width: 58ch;
+}
+
+.newsletter-signup__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+    margin: var(--s-2) 0 var(--s-3);
+    color: var(--ink);
+}
+
+.newsletter-signup__title em {
+    color: var(--terracotta);
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+}
+
+.newsletter-signup__pitch {
+    color: var(--ink-2);
+    margin: 0 0 var(--s-5);
+    font-size: var(--fz-base);
+    line-height: 1.6;
+}
+
+.newsletter-signup__form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--s-3);
+    align-items: stretch;
+    margin-bottom: var(--s-4);
+}
+
+.newsletter-signup__input {
+    padding: var(--s-3) var(--s-4);
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.4;
+    transition: border-color 200ms var(--ease-out-soft), box-shadow 200ms var(--ease-out-soft);
+}
+
+.newsletter-signup__input::placeholder {
+    color: var(--ink-muted);
+    font-style: italic;
+}
+
+.newsletter-signup__input:focus {
+    outline: none;
+    border-color: var(--terracotta);
+    box-shadow: 0 0 0 1px var(--terracotta);
+}
+
+.newsletter-signup__btn {
+    padding: var(--s-3) var(--s-5);
+    background: var(--terracotta);
+    color: var(--paper);
+    border: 1px solid var(--terracotta);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: background-color 200ms var(--ease-out-soft), transform 200ms var(--ease-out-soft);
+    white-space: nowrap;
+}
+
+.newsletter-signup__btn:hover {
+    background: var(--terracotta-hot);
+    transform: translateY(-1px);
+}
+
+.newsletter-signup__btn:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.newsletter-signup__legal {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.newsletter-signup__legal a {
+    color: inherit;
+    border-bottom: 1px solid var(--rule);
+    transition: color 200ms var(--ease-out-soft), border-color 200ms var(--ease-out-soft);
+}
+
+.newsletter-signup__legal a:hover {
+    color: var(--terracotta);
+    border-bottom-color: var(--terracotta);
+}
+
+@media (max-width: 760px) {
+    .newsletter-signup {
+        padding: var(--s-5) var(--s-4);
+    }
+
+    .newsletter-signup__form {
+        grid-template-columns: 1fr;
+    }
+}

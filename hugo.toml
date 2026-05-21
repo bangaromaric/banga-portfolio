@@ -29,6 +29,14 @@ disableThemeToggle = false
   [params.analytics.bing]
   SiteVerificationTag = "308BF07CFE01FB477AA7479FC7ABA3A4"
 
+# Newsletter — Buttondown (provider externe, POST depuis form embed). Le username est l'identifiant du compte Buttondown.
+# IMPORTANT : après création du compte sur buttondown.email, vérifier que username ci-dessous correspond bien à ton identifiant final.
+[params.newsletter]
+provider = "buttondown"
+username = "romaricbanga"
+name = "Mbolo Letter"
+tagline = "Un email à chaque nouvel article. [Pas plus.]"
+
 # Schema.org — portfolio personnel, donc publisherType = Person (au lieu d'Organization par défaut)
 [params.schema]
 publisherType = "Person"
@@ -134,9 +142,14 @@ url = "/posts/"
 weight = 4
 
 [[menu.main]]
+name = "Newsletter"
+url = "/newsletter/"
+weight = 5
+
+[[menu.main]]
 name = "GDG Libreville"
 url = "/gdg/"
-weight = 5
+weight = 6
 
 # Configuration pour GitHub Pages
 [markup]

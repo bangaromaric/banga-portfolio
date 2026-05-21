@@ -1,0 +1,45 @@
+{{- /*
+    Partial : newsletter-signup
+    Args (dict) :
+      - placement (string) : identifiant logique du placement, utilisé pour GA4 et IDs uniques (ex: "post-end", "about", "page")
+*/ -}}
+{{- $placement := .placement | default "unknown" -}}
+{{- with site.Params.newsletter }}
+{{- $username := .username -}}
+{{- $name := .name -}}
+{{- $tagline := .tagline -}}
+<aside class="newsletter-signup" data-placement="{{ $placement }}" aria-labelledby="newsletter-{{ $placement }}-title">
+    <div class="newsletter-signup__inner">
+        <span class="kicker">§ {{ $name }}</span>
+        <h3 id="newsletter-{{ $placement }}-title" class="newsletter-signup__title">
+            {{ $tagline | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+        </h3>
+        <p class="newsletter-signup__pitch">
+            Spring, Cloud, IA générative — vu depuis Libreville. Un email à chaque nouvel article, désinscription en un clic, jamais de spam.
+        </p>
+        <form
+            action="https://buttondown.email/api/emails/embed-subscribe/{{ $username }}"
+            method="post"
+            target="popupwindow"
+            class="newsletter-signup__form"
+            onsubmit="if (window.gtag) gtag('event', 'newsletter_signup', { 'placement': '{{ $placement }}' });"
+        >
+            <input
+                type="email"
+                name="email"
+                placeholder="ton.email@exemple.com"
+                aria-label="Adresse email"
+                autocomplete="email"
+                required
+                class="newsletter-signup__input"
+            >
+            <button type="submit" class="newsletter-signup__btn">
+                <span>S'abonner</span>
+            </button>
+        </form>
+        <p class="newsletter-signup__legal">
+            Double opt-in via <a href="https://buttondown.email" rel="noopener">Buttondown</a> · <a href="/newsletter/">en savoir plus</a>
+        </p>
+    </div>
+</aside>
+{{- end }}
