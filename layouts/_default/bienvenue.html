@@ -70,39 +70,31 @@
                 <h3 class="bienvenue__door-title">Suis-moi ailleurs</h3>
                 <p class="bienvenue__door-desc">Code sur GitHub, posts techniques sur LinkedIn, badges certifs sur Google Developer Profile, conférences GDG.</p>
                 <ul class="bienvenue__door-links">
-                    <li><a href="https://github.com/bangaromaric" rel="noopener">GitHub&nbsp;↗</a></li>
-                    <li><a href="https://www.linkedin.com/in/romaric-banga/" rel="noopener">LinkedIn&nbsp;↗</a></li>
-                    <li><a href="https://g.dev/romaricbanga" rel="noopener">g.dev&nbsp;↗</a></li>
+                    <li><a href="https://github.com/bangaromaric" target="_blank" rel="noopener noreferrer">GitHub&nbsp;↗</a></li>
+                    <li><a href="https://www.linkedin.com/in/romaric-banga/" target="_blank" rel="noopener noreferrer">LinkedIn&nbsp;↗</a></li>
+                    <li><a href="https://g.dev/romaricbanga" target="_blank" rel="noopener noreferrer">g.dev&nbsp;↗</a></li>
                 </ul>
             </article>
         </div>
     </section>
 
-    <section class="bienvenue__share" aria-labelledby="bienvenue-share-title">
+    <section class="bienvenue__share-intro" aria-labelledby="bienvenue-share-title">
         <span class="kicker">§ Si tu veux nous aider</span>
         <h2 id="bienvenue-share-title" class="bienvenue__section-title">Partage Mbolo Letter</h2>
         <p class="bienvenue__share-pitch">
             Si tu trouves Mbolo Letter utile, le plus beau cadeau que tu peux faire : partage le lien à un ou deux développeurs/architectes francophones de ton réseau. C'est comme ça qu'on construit une communauté de qualité, pas par la viralité.
         </p>
-
-        <div class="bienvenue__share-buttons">
-            <a class="bienvenue__share-btn"
-               href="https://twitter.com/intent/tweet?text=J%27ai%20d%C3%A9couvert%20Mbolo%20Letter%2C%20une%20newsletter%20technique%20francophone%20sur%20Spring%2C%20Cloud%20et%20IA%20g%C3%A9n%C3%A9rative%20%C3%A9crite%20depuis%20Libreville.&url=https%3A%2F%2Fban.ga%2Fnewsletter%2F"
-               rel="noopener">
-                Partager sur X
-            </a>
-            <a class="bienvenue__share-btn"
-               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fban.ga%2Fnewsletter%2F"
-               rel="noopener">
-                Partager sur LinkedIn
-            </a>
-            <button class="bienvenue__share-btn bienvenue__share-btn--copy"
-                    type="button"
-                    onclick="navigator.clipboard.writeText('https://ban.ga/newsletter/').then(()=>{this.textContent='Lien copié';setTimeout(()=>{this.textContent='Copier le lien';},2000);});">
-                Copier le lien
-            </button>
-        </div>
     </section>
+
+    {{ partial "share-buttons" (dict
+        "title" "Mbolo Letter — newsletter Spring, Cloud & IA générative depuis Libreville"
+        "url" "https://ban.ga/newsletter/"
+        "placement" "bienvenue"
+        "tweetText" "J'ai découvert Mbolo Letter, une newsletter technique francophone sur Spring, Cloud et IA générative écrite depuis Libreville par @bangaromaric"
+        "waText" "Je te recommande Mbolo Letter, une newsletter technique francophone sur Spring/Cloud/IA depuis Libreville — https://ban.ga/newsletter/"
+        "emailSubject" "Newsletter à découvrir : Mbolo Letter"
+        "emailBody" "Salut,\n\nJe pense que cette newsletter technique va te plaire — Spring, Cloud, IA générative, écrite depuis Libreville par Romaric BANGA :\n\nhttps://ban.ga/newsletter/\n\n1-2 emails par mois, désinscription en un clic, aucun spam.")
+    }}
 
     <footer class="bienvenue__closing">
         <p class="bienvenue__closing-line">Pour me répondre directement, tu peux toujours répondre à n'importe quel email de Mbolo Letter — ça atterrit dans ma vraie boîte. Je lis tout.</p>

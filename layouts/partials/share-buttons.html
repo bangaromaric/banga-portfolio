@@ -1,0 +1,65 @@
+{{- /*
+    Partial : share-buttons
+    Permet aux visiteurs de partager le contenu courant sur les principales plateformes.
+    5 destinations : LinkedIn, X, WhatsApp, Email, Copier le lien.
+
+    Arguments (dict) :
+      - title (string)  : Titre à partager
+      - url (string)    : URL absolue à partager
+      - placement (string) : Identifiant pour GA4 (ex: "post-end", "bienvenue", "projet")
+      - description (string, optionnel) : Résumé pour preview riche (LinkedIn auto-extrait via OG)
+      - tweetText (string, optionnel) : Texte tweet custom (sinon : « TITRE » par @bangaromaric)
+      - waText (string, optionnel) : Texte WhatsApp custom (sinon : TITRE — URL)
+      - emailSubject (string, optionnel) : Sujet email custom
+      - emailBody (string, optionnel) : Corps email custom
+*/ -}}
+{{- $title := .title -}}
+{{- $url := .url -}}
+{{- $placement := .placement | default "unknown" -}}
+{{- $tweetText := .tweetText | default (printf "« %s » par @bangaromaric" $title) -}}
+{{- $waText := .waText | default (printf "%s — %s" $title $url) -}}
+{{- $emailSubject := .emailSubject | default (printf "Article à lire : %s" $title) -}}
+{{- $emailBody := .emailBody | default (printf "Salut,\n\nJe voulais te partager cet article :\n\n%s\n%s" $title $url) -}}
+
+{{- $linkedinUrl := printf "https://www.linkedin.com/sharing/share-offsite/?url=%s" ($url | urlquery) -}}
+{{- $xUrl := printf "https://twitter.com/intent/tweet?text=%s&url=%s" ($tweetText | urlquery) ($url | urlquery) -}}
+{{- $waUrl := printf "https://wa.me/?text=%s" ($waText | urlquery) -}}
+{{- $emailUrl := printf "mailto:?subject=%s&body=%s" ($emailSubject | urlquery) ($emailBody | urlquery) -}}
+
+<section class="post-share" data-placement="{{ $placement }}" aria-labelledby="post-share-title-{{ $placement }}">
+    <span class="kicker" id="post-share-title-{{ $placement }}">§ Partager</span>
+    <div class="post-share__buttons">
+        <a class="post-share__btn"
+           href="{{ $linkedinUrl | safeURL }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="if(window.gtag)gtag('event','share_click',{platform:'linkedin',placement:'{{ $placement }}'});">
+            LinkedIn
+        </a>
+        <a class="post-share__btn"
+           href="{{ $xUrl | safeURL }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="if(window.gtag)gtag('event','share_click',{platform:'x',placement:'{{ $placement }}'});">
+            X
+        </a>
+        <a class="post-share__btn"
+           href="{{ $waUrl | safeURL }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="if(window.gtag)gtag('event','share_click',{platform:'whatsapp',placement:'{{ $placement }}'});">
+            WhatsApp
+        </a>
+        <a class="post-share__btn"
+           href="{{ $emailUrl | safeURL }}"
+           onclick="if(window.gtag)gtag('event','share_click',{platform:'email',placement:'{{ $placement }}'});">
+            Email
+        </a>
+        <button class="post-share__btn post-share__btn--copy"
+                type="button"
+                data-url="{{ $url }}"
+                onclick="navigator.clipboard.writeText(this.dataset.url).then(()=>{var t=this.querySelector('.post-share__btn-label')||this;var o=t.textContent;t.textContent='Lien copié';if(window.gtag)gtag('event','share_click',{platform:'copy',placement:'{{ $placement }}'});setTimeout(()=>{t.textContent=o;},2000);});">
+            <span class="post-share__btn-label">Copier le lien</span>
+        </button>
+    </div>
+</section>

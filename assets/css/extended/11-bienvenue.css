@@ -259,7 +259,7 @@
     color: var(--terracotta-hot);
 }
 
-/* ─── SHARE — boutons partage ──────────────────────────── */
+/* ─── SHARE INTRO — pitch au-dessus du partial share-buttons ── */
 
 .bienvenue__share-pitch {
     font-size: 1.02rem;
@@ -269,49 +269,13 @@
     margin: 0 0 var(--s-5);
 }
 
-.bienvenue__share-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-3);
-}
+/* Note : les boutons de partage eux-mêmes sont maintenant gérés par
+   le partial layouts/partials/share-buttons.html + assets/css/extended/13-share-buttons.css.
+   Surcharge éventuelle de .post-share dans le contexte bienvenue ci-dessous. */
 
-.bienvenue__share-btn {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--s-3) var(--s-5);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--ink);
-    background: transparent;
-    border: 1px solid var(--ink);
-    background-image: none !important;
-    cursor: pointer;
-    transition: background-color 200ms var(--ease-out-soft),
-                color 200ms var(--ease-out-soft),
-                transform 200ms var(--ease-out-soft);
-}
-
-.bienvenue__share-btn:hover {
-    background: var(--ink);
-    color: var(--paper);
-    transform: translateY(-1px);
-}
-
-.bienvenue__share-btn--copy {
-    border-color: var(--terracotta);
-    color: var(--terracotta);
-}
-
-.bienvenue__share-btn--copy:hover {
-    background: var(--terracotta);
-    color: var(--paper);
-}
-
-.bienvenue__share-btn:focus-visible {
-    outline: 2px solid var(--terracotta);
-    outline-offset: 3px;
+.bienvenue .post-share {
+    margin-top: 0;
+    border-top: 0;
 }
 
 /* ─── CLOSING ──────────────────────────────────────────── */

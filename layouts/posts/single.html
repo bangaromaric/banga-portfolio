@@ -38,6 +38,13 @@
         {{ .Content }}
     </div>
 
+    {{ partial "share-buttons" (dict
+        "title" $p.Title
+        "url" $p.Permalink
+        "description" $p.Description
+        "placement" "post-end")
+    }}
+
     <footer class="post-single-editorial__footer">
         <ul class="post-single-editorial__tags">
             {{- range $p.GetTerms "tags" }}

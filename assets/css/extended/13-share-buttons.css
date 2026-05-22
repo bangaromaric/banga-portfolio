@@ -1,0 +1,90 @@
+/* Boutons de partage — partial layouts/partials/share-buttons.html
+   Utilisé en bas d'article (posts/single.html) et sur /bienvenue/.
+   5 plateformes : LinkedIn, X, WhatsApp, Email, Copy link.
+   Respect strict du design system §11 — tokens, mono labels, terracotta accent. */
+
+.post-share {
+    max-width: 720px;
+    margin: var(--s-7) auto var(--s-6);
+    padding: var(--s-5) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+}
+
+.post-share .kicker {
+    display: block;
+    margin-bottom: var(--s-4);
+}
+
+.post-share__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    align-items: stretch;
+}
+
+.post-share__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s-3) var(--s-4);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule-strong);
+    background-image: none !important;
+    cursor: pointer;
+    transition: background-color 200ms var(--ease-out-soft),
+                color 200ms var(--ease-out-soft),
+                border-color 200ms var(--ease-out-soft),
+                transform 200ms var(--ease-out-soft);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.post-share__btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    transform: translateY(-1px);
+}
+
+.post-share__btn:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 3px;
+}
+
+.post-share__btn--copy {
+    border-color: var(--terracotta);
+    color: var(--terracotta);
+}
+
+.post-share__btn--copy:hover {
+    background: var(--terracotta);
+    color: var(--paper);
+    border-color: var(--terracotta);
+}
+
+/* Mobile : grille 2 colonnes pour densité éditoriale */
+@media (max-width: 720px) {
+    .post-share {
+        margin: var(--s-6) auto var(--s-5);
+        padding: var(--s-4) 0;
+    }
+    .post-share__buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--s-2);
+    }
+    .post-share__btn {
+        padding: var(--s-3);
+        font-size: 0.72rem;
+    }
+    .post-share__btn--copy {
+        grid-column: span 2;
+    }
+}

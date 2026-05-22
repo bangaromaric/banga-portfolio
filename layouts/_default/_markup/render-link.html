@@ -6,6 +6,13 @@
   - Tous les autres (http://, https:// vers domaines tiers) → nouvel onglet
     avec rel="noopener noreferrer" pour bloquer le tabnabbing
 
+  ATTENTION — LIMITE IMPORTANTE :
+  Ce render hook ne s'applique QU'aux liens écrits en MARKDOWN (.md files).
+  Il NE s'applique PAS aux <a> codés directement en HTML dans les templates
+  (layouts/, partials/). Si tu ajoutes un lien externe hand-codé dans un
+  template, tu dois mettre `target="_blank" rel="noopener noreferrer"` à la
+  main, sinon le lien s'ouvre dans le même onglet (perte de UX).
+
   ATTENTION sur la distinction des domaines :
   - `ban.ga` = le portfolio (site éditorial principal) → traité comme INTERNE
   - `banga.ga` = domaine séparé qui héberge les démos projets
