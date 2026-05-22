@@ -6,6 +6,10 @@ Disallow: /tags/
 Disallow: /categories/
 Disallow: /search/
 
+# Pages newsletter transientes — accessibles uniquement via redirects Buttondown
+Disallow: /bienvenue/
+Disallow: /verification/
+
 # Permettre les images
 Allow: /images/
 

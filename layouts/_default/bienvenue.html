@@ -1,0 +1,113 @@
+{{- /*
+    Layout : page de bienvenue post-confirmation Mbolo Letter.
+    Cible : visiteurs qui viennent de cliquer le lien de double opt-in Buttondown.
+    Configurée comme cible du redirect "After confirming" dans Buttondown.
+    Volontairement noindex + hors sitemap + hors menu — accessible uniquement via le redirect.
+*/ -}}
+{{ define "main" }}
+{{- $p := . -}}
+{{- $featured := first 3 (where site.RegularPages "Section" "posts").ByDate.Reverse -}}
+
+<article class="bienvenue">
+
+    <header class="bienvenue__hero">
+        <span class="kicker">§ Mbolo Letter</span>
+        <h1 class="bienvenue__title">
+            {{ $p.Params.heroTitle | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+        </h1>
+        <p class="bienvenue__lede">{{ $p.Params.lede }}</p>
+    </header>
+
+    <section class="bienvenue__intro">
+        {{ $p.Content }}
+    </section>
+
+    {{- with $featured }}
+    <section class="bienvenue__articles" aria-labelledby="bienvenue-articles-title">
+        <span class="kicker">§ Par où commencer</span>
+        <h2 id="bienvenue-articles-title" class="bienvenue__section-title">Trois articles pour entrer dans Mbolo Letter</h2>
+        <ol class="bienvenue__article-list">
+            {{- range . }}
+            <li class="bienvenue__article">
+                <h3 class="bienvenue__article-title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h3>
+                {{- with .Description }}
+                <p class="bienvenue__article-desc">{{ . | plainify | truncate 180 }}</p>
+                {{- end }}
+                <span class="bienvenue__article-meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+                    <span aria-hidden="true">·</span>
+                    <span>{{ .ReadingTime }} min de lecture</span>
+                </span>
+            </li>
+            {{- end }}
+        </ol>
+    </section>
+    {{- end }}
+
+    <section class="bienvenue__doors" aria-labelledby="bienvenue-doors-title">
+        <span class="kicker">§ Au-delà des emails</span>
+        <h2 id="bienvenue-doors-title" class="bienvenue__section-title">Trois portes ouvertes, si tu veux aller plus loin</h2>
+
+        <div class="bienvenue__doors-grid">
+            <article class="bienvenue__door">
+                <span class="bienvenue__door-label">Consulting</span>
+                <h3 class="bienvenue__door-title">Une archi Spring ou GCP à challenger ?</h3>
+                <p class="bienvenue__door-desc">Audit code, migration cloud, design d'architecture, coaching d'équipe Spring. Mission ponctuelle ou récurrente.</p>
+                <a class="bienvenue__door-cta" href="mailto:bangaromaric@gmail.com?subject=Mission%20consulting%20%E2%80%94%20Mbolo%20Letter">Écrire un mail&nbsp;↗</a>
+            </article>
+
+            <article class="bienvenue__door">
+                <span class="bienvenue__door-label">Communauté</span>
+                <h3 class="bienvenue__door-title">GDG Libreville</h3>
+                <p class="bienvenue__door-desc">Plus de 500 développeurs au Gabon. Meetups, DevFest, Women Techmakers, Study Jams. Bienvenue si tu passes par Libreville.</p>
+                <a class="bienvenue__door-cta" href="{{ "/gdg/" | absURL }}">Découvrir le GDG&nbsp;→</a>
+            </article>
+
+            <article class="bienvenue__door">
+                <span class="bienvenue__door-label">Profils</span>
+                <h3 class="bienvenue__door-title">Suis-moi ailleurs</h3>
+                <p class="bienvenue__door-desc">Code sur GitHub, posts techniques sur LinkedIn, badges certifs sur Google Developer Profile, conférences GDG.</p>
+                <ul class="bienvenue__door-links">
+                    <li><a href="https://github.com/bangaromaric" rel="noopener">GitHub&nbsp;↗</a></li>
+                    <li><a href="https://www.linkedin.com/in/romaric-banga/" rel="noopener">LinkedIn&nbsp;↗</a></li>
+                    <li><a href="https://g.dev/romaricbanga" rel="noopener">g.dev&nbsp;↗</a></li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="bienvenue__share" aria-labelledby="bienvenue-share-title">
+        <span class="kicker">§ Si tu veux nous aider</span>
+        <h2 id="bienvenue-share-title" class="bienvenue__section-title">Partage Mbolo Letter</h2>
+        <p class="bienvenue__share-pitch">
+            Si tu trouves Mbolo Letter utile, le plus beau cadeau que tu peux faire : partage le lien à un ou deux développeurs/architectes francophones de ton réseau. C'est comme ça qu'on construit une communauté de qualité, pas par la viralité.
+        </p>
+
+        <div class="bienvenue__share-buttons">
+            <a class="bienvenue__share-btn"
+               href="https://twitter.com/intent/tweet?text=J%27ai%20d%C3%A9couvert%20Mbolo%20Letter%2C%20une%20newsletter%20technique%20francophone%20sur%20Spring%2C%20Cloud%20et%20IA%20g%C3%A9n%C3%A9rative%20%C3%A9crite%20depuis%20Libreville.&url=https%3A%2F%2Fban.ga%2Fnewsletter%2F"
+               rel="noopener">
+                Partager sur X
+            </a>
+            <a class="bienvenue__share-btn"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fban.ga%2Fnewsletter%2F"
+               rel="noopener">
+                Partager sur LinkedIn
+            </a>
+            <button class="bienvenue__share-btn bienvenue__share-btn--copy"
+                    type="button"
+                    onclick="navigator.clipboard.writeText('https://ban.ga/newsletter/').then(()=>{this.textContent='Lien copié';setTimeout(()=>{this.textContent='Copier le lien';},2000);});">
+                Copier le lien
+            </button>
+        </div>
+    </section>
+
+    <footer class="bienvenue__closing">
+        <p class="bienvenue__closing-line">Pour me répondre directement, tu peux toujours répondre à n'importe quel email de Mbolo Letter — ça atterrit dans ma vraie boîte. Je lis tout.</p>
+        <p class="bienvenue__signature">— Romaric · <em>Mbolo.</em></p>
+    </footer>
+
+</article>
+{{ end }}

@@ -1,0 +1,392 @@
+/* Page /bienvenue/ — post-confirmation Mbolo Letter.
+   Cible : visiteurs juste confirmés par double opt-in Buttondown.
+   Voir layouts/_default/bienvenue.html.
+   Respect strict du design system §11 : tokens uniquement, Fraunces + Newsreader + JetBrains Mono,
+   pagne accent terracotta, syntaxe [mot] italique. */
+
+.bienvenue {
+    max-width: var(--w-narrow);
+    margin: var(--s-8) auto var(--s-9);
+    padding: 0 var(--s-5);
+}
+
+/* ─── HERO ─────────────────────────────────────────────── */
+
+.bienvenue__hero {
+    text-align: center;
+    padding: var(--s-7) 0 var(--s-8);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: var(--s-8);
+}
+
+.bienvenue__hero .kicker {
+    display: inline-block;
+    margin-bottom: var(--s-5);
+}
+
+.bienvenue__title {
+    font-family: var(--font-display);
+    font-weight: 350;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.06;
+    letter-spacing: -0.022em;
+    margin: 0 0 var(--s-4);
+    color: var(--ink);
+}
+
+.bienvenue__title em {
+    color: var(--terracotta);
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+}
+
+.bienvenue__lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.4;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 36em;
+    margin-inline: auto;
+}
+
+/* ─── INTRO PARAGRAPHES ────────────────────────────────── */
+
+.bienvenue__intro {
+    margin: 0 auto var(--s-8);
+    max-width: 56ch;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--ink-2);
+}
+
+.bienvenue__intro p {
+    margin: 0 0 var(--s-4);
+}
+
+.bienvenue__intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* ─── SECTIONS GÉNÉRIQUES ──────────────────────────────── */
+
+.bienvenue section {
+    margin-top: var(--s-9);
+    padding-top: var(--s-7);
+    border-top: 1px solid var(--rule);
+}
+
+.bienvenue__section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    line-height: 1.18;
+    font-weight: 420;
+    letter-spacing: -0.018em;
+    margin: var(--s-3) 0 var(--s-6);
+    color: var(--ink);
+}
+
+/* ─── ARTICLES — liste numérotée editorial ─────────────── */
+
+.bienvenue__article-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: bienvenue-article;
+}
+
+.bienvenue__article {
+    counter-increment: bienvenue-article;
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    column-gap: var(--s-5);
+    row-gap: var(--s-2);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    position: relative;
+    transition: padding-left 280ms var(--ease-out-soft);
+}
+
+.bienvenue__article::before {
+    content: counter(bienvenue-article, decimal-leading-zero);
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--terracotta);
+    letter-spacing: 0.02em;
+    align-self: start;
+}
+
+.bienvenue__article-title {
+    grid-column: 2;
+    grid-row: 1;
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2vw, 1.3rem);
+    font-weight: 460;
+    line-height: 1.25;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.bienvenue__article-title a {
+    background-image: none !important;
+    color: var(--ink);
+    transition: color 200ms var(--ease-out-soft);
+}
+
+.bienvenue__article-title a:hover {
+    color: var(--terracotta);
+}
+
+.bienvenue__article-desc {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.bienvenue__article-meta {
+    grid-column: 2;
+    grid-row: 3;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    display: inline-flex;
+    gap: var(--s-2);
+    align-items: center;
+    margin-top: var(--s-2);
+}
+
+.bienvenue__article:last-child {
+    border-bottom: none;
+}
+
+/* ─── DOORS — 3 cards parallèles ───────────────────────── */
+
+.bienvenue__doors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+    margin-top: var(--s-2);
+}
+
+.bienvenue__door {
+    padding: var(--s-5);
+    background: var(--paper-2);
+    border-left: 3px solid var(--terracotta);
+    display: flex;
+    flex-direction: column;
+    transition: transform 220ms var(--ease-out-soft);
+}
+
+.bienvenue__door:hover {
+    transform: translateY(-2px);
+}
+
+.bienvenue__door-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--terracotta);
+    display: block;
+    margin-bottom: var(--s-3);
+}
+
+.bienvenue__door-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 460;
+    line-height: 1.25;
+    margin: 0 0 var(--s-3);
+    color: var(--ink);
+}
+
+.bienvenue__door-desc {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin: 0 0 var(--s-4);
+    flex-grow: 1;
+}
+
+.bienvenue__door-cta {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--terracotta);
+    align-self: flex-start;
+    background-image: none !important;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    transition: color 200ms var(--ease-out-soft);
+}
+
+.bienvenue__door-cta:hover {
+    color: var(--terracotta-hot);
+}
+
+.bienvenue__door-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+}
+
+.bienvenue__door-links a {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--terracotta);
+    background-image: none !important;
+}
+
+.bienvenue__door-links a:hover {
+    color: var(--terracotta-hot);
+}
+
+/* ─── SHARE — boutons partage ──────────────────────────── */
+
+.bienvenue__share-pitch {
+    font-size: 1.02rem;
+    color: var(--ink-2);
+    line-height: 1.65;
+    max-width: 56ch;
+    margin: 0 0 var(--s-5);
+}
+
+.bienvenue__share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+}
+
+.bienvenue__share-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--s-3) var(--s-5);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--ink);
+    background-image: none !important;
+    cursor: pointer;
+    transition: background-color 200ms var(--ease-out-soft),
+                color 200ms var(--ease-out-soft),
+                transform 200ms var(--ease-out-soft);
+}
+
+.bienvenue__share-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-1px);
+}
+
+.bienvenue__share-btn--copy {
+    border-color: var(--terracotta);
+    color: var(--terracotta);
+}
+
+.bienvenue__share-btn--copy:hover {
+    background: var(--terracotta);
+    color: var(--paper);
+}
+
+.bienvenue__share-btn:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 3px;
+}
+
+/* ─── CLOSING ──────────────────────────────────────────── */
+
+.bienvenue__closing {
+    margin-top: var(--s-9);
+    padding-top: var(--s-7);
+    border-top: 1px solid var(--rule);
+    text-align: center;
+}
+
+.bienvenue__closing-line {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 52ch;
+    margin: 0 auto var(--s-5);
+}
+
+.bienvenue__signature {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    margin: 0;
+}
+
+.bienvenue__signature em {
+    color: var(--terracotta);
+    font-style: italic;
+    font-variation-settings: "SOFT" 100;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    margin-left: var(--s-1);
+}
+
+/* ─── RESPONSIVE ───────────────────────────────────────── */
+
+@media (max-width: 900px) {
+    .bienvenue__doors-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .bienvenue {
+        margin-top: var(--s-6);
+        padding: 0 var(--s-4);
+    }
+    .bienvenue__hero {
+        padding: var(--s-5) 0 var(--s-6);
+        margin-bottom: var(--s-6);
+    }
+    .bienvenue section {
+        margin-top: var(--s-7);
+        padding-top: var(--s-5);
+    }
+    .bienvenue__article {
+        grid-template-columns: 48px minmax(0, 1fr);
+        column-gap: var(--s-4);
+    }
+    .bienvenue__article::before {
+        font-size: 1.2rem;
+    }
+    .bienvenue__share-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .bienvenue__share-btn {
+        justify-content: center;
+    }
+}

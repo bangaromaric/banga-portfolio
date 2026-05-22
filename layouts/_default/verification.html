@@ -1,0 +1,67 @@
+{{- /*
+    Layout : page d'attente post-soumission form Mbolo Letter (pre-double-opt-in).
+    Cible : visiteur qui vient de saisir son email mais n'a PAS encore cliqué le lien de confirmation.
+    Configurée comme cible du redirect "After subscribing" dans Buttondown.
+    UX : Single Task UI — TOUT pousse vers une seule action (cliquer le lien dans l'email).
+    Volontairement noindex + hors sitemap + hors menu.
+*/ -}}
+{{ define "main" }}
+{{- $p := . -}}
+
+<article class="verification">
+
+    <header class="verification__hero">
+        <span class="kicker">§ Mbolo Letter</span>
+        <h1 class="verification__title">
+            {{ $p.Params.heroTitle | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+        </h1>
+        <p class="verification__lede">{{ $p.Params.lede }}</p>
+    </header>
+
+    <div class="verification__status" role="status" aria-live="polite">
+        <span class="verification__status-dot" aria-hidden="true"></span>
+        <span class="verification__status-label">Email de confirmation envoyé</span>
+    </div>
+
+    <section class="verification__instruction">
+        <p>Clique le lien dans l'email pour finaliser ton inscription à <strong>Mbolo Letter</strong>. Il arrive dans les prochaines secondes — parfois jusqu'à <strong>5 minutes</strong> selon ton fournisseur.</p>
+    </section>
+
+    <section class="verification__providers" aria-labelledby="verification-providers-title">
+        <h2 id="verification-providers-title" class="verification__sub">Ouvrir ta boîte directement</h2>
+        <div class="verification__providers-grid">
+            <a class="verification__provider" href="https://mail.google.com/" rel="noopener">
+                <span class="verification__provider-name">Gmail</span>
+                <span class="verification__provider-hint" aria-hidden="true">↗</span>
+            </a>
+            <a class="verification__provider" href="https://outlook.live.com/" rel="noopener">
+                <span class="verification__provider-name">Outlook</span>
+                <span class="verification__provider-hint" aria-hidden="true">↗</span>
+            </a>
+            <a class="verification__provider" href="https://www.icloud.com/mail" rel="noopener">
+                <span class="verification__provider-name">iCloud</span>
+                <span class="verification__provider-hint" aria-hidden="true">↗</span>
+            </a>
+            <a class="verification__provider" href="https://mail.proton.me/" rel="noopener">
+                <span class="verification__provider-name">ProtonMail</span>
+                <span class="verification__provider-hint" aria-hidden="true">↗</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="verification__help" aria-labelledby="verification-help-title">
+        <h2 id="verification-help-title" class="verification__sub">L'email tarde à arriver ?</h2>
+        <ul class="verification__help-list">
+            <li>Vérifie le dossier <strong>Promotions</strong> (Gmail) ou <strong>Indésirables</strong> (Outlook).</li>
+            <li>Cherche le sujet <em>« Confirm your subscription to Mbolo Letter »</em> ou l'expéditeur <code>mbolo@newsletter.ban.ga</code>.</li>
+            <li>Ajoute <code>mbolo@newsletter.ban.ga</code> à tes contacts pour que les futurs envois arrivent en boîte principale.</li>
+            <li>Si après 10 minutes toujours rien, écris-moi à <a href="mailto:bangaromaric@gmail.com?subject=Email%20de%20confirmation%20Mbolo%20Letter%20non%20re%C3%A7u">bangaromaric@gmail.com</a> — je vérifie côté Buttondown.</li>
+        </ul>
+    </section>
+
+    <footer class="verification__closing">
+        <p class="verification__signature">— Romaric&nbsp;·&nbsp;<em>Mbolo.</em></p>
+    </footer>
+
+</article>
+{{ end }}
