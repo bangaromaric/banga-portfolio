@@ -75,3 +75,125 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
+
+  # Notifie IndexNow (Bing, DuckDuckGo, Yandex, Naver, Seznam) des URLs modifiées.
+  # Ne ping QUE les .md changés dans content/, filtre drafts + noindex, n'échoue jamais le workflow.
+  # Spec: https://www.indexnow.org/documentation
+  indexnow:
+    name: Notify IndexNow
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ping IndexNow with changed URLs
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          set -uo pipefail
+
+          # 1. Récupérer la clé depuis static/{key}.txt (clé = nom de fichier sans extension)
+          KEY_FILE=$(find static -maxdepth 1 -regextype posix-extended -regex 'static/[a-f0-9]{8,128}\.txt' | head -1)
+          if [ -z "$KEY_FILE" ]; then
+            echo "::warning::Aucun fichier clé IndexNow trouvé dans static/. Skip."
+            exit 0
+          fi
+          INDEXNOW_KEY=$(basename "$KEY_FILE" .txt)
+          KEY_LOCATION="https://ban.ga/${INDEXNOW_KEY}.txt"
+          echo "Clé IndexNow : ${INDEXNOW_KEY:0:8}… (location publique : $KEY_LOCATION)"
+
+          # 2. Déterminer le SHA de référence pour le diff
+          if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BEFORE_SHA=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          fi
+          if [ -z "$BEFORE_SHA" ]; then
+            echo "::warning::Pas de commit précédent disponible. Skip IndexNow."
+            exit 0
+          fi
+          echo "Diff : ${BEFORE_SHA:0:8}…${AFTER_SHA:0:8}"
+
+          # 3. Lister les content/*.md modifiés/ajoutés/supprimés
+          CHANGED=$(git diff --name-only "$BEFORE_SHA" "$AFTER_SHA" -- 'content/*.md' 'content/**/*.md' 2>/dev/null || true)
+          if [ -z "$CHANGED" ]; then
+            echo "Aucun fichier content/*.md modifié dans ce push. Skip IndexNow."
+            exit 0
+          fi
+
+          # 4. Mapper chaque fichier vers son URL Hugo, filtrer drafts + noindex
+          URLS=()
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+
+            # Filtre frontmatter (seulement pour fichiers qui existent encore — pas pour suppressions)
+            if [ -f "$file" ]; then
+              if head -30 "$file" | grep -Eq '^draft:[[:space:]]*true'; then
+                echo "  ⏭  Skip draft : $file"
+                continue
+              fi
+              if head -30 "$file" | grep -Eq '^noindex:[[:space:]]*true'; then
+                echo "  ⏭  Skip noindex : $file"
+                continue
+              fi
+            fi
+
+            # Mapping chemin → URL Hugo
+            path="${file#content/}"
+            if [ "$path" = "_index.md" ]; then
+              url_path=""
+            elif [[ "$path" == */_index.md ]]; then
+              url_path="${path%/_index.md}/"
+            else
+              url_path="${path%.md}/"
+            fi
+
+            URLS+=("https://ban.ga/${url_path}")
+          done <<< "$CHANGED"
+
+          if [ ${#URLS[@]} -eq 0 ]; then
+            echo "Aucune URL publiable après filtrage drafts/noindex. Skip IndexNow."
+            exit 0
+          fi
+
+          echo ""
+          echo "URLs à notifier (${#URLS[@]}) :"
+          printf '  • %s\n' "${URLS[@]}"
+          echo ""
+
+          # 5. Construire le payload JSON conforme à la spec IndexNow
+          URL_JSON=$(printf '%s\n' "${URLS[@]}" | jq -R . | jq -s .)
+          PAYLOAD=$(jq -n \
+            --arg host "ban.ga" \
+            --arg key "$INDEXNOW_KEY" \
+            --arg keyLocation "$KEY_LOCATION" \
+            --argjson urlList "$URL_JSON" \
+            '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urlList}')
+
+          # 6. POST vers api.indexnow.org (endpoint générique → propage à tous les moteurs)
+          HTTP_CODE=$(curl -sS -o /tmp/indexnow_response.txt -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -H "User-Agent: ban.ga IndexNow client (GitHub Actions)" \
+            -d "$PAYLOAD" || echo "000")
+
+          echo "Réponse HTTP : $HTTP_CODE"
+          if [ -s /tmp/indexnow_response.txt ]; then
+            echo "Corps de réponse :"
+            cat /tmp/indexnow_response.txt
+            echo ""
+          fi
+
+          # 7. Interprétation des codes (jamais fail le workflow — c'est non-critique)
+          case "$HTTP_CODE" in
+            200) echo "✅ IndexNow OK — URLs acceptées." ;;
+            202) echo "✅ IndexNow OK — URLs reçues, validation clé en cours." ;;
+            400) echo "::warning::IndexNow 400 — Format JSON invalide." ;;
+            403) echo "::warning::IndexNow 403 — Clé invalide ou fichier introuvable à $KEY_LOCATION." ;;
+            422) echo "::warning::IndexNow 422 — URLs hors domaine ou clé non conforme au schema." ;;
+            429) echo "::warning::IndexNow 429 — Rate limit (spam suspecté). Réduire la fréquence." ;;
+            000) echo "::warning::IndexNow injoignable (timeout/DNS)." ;;
+            *)   echo "::warning::IndexNow réponse inattendue : $HTTP_CODE" ;;
+          esac

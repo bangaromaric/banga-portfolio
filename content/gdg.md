@@ -71,4 +71,4 @@ Kit sponsor disponible sur demande — [bangaromaric@gmail.com](mailto:bangaroma
 
 ---
 
-> *Together, we're building the future of tech in Africa.*
+> *Together, we're building the future of tech in Africa..*
