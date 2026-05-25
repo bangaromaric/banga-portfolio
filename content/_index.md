@@ -1,6 +1,6 @@
 ---
 title: "BANGA Romaric — Développeur Spring & Google Cloud à Libreville"
-description: "Portfolio de BANGA Romaric Tanguy, lead Spring developer à l'ANINF, pionnier IA générative au Gabon avec Spring AI, organisateur du Google Developers Group Libreville (400+ développeurs)."
+description: "Lead Spring developer & Google Cloud engineer à l'ANINF (Gabon). Pionnier Spring AI et organisateur du GDG Libreville (400+ développeurs)."
 kicker: "§ I — En résidence à Libreville"
 heroTitle: "Je conçois des [systèmes Spring] qui tournent en production sur des [services publics] gabonais."
 heroLede: "Développeur Spring senior et GCP Cloud Engineer à l'ANINF depuis 7+ ans. Organisateur du Google Developers Group Libreville — la plus grande communauté tech du pays."

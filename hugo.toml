@@ -151,6 +151,13 @@ name = "GDG Libreville"
 url = "/gdg/"
 weight = 6
 
+# HTML minification — garder les guillemets sur les attributs.
+# Sans ça, Hugo retire les guillemets HTML5-légaux (`name=description`), ce qui casse
+# certains parsers SEO stricts (Bing Webmaster Tools, validateurs externes).
+# Cf. CLAUDE.md §10.1 — symptôme historique sur msvalidate.01 et description.
+[minify.tdewolff.html]
+keepQuotes = true
+
 # Configuration pour GitHub Pages
 [markup]
 [markup.goldmark]
