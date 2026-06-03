@@ -2,7 +2,7 @@
 title: "L'IA ne remplace pas les développeurs — elle dissout ce qui les unissait"
 heroTitle: "L'IA et la [division silencieuse] des équipes"
 date: 2026-06-03
-draft: true
+draft: false
 description: "Le vrai risque de l'IA n'est pas de remplacer les développeurs, mais de dissoudre ce qui nous forçait à collaborer. Anatomie d'une division silencieuse."
 categories: ["Métier"]
 tags: ["IA générative", "Collaboration", "Équipes", "Culture tech", "Gabon", "Développement"]
