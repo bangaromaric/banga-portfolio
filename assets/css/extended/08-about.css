@@ -66,6 +66,9 @@
 
 @media (max-width: 900px) {
     .page-editorial__body { grid-template-columns: 1fr; gap: var(--s-5); padding: var(--s-6) 0; }
+    /* En mono-colonne, le sticky épinglerait la sidebar par-dessus le contenu qui défile.
+       On le neutralise : la sidebar redevient un bloc normal au-dessus du contenu. */
+    .page-editorial__sidebar { position: static; top: auto; }
 }
 
 .page-editorial__sidebar {
