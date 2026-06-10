@@ -89,13 +89,6 @@
     padding: var(--s-9) 0;
 }
 
-@media (max-width: 900px) {
-    .project-single__body { grid-template-columns: 1fr; gap: var(--s-5); padding: var(--s-7) 0; }
-    /* En mono-colonne, le sticky épinglerait la sidebar par-dessus le contenu qui défile.
-       On le neutralise : la sidebar redevient un bloc normal au-dessus du contenu. */
-    .project-single__sidebar { position: static; top: auto; }
-}
-
 .project-single__sidebar {
     position: sticky;
     top: 90px;
@@ -105,6 +98,14 @@
     letter-spacing: 0.04em;
     color: var(--ink-muted);
     line-height: 1.7;
+}
+
+/* La neutralisation du sticky DOIT venir après la règle de base : une media query
+   n'ajoute pas de spécificité, donc à sélecteur égal c'est l'ordre source qui tranche.
+   En mono-colonne, le sticky épinglerait la sidebar par-dessus le contenu qui défile. */
+@media (max-width: 900px) {
+    .project-single__body { grid-template-columns: 1fr; gap: var(--s-5); padding: var(--s-7) 0; }
+    .project-single__sidebar { position: static; top: auto; }
 }
 
 .project-single__sidebar h4 {
