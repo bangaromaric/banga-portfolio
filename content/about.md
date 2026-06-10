@@ -27,7 +27,7 @@ J'ai trois préoccupations qui guident chaque projet. **Que ce qui part en produ
 <ul class="timeline">
   <li>
     <div class="timeline__period">2017 — aujourd'hui · 7+ ans</div>
-    <h3 class="timeline__role">Développeur Web Senior — <span class="timeline__company">ANINF</span></h3>
+    <h3 class="timeline__role">Lead Developer Spring — <span class="timeline__company">ANINF</span></h3>
     <p class="timeline__detail">Architecture microservices Spring Boot pour applications gouvernementales. ETL Talend (base à base). Maintenance et évolution de KEWA Android (100k+ téléchargements). Systèmes critiques : gestion des fréquences nationales, parc informatique GLPI.</p>
   </li>
   <li>
