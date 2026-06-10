@@ -157,5 +157,6 @@ Le plus simple est l'email. Je réponds sous 48h ouvrées.
 - **Email** — [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com?subject=Collaboration%20technique)
 - **LinkedIn** — [linkedin.com/in/romaric-banga](https://www.linkedin.com/in/romaric-banga/)
 - **GitHub** — [github.com/bangaromaric](https://github.com/bangaromaric)
+- **Facebook** — [Romaric Banga](https://www.facebook.com/profile.php?id=61585782202218)
 - **Profil Google Developer** — [g.dev/romaricbanga](https://g.dev/romaricbanga)
 - **Localisation** — Libreville, Gabon (UTC+1)

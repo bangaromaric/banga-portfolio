@@ -44,6 +44,7 @@ sameAs = [
   "https://www.linkedin.com/in/romaric-banga/",
   "https://github.com/bangaromaric",
   "https://x.com/bangaromaric",
+  "https://www.facebook.com/profile.php?id=61585782202218",
   "https://gdg.community.dev/gdg-libreville/",
   "https://g.dev/romaricbanga"
 ]
@@ -115,6 +116,10 @@ url = "https://github.com/bangaromaric"
 [[params.socialIcons]]
 name = "twitter"
 url = "https://x.com/bangaromaric"
+
+[[params.socialIcons]]
+name = "facebook"
+url = "https://www.facebook.com/profile.php?id=61585782202218"
 
 [[params.socialIcons]]
 name = "rss"
