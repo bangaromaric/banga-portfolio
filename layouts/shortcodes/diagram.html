@@ -1,0 +1,55 @@
+{{- /*
+  Shortcode : diagramme SVG inline.
+
+  Usage (SEUL SUR SA LIGNE, entoure de lignes vides) :
+
+    {{< diagram name="flux-requete-authentifiee"
+                caption="La Gateway porte la validation du jeton ; le service Commandes reste ignorant de l'authentification." >}}
+
+  Le fichier source est assets/diagrams/<name>.svg.
+
+  Pourquoi un fichier et non du SVG colle dans le markdown : le .svg garde la
+  coloration XML de l'editeur, s'ouvre seul dans un navigateur, produit un
+  git diff lisible, et la MEME source alimente le pipeline PNG du cover.
+  Le shortcode est aussi le seul point de passage ou l'on peut imposer le
+  contrat figure + legende + accessibilite.
+
+  resources.Get est une simple lecture de fichier : cela n'engage pas l'Image
+  Processing de Hugo, donc CLAUDE.md §6.5 reste respecte.
+
+  Le SVG source doit porter lui-meme class="diagram__svg", role="img",
+  <title>, <desc> et aria-labelledby, et n'utiliser QUE des classes dg-*
+  pour la peinture (voir assets/css/extended/14-diagrams.css). Aucune couleur
+  en dur : c'est ce qui rend le mode sombre gratuit.
+
+  Chaque id interne au SVG (marqueurs de fleche notamment) doit etre suffixe
+  par le slug du diagramme, sinon deux diagrammes sur une meme page
+  collisionnent en silence.
+
+  wide="true" fait sortir le diagramme de la colonne 720px jusqu'a --w-wide.
+
+  errorf et non warnf sur les trois controles : une faute de frappe doit
+  casser le build, pas livrer une figure vide en production.
+*/ -}}
+
+{{- $name := .Get "name" | default (.Get 0) -}}
+{{- if not $name -}}
+  {{- errorf "shortcode diagram : parametre `name` manquant (%s)" .Position -}}
+{{- end -}}
+
+{{- $path := printf "diagrams/%s.svg" $name -}}
+{{- $res := resources.Get $path -}}
+{{- if not $res -}}
+  {{- errorf "shortcode diagram : fichier assets/%s introuvable (%s)" $path .Position -}}
+{{- end -}}
+
+{{- $caption := .Get "caption" -}}
+{{- if not $caption -}}
+  {{- errorf "shortcode diagram : parametre `caption` obligatoire pour assets/%s (%s). Un diagramme sans legende enoncant son propos n'est pas termine." $path .Position -}}
+{{- end -}}
+
+{{- $wide := eq (.Get "wide" | default "false") "true" -}}
+<figure class="diagram{{ if $wide }} diagram--wide{{ end }}">
+  <div class="diagram__scroll" tabindex="0">{{ $res.Content | safeHTML }}</div>
+  <figcaption class="diagram__caption">{{ $caption | markdownify }}</figcaption>
+</figure>

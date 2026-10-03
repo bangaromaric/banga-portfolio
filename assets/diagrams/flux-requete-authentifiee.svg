@@ -1,0 +1,75 @@
+<svg class="diagram__svg" xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 600 218" preserveAspectRatio="xMidYMid meet"
+     role="img" focusable="false"
+     aria-labelledby="dg-flux-t dg-flux-d">
+
+  <title id="dg-flux-t">Flux d'une requete authentifiee</title>
+  <desc id="dg-flux-d">Le navigateur envoie une requete GET a la Gateway. La Gateway valide le jeton aupres de Keycloak, puis route la requete vers le service Commandes, qui lit PostgreSQL. Le service Commandes ne voit jamais le jeton : la validation reste dans le perimetre de la Gateway.</desc>
+
+  <defs>
+    <!-- Deux marqueurs, parce qu'un <marker> SVG n'herite pas du contexte de
+         l'element qui le reference : une seule fleche ne peut pas etre a la fois
+         sourde et terracotta. Les ids sont suffixes par le slug du diagramme,
+         sinon deux diagrammes sur une meme page collisionnent en silence. -->
+    <marker id="dg-arrow-flux" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path class="dg-arrowhead" d="M0 0 L10 5 L0 10 Z"/>
+    </marker>
+    <marker id="dg-arrow-accent-flux" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path class="dg-arrowhead dg-arrowhead--accent" d="M0 0 L10 5 L0 10 Z"/>
+    </marker>
+  </defs>
+
+  <!-- 1. Les aretes d'abord : elles passent sous les noeuds. -->
+  <g class="dg-edges">
+    <path class="dg-edge" d="M124 60 H189" marker-end="url(#dg-arrow-flux)"/>
+    <path class="dg-edge dg-edge--dashed dg-edge--accent" d="M250 84 V125" marker-end="url(#dg-arrow-accent-flux)"/>
+    <path class="dg-edge" d="M308 60 H373" marker-end="url(#dg-arrow-flux)"/>
+    <path class="dg-edge" d="M434 84 V125" marker-end="url(#dg-arrow-flux)"/>
+  </g>
+
+  <!-- 2. Etiquette d'arete : fond papier pour trouer la ligne. -->
+  <g class="dg-edge-labels">
+    <rect class="dg-edge-label-bg" x="145" y="53" width="23" height="14" rx="1"/>
+    <text class="dg-edge-label" x="156.5" y="60">GET</text>
+  </g>
+
+  <!-- 3. Noeuds. -->
+  <g class="dg-nodes">
+    <g class="dg-node">
+      <rect x="8" y="36" width="116" height="48" rx="2"/>
+      <text class="dg-label" x="66" y="55">Navigateur</text>
+      <text class="dg-sublabel" x="66" y="71">client</text>
+    </g>
+
+    <g class="dg-node dg-node--primary">
+      <rect x="192" y="36" width="116" height="48" rx="2"/>
+      <text class="dg-label" x="250" y="55">Gateway</text>
+      <text class="dg-sublabel" x="250" y="71">Spring Cloud</text>
+    </g>
+
+    <g class="dg-node">
+      <rect x="376" y="36" width="116" height="48" rx="2"/>
+      <text class="dg-label" x="434" y="55">Commandes</text>
+      <text class="dg-sublabel" x="434" y="71">Spring Boot</text>
+    </g>
+
+    <g class="dg-node dg-node--store">
+      <rect x="192" y="128" width="116" height="44" rx="2"/>
+      <text class="dg-label" x="250" y="150">Keycloak</text>
+    </g>
+
+    <g class="dg-node dg-node--store">
+      <rect x="376" y="128" width="116" height="44" rx="2"/>
+      <text class="dg-label" x="434" y="150">PostgreSQL</text>
+    </g>
+  </g>
+
+  <!-- 4. Perimetre : trace en dernier, sans remplissage, pour passer au-dessus
+          des aretes sans les masquer. -->
+  <g class="dg-group">
+    <rect x="180" y="20" width="324" height="166" rx="3"/>
+    <text class="dg-group-label" x="190" y="200">perimetre authentifie</text>
+  </g>
+</svg>

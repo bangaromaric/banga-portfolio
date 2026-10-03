@@ -1,0 +1,36 @@
+{{- /*
+  Render hook : blocs ```tree (arborescences de dossiers).
+
+  Usage :
+
+    ```tree {caption="Un module par contexte borne ; shared ne depend de personne."}
+    mbolopay/
+    ├── identite/
+    │   ├── domain/
+    │   └── infrastructure/
+    ├── portefeuille/
+    └── shared/
+    ```
+
+  Identique a render-codeblock-ascii.html, avec la classe diagram--tree qui
+  applique un interligne plus aere (14-diagrams.css §4) : les glyphes
+  box-drawing occupent toute la cellule, et sur un arbre les petits trous dans
+  les verticales se lisent comme la sortie normale de tree(1).
+
+  Regles de dessin, documentees dans la skill diagramme-archi :
+  2 espaces d'indentation par niveau, 4 niveaux au plus, 20 lignes visibles au
+  plus, colonne 72 maximum, et jamais de boite dessinee en ASCII (une boite est
+  le signal qu'il faut du SVG).
+*/ -}}
+
+{{- $caption := .Attributes.caption -}}
+{{- if not $caption -}}
+  {{- errorf "bloc ```tree sans attribut caption (%s). Ajouter {caption=\"...\"} apres le nom de la fence." .Position -}}
+{{- end -}}
+{{- $label := $caption | markdownify | plainify -}}
+<figure class="diagram diagram--tree">
+  <div class="diagram__scroll" tabindex="0" role="img" aria-label="{{ $label }}">
+    <pre class="diagram__ascii">{{ .Inner | chomp }}</pre>
+  </div>
+  <figcaption class="diagram__caption">{{ $caption | markdownify }}</figcaption>
+</figure>

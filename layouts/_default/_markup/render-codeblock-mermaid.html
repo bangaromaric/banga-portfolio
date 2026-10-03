@@ -1,0 +1,43 @@
+{{- /*
+  Render hook : blocs ```mermaid.
+
+  Usage :
+
+    ```mermaid {caption="Le paiement n'est confirme qu'apres l'acquittement de l'operateur."}
+    sequenceDiagram
+      accTitle: Paiement mobile money
+      accDescr: Le client initie un paiement, l'API cree une transaction en attente, l'operateur acquitte, puis l'API confirme au client.
+      ...
+    ```
+
+  Pose un drapeau sur la page (.Store) afin que layouts/posts/single.html
+  n'injecte le loader Mermaid que sur les pages qui en ont besoin.
+
+  ATTENTION, piege majeur : ne JAMAIS lire ce drapeau depuis
+  layouts/partials/footer.html. Le footer est appele via partialCached avec la
+  cle de variante (.Layout, .Kind, hideFooter, ShowCodeCopyButtons)
+  dans themes/PaperMod/layouts/_default/baseof.html ligne 23. Tous les posts
+  partagent ce tuple, donc le premier post construit deciderait pour tous les
+  autres, de facon non deterministe d'un build a l'autre. Le drapeau se lit dans
+  le bloc "main", qui n'est pas cache, et APRES {{ .Content }} puisque Hugo rend
+  le contenu paresseusement.
+
+  Mermaid est une trappe de secours, pas le defaut du site : le bundle pese
+  5,5 Mo (1,5 Mo gzippe). Le workflow a privilegier est d'ecrire en Mermaid puis
+  de cuire en SVG a la redaction (voir la skill diagramme-archi), ce qui donne
+  zero JS au runtime et un mode sombre gratuit. Le rendu cote client reste
+  justifie pour les diagrammes de sequence a partir de quatre participants.
+*/ -}}
+
+{{- .Page.Store.Set "hasMermaid" true -}}
+{{- $id := printf "mmd-%s-%d" (.Page.File.ContentBaseName | default "page") .Ordinal -}}
+{{- $caption := .Attributes.caption -}}
+{{- if not $caption -}}
+  {{- errorf "bloc ```mermaid sans attribut caption (%s). Ajouter {caption=\"...\"} apres le nom de la fence." .Position -}}
+{{- end -}}
+<figure class="diagram diagram--mermaid" id="{{ $id }}" data-mermaid>
+  <div class="diagram__scroll" tabindex="0">
+    <pre class="mermaid">{{ .Inner | chomp }}</pre>
+  </div>
+  <figcaption class="diagram__caption">{{ $caption | markdownify }}</figcaption>
+</figure>

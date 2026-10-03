@@ -1,0 +1,44 @@
+{{- /*
+  Render hook : blocs ```ascii (pipelines lineaires en ASCII pur).
+
+  Usage :
+
+    ```ascii {caption="Les trois adaptateurs entrants partagent un seul port applicatif."}
+      REST  >---+
+      gRPC  >---+---> [ PlacerCommande ] ---> PostgreSQL
+      CLI   >---+
+    ```
+
+  Pourquoi un hook dedie plutot qu'un bloc de code nu : hugo.toml n'a pas de
+  section [markup.highlight], donc les valeurs par defaut s'appliquent
+  (noclasses = true, style = monokai). Chroma pose alors un style INLINE sur le
+  <pre>, qui bat .post-single-editorial__body pre { background: var(--code-block-bg) }.
+  Impossible de recuperer la surface sans produire notre propre markup.
+
+  Un hook nomme par langage n'intercepte que sa fence : les blocs java, bash,
+  yaml, xml et text continuent de passer par Chroma sans y toucher. NE JAMAIS
+  creer un render-codeblock.html generique, qui capturerait les 30 blocs de code
+  existants et tuerait silencieusement la coloration syntaxique.
+
+  L'attribut caption vient de la chaine d'information de la fence, que Hugo
+  parse lui-meme. Cela ne depend PAS de [markup.goldmark.parser.attribute]
+  block, qu'il ne faut pas activer (il changerait le parsing des articles
+  existants pour un gain nul).
+
+  role="img" plus aria-label : un lecteur d'ecran ne doit pas epeler quelques
+  centaines de tirets. Le sens passe par la legende, donc obligatoire.
+  tabindex="0" sur le conteneur scrollable : sans lui, un utilisateur au clavier
+  ne peut pas atteindre la partie hors cadre (WCAG 2.1.1).
+*/ -}}
+
+{{- $caption := .Attributes.caption -}}
+{{- if not $caption -}}
+  {{- errorf "bloc ```ascii sans attribut caption (%s). Ajouter {caption=\"...\"} apres le nom de la fence." .Position -}}
+{{- end -}}
+{{- $label := $caption | markdownify | plainify -}}
+<figure class="diagram diagram--ascii">
+  <div class="diagram__scroll" tabindex="0" role="img" aria-label="{{ $label }}">
+    <pre class="diagram__ascii">{{ .Inner | chomp }}</pre>
+  </div>
+  <figcaption class="diagram__caption">{{ $caption | markdownify }}</figcaption>
+</figure>

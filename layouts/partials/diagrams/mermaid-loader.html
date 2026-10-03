@@ -1,0 +1,143 @@
+{{- /*
+  Loader Mermaid.
+
+  Injecte uniquement sur les pages qui contiennent un bloc ```mermaid, via le
+  drapeau .Store pose par layouts/_default/_markup/render-codeblock-mermaid.html.
+  Jamais dans extend_head.html : ce fichier est sur le chemin LCP de tout le site.
+
+  Version epinglee plus SRI plus crossorigin. Jamais "latest" : une mise a jour
+  silencieuse du CDN casserait le rendu sans qu'aucun commit ne l'explique.
+  Build UMD et non ESM, parce qu'un import() dynamique ne peut pas porter
+  d'attribut integrity. Mermaid 12 pose globalThis["mermaid"] en fin de bundle.
+
+  Pour changer de version, recalculer l'empreinte :
+    curl -sL https://cdn.jsdelivr.net/npm/mermaid@<version>/dist/mermaid.min.js \
+      | openssl dgst -sha384 -binary | openssl base64 -A
+
+  Deux contraintes de design non evidentes :
+
+  1. Mermaid ecrit des couleurs INLINE dans le SVG qu'il genere et ne sait pas
+     lire les variables CSS. Pour respecter les tokens du site, il faut donc
+     lire les valeurs calculees dans le DOM et les lui passer en themeVariables,
+     puis re-rendre au basculement de thème.
+
+  2. Les tokens sont lus sur document.body et non sur documentElement : le
+     handler de toggle (layouts/partials/footer.html) ne touche que
+     body.classList, donc en mode "bascule vers sombre" les variables vivent sur
+     body. Le MutationObserver surveille la classe des deux elements, parce que
+     l'init anti-FOUC (extend_head.html) pose la classe sur les deux.
+
+  Echec visible, jamais echec blanc : si le CDN est bloque, le lecteur doit voir
+  la source Mermaid (ingrate mais informative) plutot qu'un trou. D'ou onerror
+  et le garde-fou a 4 s.
+*/ -}}
+<script>
+(function () {
+  var figs = Array.prototype.slice.call(document.querySelectorAll('[data-mermaid]'));
+  if (!figs.length) { return; }
+
+  var nodes = figs.map(function (f) { return f.querySelector('pre.mermaid'); });
+  var sources = nodes.map(function (n) { return n.textContent; });
+  var revealed = false;
+
+  function reveal() {
+    revealed = true;
+    figs.forEach(function (f) { f.classList.add('is-rendered'); });
+  }
+
+  function palette() {
+    var cs = getComputedStyle(document.body);
+    function v(name, fallback) {
+      var raw = cs.getPropertyValue(name);
+      return (raw && raw.trim()) || fallback;
+    }
+    var paper = v('--paper', '#f5f1e8');
+    var paper2 = v('--paper-2', '#ece6d5');
+    var ink = v('--ink', '#1a1814');
+    var ink2 = v('--ink-2', '#2c2823');
+    var muted = v('--ink-muted', '#5c564b');
+    var rule = v('--rule', '#d9d2c0');
+    var ruleStrong = v('--rule-strong', '#b9b0a0');
+    var terracotta = v('--terracotta', '#a4502f');
+    var ochre = v('--ochre', '#c9a961');
+
+    return {
+      background: paper,
+      primaryColor: paper2,
+      primaryTextColor: ink,
+      primaryBorderColor: ruleStrong,
+      secondaryColor: paper,
+      tertiaryColor: paper,
+      mainBkg: paper2,
+      nodeBorder: ruleStrong,
+      nodeTextColor: ink,
+      lineColor: muted,
+      textColor: ink2,
+      titleColor: ink,
+      edgeLabelBackground: paper,
+      clusterBkg: 'transparent',
+      clusterBorder: rule,
+      actorBkg: paper2,
+      actorBorder: terracotta,
+      actorTextColor: ink,
+      actorLineColor: rule,
+      signalColor: muted,
+      signalTextColor: ink2,
+      labelBoxBkg: paper2,
+      labelBoxBorderColor: ruleStrong,
+      labelTextColor: ink,
+      loopTextColor: ink2,
+      activationBkgColor: paper2,
+      activationBorderColor: ochre,
+      sequenceNumberColor: paper,
+      noteBkgColor: paper2,
+      noteTextColor: ink,
+      noteBorderColor: ochre,
+      fontFamily: '"JetBrains Mono", SFMono-Regular, Consolas, monospace',
+      fontSize: '14px'
+    };
+  }
+
+  function render() {
+    if (!window.mermaid) { return; }
+
+    // Mermaid tatoue data-processed="true" et remplace le texte du noeud :
+    // il faut restaurer la source avant chaque nouveau rendu.
+    nodes.forEach(function (n, i) {
+      n.removeAttribute('data-processed');
+      n.textContent = sources[i];
+    });
+
+    window.mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: palette(),
+      // htmlLabels: false donne de vrais <text> SVG au lieu de foreignObject :
+      // plus portable, et la police de themeVariables est bien respectee.
+      flowchart: { htmlLabels: false, curve: 'linear', useMaxWidth: true, padding: 14 },
+      sequence: { useMaxWidth: true, mirrorActors: false, showSequenceNumbers: false },
+      er: { useMaxWidth: true }
+    });
+
+    window.mermaid.run({ nodes: nodes, suppressErrors: true })
+      .then(reveal)
+      .catch(reveal);
+  }
+
+  setTimeout(function () { if (!revealed) { reveal(); } }, 4000);
+
+  var obs = new MutationObserver(function () { render(); });
+  obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/mermaid@12.1.0/dist/mermaid.min.js';
+  s.integrity = 'sha384-EbBpjO7rlR6eqZEcG7GaPpyk9H9WrMyPWX4d3KvPYltgt8Z8l0z6R56B1qP40pR4';
+  s.crossOrigin = 'anonymous';
+  s.referrerPolicy = 'no-referrer';
+  s.onload = render;
+  s.onerror = reveal;
+  document.head.appendChild(s);
+})();
+</script>
