@@ -1,0 +1,214 @@
+/* ============================================================================
+   15-chroma.css
+   Coloration syntaxique, en classes Chroma.
+
+   Pourquoi ce fichier existe : hugo.toml n'avait pas de [markup.highlight], donc
+   Hugo appliquait ses defauts (noClasses = true, style = monokai) et ecrivait un
+   style INLINE sur chaque <pre>. Aucune regle CSS ne peut battre un style inline,
+   donc le --code-block-bg du systeme de tokens etait inoperant et les 30 blocs de
+   code du site etaient en monokai vert-gris, hors palette.
+
+   hugo.toml declare maintenant noClasses = false. Hugo emet
+   <div class="highlight"><pre class="chroma"> avec des spans de classes courtes,
+   et c'est ce fichier qui les habille.
+
+   DECISION DE DESIGN : le panneau de code est TOUJOURS sombre, dans les deux
+   themes du site (--code-block-bg vaut #1a1814 en clair et #050504 en sombre).
+   La palette syntaxique est donc fixe et accordee a un fond sombre, au lieu de
+   suivre les tokens de la page. Utiliser var(--terracotta) ici donnerait un
+   rouge trop sombre sur fond noir en mode clair, puisque ce token est calibre
+   pour du texte sur papier. Les valeurs ci-dessous sont les variantes sombres de
+   la palette pagne, qui sont precisement celles qui tiennent sur fond sombre.
+   ============================================================================ */
+
+.chroma {
+    --cx-text: #e8e2d2;   /* texte de base, identique au color du pre */
+    --cx-muted: #948b7a;  /* commentaires, ponctuation, operateurs */
+    --cx-accent: #d97a52; /* terracotta sombre : mots-cles, annotations, balises */
+    --cx-string: #6fa882; /* jade eclairci : chaines */
+    --cx-number: #d9bd7b; /* ochre sombre : nombres, attributs, fonctions */
+    --cx-type: #9db7df;   /* indigo eclairci : types, classes, namespaces */
+    --cx-error: #e8775a;
+}
+
+/* LE PANNEAU VISUEL PASSE DU <pre> AU WRAPPER .highlight.
+
+   Raison, verifiee sur le CSS compile : PaperMod embarque sa propre feuille
+   Chroma (palette Catppuccin) et termine par
+
+       .chroma { background-color: unset !important; }
+
+   Un !important ne se bat pas avec de la specificite : tant que le fond est
+   pose sur le <pre class="chroma">, il est annule. Le theme assume que le fond
+   vient du wrapper, via sa regle
+
+       .post-content .highlight:not(table) { background: var(--code-block-bg) !important }
+
+   mais ce site n'utilise pas le conteneur .post-content : son corps d'article
+   est .post-single-editorial__body. D'ou ces regles, qui reprennent exactement
+   l'apparence definie dans 07-post.css, un cran plus haut dans l'arbre.
+
+   La regle `.post-single-editorial__body pre` de 07-post.css reste utile : elle
+   couvre les <pre> non passes par Chroma, qui n'ont pas la classe .chroma et
+   donc pas le !important. */
+
+.post-single-editorial__body .highlight,
+.project-single__content .highlight {
+    margin: var(--s-6) 0;
+    background: var(--code-block-bg);
+    border-radius: 3px;
+    border-left: 2px solid var(--terracotta);
+}
+
+.post-single-editorial__body .highlight pre,
+.project-single__content .highlight pre {
+    margin: 0;
+    padding: var(--s-4);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    overflow-x: auto;
+}
+
+.chroma {
+    color: var(--cx-text);
+}
+
+/* Ligne et conteneur de ligne : neutres, ils ne portent que la structure. */
+.chroma .line,
+.chroma .cl {
+    color: inherit;
+}
+
+/* Ligne mise en evidence (hl_lines). */
+.chroma .hl {
+    display: block;
+    background: rgba(217, 189, 123, 0.12);
+    box-shadow: inset 2px 0 0 var(--cx-number);
+}
+
+/* Numeros de ligne, si lineNos est active un jour. */
+.chroma .lnt,
+.chroma .ln,
+.chroma .lntd {
+    color: var(--cx-muted);
+    user-select: none;
+}
+
+/* Commentaires. */
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs,
+.chroma .cp,
+.chroma .cpf {
+    color: var(--cx-muted);
+    font-style: italic;
+}
+
+/* Mots-cles. */
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr {
+    color: var(--cx-accent);
+}
+
+/* Types et classes. */
+.chroma .kt,
+.chroma .nc,
+.chroma .nn,
+.chroma .no,
+.chroma .ne,
+.chroma .bp {
+    color: var(--cx-type);
+}
+
+/* Annotations Java, decorateurs, balises XML et HTML : ce sont les reperes
+   visuels que l'on cherche en diagonale dans les articles de ce site. */
+.chroma .nd,
+.chroma .nt {
+    color: var(--cx-accent);
+}
+
+/* Fonctions et attributs. */
+.chroma .nf,
+.chroma .na,
+.chroma .nl,
+.chroma .py {
+    color: var(--cx-number);
+}
+
+/* Variables et noms ordinaires : texte de base, pour ne pas saturer. */
+.chroma .n,
+.chroma .nv,
+.chroma .vc,
+.chroma .vg,
+.chroma .vi,
+.chroma .nx,
+.chroma .nb,
+.chroma .ni {
+    color: var(--cx-text);
+}
+
+/* Chaines. */
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .dl,
+.chroma .sd,
+.chroma .s2,
+.chroma .sh,
+.chroma .si,
+.chroma .sx,
+.chroma .sr,
+.chroma .s1,
+.chroma .ss {
+    color: var(--cx-string);
+}
+
+/* Echappements dans les chaines : plus clairs que la chaine elle-meme. */
+.chroma .se {
+    color: var(--cx-number);
+}
+
+/* Nombres. */
+.chroma .m,
+.chroma .mb,
+.chroma .mf,
+.chroma .mh,
+.chroma .mi,
+.chroma .il,
+.chroma .mo {
+    color: var(--cx-number);
+}
+
+/* Operateurs et ponctuation : volontairement sourds. Dans un bloc de 10 lignes,
+   colorer les accolades et les points-virgules ne fait qu'ajouter du bruit. */
+.chroma .o,
+.chroma .ow,
+.chroma .p {
+    color: var(--cx-muted);
+}
+
+/* Diff et sortie generique, utiles pour les fences ```diff et ```text. */
+.chroma .gd { color: var(--cx-error); }
+.chroma .gi { color: var(--cx-string); }
+.chroma .ge { font-style: italic; }
+.chroma .gs { font-weight: 600; }
+.chroma .gh,
+.chroma .gu { color: var(--cx-type); font-weight: 600; }
+.chroma .gp { color: var(--cx-muted); }
+.chroma .gr,
+.chroma .err { color: var(--cx-error); }
+.chroma .gt { color: var(--cx-error); }
+
+/* Espaces : jamais visibles. Chroma leur donne une classe, ce qui permettrait
+   de les afficher, mais ce serait du bruit dans un article. */
+.chroma .w {
+    color: inherit;
+}

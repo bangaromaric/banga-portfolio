@@ -9,7 +9,7 @@ layout: verification
 noindex: true
 sitemap:
   disable: true
-_build:
+build:
   list: never
   render: always
   publishResources: true

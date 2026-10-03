@@ -1,3 +1,22 @@
+# ============================================================================
+# Configuration Hugo de ban.ga
+#
+# RÈGLE D'ORDRE TOML, à lire avant toute modification de ce fichier.
+#
+# En TOML, un header de table capture TOUTES les clés qui le suivent, jusqu'au
+# header suivant. Une clé simple écrite après [params.schema] atterrit donc dans
+# params.schema, pas dans params, et Hugo ne signale rien : le paramètre est
+# simplement ignoré, en silence.
+#
+# Ce fichier a eu ce bug : huit drapeaux PaperMod (ShowShareButtons,
+# ShowCodeCopyButtons, ShowBreadCrumbs, UseHugoToc...) et mainSections étaient
+# écrits après [params.schema] et [[related.indices]]. Ils ne s'appliquaient pas.
+#
+# Donc : toutes les clés simples de [params] en premier, les sous-tables
+# [params.xxx] ensuite, les tableaux de tables [[params.xxx]] en dernier.
+# `python scripts/hugo_doctor.py` vérifie cette règle.
+# ============================================================================
+
 baseURL = 'https://ban.ga'
 languageCode = 'fr'
 defaultContentLanguage = 'fr'
@@ -5,11 +24,11 @@ title = 'BANGA Romaric | Développeur Spring & Google Cloud | GDG Libreville | G
 theme = 'PaperMod'
 enableGitInfo = true
 
-# Configuration Google Analytics (nouvelle méthode Hugo)
-[services]
-    [services.googleAnalytics]
-        id = 'G-WHSESG5NQH'
 
+# ----------------------------------------------------------------------------
+# [params] : clés simples UNIQUEMENT. Toute clé ajoutée plus bas dans le fichier
+# n'atterrira pas ici.
+# ----------------------------------------------------------------------------
 [params]
 author = "BANGA Romaric"
 description = "Portfolio de BANGA Romaric Tanguy — VMware Spring Certified Professional 2024 v2, Google Cloud Associate Engineer, lead Spring developer à l'ANINF, organisateur du Google Developers Group Libreville."
@@ -18,26 +37,71 @@ env = "production"
 
 # SEO et métadonnées
 images = ["/images/og-default.jpg"]
+
+# Thème clair/sombre
 defaultTheme = "auto"
 disableThemeToggle = false
 
+# Sections affichées sur la home et dans les listings.
+# Note : layouts/index.html filtre explicitement par Section, donc cette clé
+# sert surtout aux templates PaperMod non surchargés.
+mainSections = ["posts", "projects"]
+
+# Drapeaux PaperMod. Ils doivent rester ICI, au-dessus de toute sous-table.
+#
+# ÉTAT RÉEL : aucun n'a d'effet aujourd'hui, parce que chaque template PaperMod
+# qui les lit est surchargé dans layouts/. Ils sont conservés pour le jour où un
+# de ces templates cesserait de l'être, et parce qu'une valeur fausse serait plus
+# trompeuse qu'une valeur inerte. Qui lit quoi :
+#   ShowReadingTime, ShowWordCount  -> partials/post_meta.html      (surchargé)
+#   ShowBreadCrumbs                 -> partials/breadcrumbs.html    (non appelé)
+#   ShowPostNavLinks                -> _default/single.html         (surchargé)
+#   ShowRssButtonInSectionTermList  -> _default/list.html           (surchargé)
+#   UseHugoToc                      -> partials/toc.html            (non appelé)
+#   ShowCodeCopyButtons             -> partials/footer.html         (surchargé)
+#   ShowShareButtons                -> plus aucun consommateur depuis que le
+#                                      doublon a été retiré de posts/single.html
+# Le site rend ces fonctions lui-même : métadonnées dans posts/single.html,
+# navigation inter-articles idem, partage via partials/share-buttons.html.
+ShowReadingTime = true
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+disableSpecial1stPost = false
+disableScrollToTop = false
+comments = false
+hidemeta = false
+hideSummary = false
+showtoc = false
+tocopen = false
+
+
+# ----------------------------------------------------------------------------
+# Sous-tables de [params]
+# ----------------------------------------------------------------------------
+
 # Search Console & Webmaster verification
-# Google Search Console : déjà vérifié via DNS (propriété de type "Domaine") — pas de meta tag nécessaire.
-# Bing Webmaster Tools (optionnel) : https://www.bing.com/webmasters → ajouter ban.ga
-#   → choisir "Meta tag" → copier le content → remplacer le placeholder ci-dessous, ou retirer le bloc si non utilisé.
+# Google Search Console : déjà vérifié via DNS (propriété de type "Domaine"), pas
+# de meta tag nécessaire.
+# Bing Webmaster Tools : importé depuis Google Search Console. Le token reste ici
+# par redondance (cf. CLAUDE.md §10.1 : la vérification par meta tag échouait
+# avant keepQuotes).
 [params.analytics]
   [params.analytics.bing]
   SiteVerificationTag = "308BF07CFE01FB477AA7479FC7ABA3A4"
 
-# Newsletter — Buttondown (provider externe, POST depuis form embed). Le username est l'identifiant du compte Buttondown.
-# IMPORTANT : après création du compte sur buttondown.email, vérifier que username ci-dessous correspond bien à ton identifiant final.
+# Newsletter : Buttondown (provider externe, POST depuis le form embed).
 [params.newsletter]
 provider = "buttondown"
 username = "romaricbanga"
 name = "Mbolo Letter"
 tagline = "Un email à chaque nouvel article. [Pas plus.]"
 
-# Schema.org — portfolio personnel, donc publisherType = Person (au lieu d'Organization par défaut)
+# Schema.org : portfolio personnel, donc publisherType = Person.
 [params.schema]
 publisherType = "Person"
 sameAs = [
@@ -49,57 +113,14 @@ sameAs = [
   "https://g.dev/romaricbanga"
 ]
 
-# Profil et réseaux sociaux
-ShowReadingTime = true
-ShowShareButtons = true
-ShowPostNavLinks = true
-ShowBreadCrumbs = true
-ShowCodeCopyButtons = true
-ShowWordCount = true
-ShowRssButtonInSectionTermList = true
-
-# Footer personnalisé
-label.text = "© 2025 BANGA Romaric - Expert Spring & Google Cloud"
-label.icon = ""
-label.iconHeight = 0
-UseHugoToc = true
-disableSpecial1stPost = false
-disableScrollToTop = false
-comments = false
-hidemeta = false
-hideSummary = false
-showtoc = false
-tocopen = false
-
-[sitemap]
-changefreq = "weekly"
-priority = 0.5
-filename = "sitemap.xml"
-
-# Related content — pour la section "Articles connexes" sur les posts
-[related]
-includeNewer = true
-threshold = 60
-toLower = false
-
-[[related.indices]]
-  name = "tags"
-  weight = 80
-
-[[related.indices]]
-  name = "categories"
-  weight = 60
-
-[[related.indices]]
-  name = "date"
-  weight = 10
-
-# Sections affichées sur la home et dans les listings
-mainSections = ["posts", "projects"]
-
-# Mode profile désactivé — la home est gérée par layouts/index.html (override éditorial)
+# Mode profile désactivé : la home est gérée par layouts/index.html.
 [params.profileMode]
 enabled = false
+
+
+# ----------------------------------------------------------------------------
+# Tableaux de tables de [params] : toujours en dernier dans la section params.
+# ----------------------------------------------------------------------------
 
 [[params.socialIcons]]
 name = "email"
@@ -125,7 +146,50 @@ url = "https://www.facebook.com/profile.php?id=61585782202218"
 name = "rss"
 url = "/posts/index.xml"
 
+
+# ----------------------------------------------------------------------------
+# Services
+# ----------------------------------------------------------------------------
+[services]
+  [services.googleAnalytics]
+  id = 'G-WHSESG5NQH'
+
+
+# ----------------------------------------------------------------------------
+# Sitemap. Les priorités fines sont dans layouts/sitemap.xml (override) :
+# home 1.0, sections 0.8, projets 0.7, posts 0.6, tags et categories exclus.
+# ----------------------------------------------------------------------------
+[sitemap]
+changefreq = "weekly"
+priority = 0.5
+filename = "sitemap.xml"
+
+
+# ----------------------------------------------------------------------------
+# Related content : alimente la section « Articles connexes » des posts.
+# Un article qui ne partage aucun tag avec le corpus n'aura aucun connexe.
+# ----------------------------------------------------------------------------
+[related]
+includeNewer = true
+threshold = 60
+toLower = false
+
+[[related.indices]]
+  name = "tags"
+  weight = 80
+
+[[related.indices]]
+  name = "categories"
+  weight = 60
+
+[[related.indices]]
+  name = "date"
+  weight = 10
+
+
+# ----------------------------------------------------------------------------
 # Menu principal
+# ----------------------------------------------------------------------------
 [[menu.main]]
 name = "Accueil"
 url = "/"
@@ -156,15 +220,41 @@ name = "GDG Libreville"
 url = "/gdg/"
 weight = 6
 
-# HTML minification — garder les guillemets sur les attributs.
-# Sans ça, Hugo retire les guillemets HTML5-légaux (`name=description`), ce qui casse
-# certains parsers SEO stricts (Bing Webmaster Tools, validateurs externes).
-# Cf. CLAUDE.md §10.1 — symptôme historique sur msvalidate.01 et description.
+
+# ----------------------------------------------------------------------------
+# Minification HTML : garder les guillemets sur les attributs.
+# Sans cela, Hugo retire les guillemets HTML5-légaux (`name=description`), ce qui
+# casse certains parsers SEO stricts. Cf. CLAUDE.md §10.1, symptôme historique
+# sur msvalidate.01.
+# ----------------------------------------------------------------------------
 [minify.tdewolff.html]
 keepQuotes = true
 
-# Configuration pour GitHub Pages
+
+# ----------------------------------------------------------------------------
+# Markup
+# ----------------------------------------------------------------------------
 [markup]
-[markup.goldmark]
-[markup.goldmark.renderer]
-unsafe = true
+
+  # unsafe = true autorise le HTML brut dans le markdown. Nécessaire pour les
+  # badges de content/about.md et pour le SVG inline des diagrammes.
+  [markup.goldmark.renderer]
+  unsafe = true
+
+  # Coloration syntaxique par CLASSES et non par styles inline.
+  # Par défaut Hugo utilise noclasses = true et le style monokai, ce qui écrit
+  # un style inline sur chaque <pre> et rend --code-block-bg inopérant.
+  # Les classes sont habillées par assets/css/extended/15-chroma.css, en tokens,
+  # donc le code suit le mode sombre comme le reste du site.
+  [markup.highlight]
+  noClasses = false
+  lineNos = false
+  tabWidth = 4
+  wrapperClass = "highlight"
+
+  # Attributs de bloc NON activés volontairement : les attributs {caption="..."}
+  # des fences viennent de la chaîne d'information, que Hugo parse lui-même, et
+  # activer parser.attribute.block changerait le parsing des articles existants.
+  [markup.goldmark.parser.attribute]
+  title = true
+  block = false
