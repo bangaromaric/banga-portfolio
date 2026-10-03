@@ -30,6 +30,14 @@
     {{- with .image }}
     <figure class="post-single-editorial__cover">
         <img src="{{ . | absURL }}" alt="{{ $p.Params.cover.alt | default $p.Title }}" loading="eager" decoding="async">
+        {{- /* cover.caption est documente dans CLAUDE.md §5.4 comme visible sous
+             l'image, et renseigne dans quatre articles, mais n'etait jamais rendu
+             ici. markdownify pour autoriser emphase et liens dans la legende.
+             Pas de width ni height sur l'img : deux des covers a legende sont en
+             1929x1062, des dimensions codees en dur seraient fausses. */ -}}
+        {{- with $p.Params.cover.caption }}
+        <figcaption class="post-single-editorial__cover-caption">{{ . | markdownify }}</figcaption>
+        {{- end }}
     </figure>
     {{- end }}
     {{- end }}
@@ -37,6 +45,16 @@
     <div class="post-single-editorial__body">
         {{ .Content }}
     </div>
+
+    {{- /* Lecture du drapeau Mermaid. Elle doit rester ICI : dans le bloc "main"
+         (non cache) et apres {{ .Content }} en ordre source, puisque Hugo rend le
+         contenu paresseusement. La deplacer dans partials/footer.html la casserait
+         silencieusement : ce partial est appele via partialCached sans la page dans
+         la cle de variante (themes/PaperMod/layouts/_default/baseof.html ligne 23),
+         donc le premier post construit deciderait pour tous les autres. */ -}}
+    {{- if .Store.Get "hasMermaid" }}
+    {{- partial "diagrams/mermaid-loader.html" . }}
+    {{- end }}
 
     {{ partial "share-buttons" (dict
         "title" $p.Title
@@ -93,11 +111,13 @@
     </nav>
     {{- end }}
 
-    {{- if (.Param "ShowShareButtons") }}
-    <div style="max-width: 720px; margin: 0 auto var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--rule);">
-        {{- partial "share_icons.html" . -}}
-    </div>
-    {{- end }}
+    {{- /* Le bloc PaperMod `share_icons.html` qui se trouvait ici a ete retire :
+         il faisait doublon avec le partial maison `share-buttons`, appele plus
+         haut dans ce meme template, qui est style par 13-share-buttons.css et
+         emet les evenements GA4. Le doublon etait invisible parce que sa
+         condition `.Param "ShowShareButtons"` etait toujours fausse : le drapeau
+         atterrissait dans params.schema a cause d'un ordre de tables TOML.
+         Voir le commentaire d'en-tete de hugo.toml. */ -}}
 </article>
 
 {{- end }}

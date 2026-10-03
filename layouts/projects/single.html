@@ -112,7 +112,7 @@
         <div class="project-single__content">
             {{ .Content }}
 
-            <hr class="rule" style="margin-top: var(--s-7);">
+            <hr class="rule">
 
             <section class="project-cta" aria-labelledby="project-cta-title">
                 <h2 id="project-cta-title" class="project-cta__title">
@@ -122,16 +122,24 @@
                     Consulting, formation entreprise, ou conférence — discutons d'un projet ou d'une intervention.
                 </p>
                 <div class="project-cta__buttons">
-                    <a class="btn btn--primary no-arrow" href="mailto:bangaromaric@gmail.com?subject=Collaboration%20technique">Discutons d'un projet</a>
+                    <a class="btn btn--primary" href="mailto:bangaromaric@gmail.com?subject=Collaboration%20technique">Discutons d'un projet</a>
                     <a class="btn no-arrow" href="/about/#services">Mes services →</a>
                 </div>
             </section>
 
-            <p style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); letter-spacing: 0.04em; margin-top: var(--s-7);">
+            <p class="project-single__back">
                 ← <a href="/projects/" class="no-arrow">Retour aux projets</a>
             </p>
         </div>
     </div>
+
+    {{- /* Lecture du drapeau Mermaid. Doit rester dans le bloc "main" (non cache)
+         et apres {{ .Content }} en ordre source. Voir le commentaire detaille dans
+         layouts/posts/single.html : la mettre dans partials/footer.html la
+         casserait silencieusement a cause du partialCached de baseof.html. */ -}}
+    {{- if .Store.Get "hasMermaid" }}
+    {{- partial "diagrams/mermaid-loader.html" . }}
+    {{- end }}
 </article>
 
 {{- end }}
