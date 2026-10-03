@@ -1,0 +1,83 @@
+{{- /*
+    Page 404 à la charte du site.
+
+    Remplace celle de PaperMod, qui ne rend qu'un `<div class="not-found">404</div>`
+    nu, sans en-tête éditorial, sans issue de secours et hors identité visuelle.
+
+    Aucune classe nouvelle : réutilise `page-editorial` (08-about.css) pour la
+    structure et `post-related` (07-post.css) pour la liste de secours. Une 404
+    n'est pas un endroit où introduire du CSS à maintenir.
+
+    Les dates suivent CLAUDE.md §10.8 : format numérique, donc insensible à la
+    locale, comme dans partials/post-card.html.
+*/ -}}
+{{- define "main" }}
+
+<article class="page-editorial">
+    <header class="page-editorial__head">
+        <div>
+            <span class="page-editorial__kicker">§ 404</span>
+            <h1 class="page-editorial__title">
+                {{ "Page [introuvable]" | replaceRE "\\[([^\\]]+)\\]" "<em>$1</em>" | safeHTML }}
+            </h1>
+        </div>
+        <p class="page-editorial__lede">
+            Cette adresse ne mène nulle part. Un lien a vieilli, une URL a été
+            retapée de travers, ou la page a changé de nom. Voici par où reprendre.
+        </p>
+    </header>
+
+    <div class="page-editorial__body">
+        <aside class="page-editorial__sidebar">
+            <h4>Où aller</h4>
+            <nav>
+                <ul>
+                    <li><a href="/" class="no-arrow">→ Accueil</a></li>
+                    <li><a href="/posts/" class="no-arrow">→ Articles</a></li>
+                    <li><a href="/projects/" class="no-arrow">→ Projets</a></li>
+                    <li><a href="/about/" class="no-arrow">→ À propos</a></li>
+                    <li><a href="/gdg/" class="no-arrow">→ GDG Libreville</a></li>
+                    <li><a href="mailto:bangaromaric@gmail.com" class="no-arrow">→ Contact</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="page-editorial__content">
+            <p>
+                Si vous êtes arrivé ici depuis un lien externe, il pointe vers une
+                page qui n'existe plus sous ce nom. Les articles et les projets,
+                eux, n'ont pas bougé.
+            </p>
+
+            {{- $posts := first 3 (where site.RegularPages "Section" "posts") }}
+            {{- with $posts }}
+            <section class="post-related" aria-labelledby="notfound-posts-title">
+                {{- /* Pas de `section-mark__numeral` ici, contrairement a
+                     posts/single.html : ce titre vit dans .page-editorial__content,
+                     dont le CSS (08-about.css ligne 123) ajoute deja un « § » en
+                     ::before. L'ecrire a la main le doublerait. */ -}}
+                <h2 id="notfound-posts-title" class="post-related__title">
+                    <span class="section-mark">Derniers articles</span>
+                </h2>
+                <ul class="post-related__list">
+                    {{- range . }}
+                    <li class="post-related__item">
+                        <time class="post-related__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01/2006" }}</time>
+                        <h3 class="post-related__entry"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                        {{- with .Description }}
+                        <p class="post-related__desc">{{ . | plainify | truncate 140 }}</p>
+                        {{- end }}
+                    </li>
+                    {{- end }}
+                </ul>
+            </section>
+            {{- end }}
+
+            <p>
+                <a class="btn btn--primary" href="/">Retour à l'accueil</a>
+            </p>
+        </div>
+    </div>
+</article>
+
+{{- end }}
