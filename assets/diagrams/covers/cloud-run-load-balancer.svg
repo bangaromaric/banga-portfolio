@@ -1,0 +1,212 @@
+<!--
+  Cover de l'article « Cloud Run derriere un load balancer global ».
+  Derive de .claude/skills/diagramme-archi/assets/gabarit-cover.svg.
+
+  Rasteriser :
+      bash .claude/skills/diagramme-archi/scripts/make_cover.sh cloud-run-load-balancer
+
+  Couleurs EN DUR : Chrome rend ce fichier hors du CSS du site.
+  Palette du site : papier #F5F1E8 / #ECE6D5, encre #1A1814 / #5C564B,
+  filet #D9D2C0, terracotta #A4502F, indigo #2B4570, ochre #C9A961, jade #2E5D43.
+
+  Les icones Cloud Run, Cloud Load Balancing et Certificate Manager sont
+  recopiees du pack officiel Google, classes CSS converties en attributs fill
+  pour eviter la collision de .cls-* entre deux icones inlinees.
+  Voir assets/diagrams/icons/gcp/NOTICE.md.
+
+  ZONE DE SECURITE : rien de signifiant hors de 80,48 -> 1120,582.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <pattern id="pagne" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+      <g fill="none">
+        <path d="M0 11 L11 0 L22 11 L11 22 Z" stroke="#1A1814" stroke-width="0.4" stroke-opacity="0.10"/>
+        <circle cx="11" cy="11" r="1.2" fill="#1A1814" fill-opacity="0.06"/>
+      </g>
+    </pattern>
+    <linearGradient id="fond" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F5F1E8"/>
+      <stop offset="100%" stop-color="#ECE6D5"/>
+    </linearGradient>
+    <marker id="fleche-tc" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A4502F"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#fond)"/>
+  <rect width="1200" height="630" fill="url(#pagne)"/>
+
+  <!-- Kicker. -->
+  <text x="80" y="90" font-family="JetBrains Mono, monospace" font-size="20"
+        letter-spacing="3" fill="#5C564B">§ GOOGLE CLOUD · ARCHITECTURE DE PRODUCTION</text>
+
+  <!-- Titre, une ligne. L'accent italique terracotta vaut la syntaxe [mot] du site. -->
+  <text x="80" y="158" font-family="Fraunces, Georgia, serif" font-size="44"
+        font-weight="350" letter-spacing="-0.9" fill="#1A1814">Cloud Run derrière un load balancer <tspan
+        font-style="italic" fill="#A4502F">global</tspan></text>
+
+  <!-- ====================== Colonne d'entree ====================== -->
+
+  <!-- Globe : le visiteur vient d'Internet. Dessine aux tokens du site. -->
+  <g fill="none" stroke="#5C564B" stroke-width="1.3">
+    <circle cx="100" cy="222" r="16"/>
+    <ellipse cx="100" cy="222" rx="6.5" ry="16"/>
+    <line x1="84" y1="222" x2="116" y2="222"/>
+    <path d="M87.5 212.5 Q100 218.5 112.5 212.5"/>
+    <path d="M87.5 231.5 Q100 225.5 112.5 231.5"/>
+  </g>
+  <text x="128" y="218" font-family="JetBrains Mono, monospace" font-size="12.5"
+        letter-spacing="0.6" fill="#1A1814">VISITEUR</text>
+  <text x="128" y="235" font-family="JetBrains Mono, monospace" font-size="11"
+        letter-spacing="0.2" fill="#5C564B">api.payapp.ga</text>
+
+  <line x1="100" y1="248" x2="100" y2="272" stroke="#A4502F" stroke-width="1.8"
+        marker-end="url(#fleche-tc)"/>
+
+  <!-- Zone DNS : chez LWS, pas sur Cloud DNS. Pas d'icone Google ici. -->
+  <rect x="80" y="278" width="190" height="52" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+  <text x="94" y="300" font-family="JetBrains Mono, monospace" font-size="12.5"
+        letter-spacing="0.6" fill="#1A1814">ZONE DNS · LWS</text>
+  <text x="94" y="318" font-family="JetBrains Mono, monospace" font-size="11"
+        letter-spacing="0.2" fill="#5C564B">api → 34.120.10.20</text>
+
+  <line x1="272" y1="304" x2="312" y2="304" stroke="#A4502F" stroke-width="1.8"
+        marker-end="url(#fleche-tc)"/>
+
+  <!-- ====================== Le load balancer ====================== -->
+
+  <rect x="300" y="224" width="818" height="210" rx="4" fill="#ECE6D5" stroke="#D9D2C0"/>
+
+  <!-- Icone officielle Cloud Load Balancing, 24px -> 22px. -->
+  <g transform="translate(316,230) scale(0.9167)">
+    <rect fill="#669df6" x="18" y="12" width="2" height="4"/>
+    <rect fill="#669df6" x="11" y="12" width="2" height="4"/>
+    <rect fill="#669df6" x="4" y="12" width="2" height="4"/>
+    <polygon fill="#4285f4" points="13 11 11 11 11 7 13 7 13 11"/>
+    <rect fill="#669df6" x="4" y="11" width="16" height="2"/>
+    <rect fill="#aecbfa" x="6" y="2" width="12" height="5"/>
+    <rect fill="#669df6" x="12" y="2" width="6" height="5"/>
+    <rect fill="#aecbfa" x="16" y="16" width="6" height="6"/>
+    <rect fill="#aecbfa" x="2" y="16" width="6" height="6"/>
+    <rect fill="#669df6" x="5" y="16" width="3" height="6"/>
+    <rect fill="#aecbfa" x="9" y="16" width="6" height="6"/>
+    <rect fill="#669df6" x="12" y="16" width="3" height="6"/>
+    <rect fill="#669df6" x="19" y="16" width="3" height="6"/>
+  </g>
+  <text x="348" y="248" font-family="JetBrains Mono, monospace" font-size="13.5"
+        letter-spacing="0.6" fill="#1A1814">payapp-prod-lb<tspan
+        fill="#5C564B"> · global external Application Load Balancer</tspan></text>
+
+  <!-- Les cinq briques, dans l'ordre du chemin d'une requete. -->
+  <g font-family="JetBrains Mono, monospace">
+    <rect x="316" y="261" width="138" height="86" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+    <text x="328" y="285" font-size="12.5" letter-spacing="0.6" fill="#1A1814">FORWARDING</text>
+    <text x="328" y="300" font-size="12.5" letter-spacing="0.6" fill="#1A1814">RULE</text>
+    <text x="328" y="321" font-size="11" letter-spacing="0.2" fill="#5C564B">IP statique</text>
+    <text x="328" y="335" font-size="11" letter-spacing="0.2" fill="#5C564B">port 443</text>
+
+    <rect x="478" y="261" width="138" height="86" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+    <text x="490" y="285" font-size="12.5" letter-spacing="0.6" fill="#1A1814">TARGET HTTPS</text>
+    <text x="490" y="300" font-size="12.5" letter-spacing="0.6" fill="#1A1814">PROXY</text>
+    <text x="490" y="321" font-size="11" letter-spacing="0.2" fill="#5C564B">termine le TLS</text>
+
+    <rect x="640" y="261" width="138" height="86" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+    <text x="652" y="285" font-size="12.5" letter-spacing="0.6" fill="#1A1814">URL MAP</text>
+    <text x="652" y="321" font-size="11" letter-spacing="0.2" fill="#5C564B">api.payapp.ga</text>
+    <text x="652" y="335" font-size="11" letter-spacing="0.2" fill="#5C564B">→ api-backend</text>
+
+    <rect x="802" y="261" width="138" height="86" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+    <text x="814" y="285" font-size="12.5" letter-spacing="0.6" fill="#1A1814">BACKEND</text>
+    <text x="814" y="300" font-size="12.5" letter-spacing="0.6" fill="#1A1814">SERVICE</text>
+    <text x="814" y="321" font-size="11" letter-spacing="0.2" fill="#5C564B">api-backend</text>
+    <text x="814" y="335" font-size="11" letter-spacing="0.2" fill="#5C564B">logs activés</text>
+
+    <rect x="964" y="261" width="138" height="86" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+    <text x="976" y="285" font-size="12.5" letter-spacing="0.6" fill="#1A1814">SERVERLESS</text>
+    <text x="976" y="300" font-size="12.5" letter-spacing="0.6" fill="#1A1814">NEG</text>
+    <text x="976" y="321" font-size="11" letter-spacing="0.2" fill="#5C564B">api-neg</text>
+    <text x="976" y="335" font-size="11" letter-spacing="0.2" fill="#5C564B">europe-west1</text>
+  </g>
+
+  <g stroke="#A4502F" stroke-width="1.8" marker-end="url(#fleche-tc)">
+    <line x1="456" y1="304" x2="476" y2="304"/>
+    <line x1="618" y1="304" x2="638" y2="304"/>
+    <line x1="780" y1="304" x2="800" y2="304"/>
+    <line x1="942" y1="304" x2="962" y2="304"/>
+  </g>
+
+  <!-- Ce qui pend du target HTTPS proxy, et de lui seul : la certificate map
+       et la politique SSL. Correction du schema de l'article, qui les
+       rattachait a la forwarding rule. -->
+  <g stroke="#5C564B" stroke-width="1.1" stroke-dasharray="3 3" fill="none">
+    <path d="M547 349 L547 357 L852 357"/>
+    <line x1="596" y1="357" x2="596" y2="365"/>
+    <line x1="852" y1="357" x2="852" y2="365"/>
+  </g>
+
+  <rect x="478" y="365" width="236" height="50" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+  <!-- Icone officielle Certificate Manager, 24px -> 19px. -->
+  <g transform="translate(490,377) scale(0.7917)" fill="#4285f4">
+    <path clip-rule="evenodd" fill-rule="evenodd" d="m20.625 8.34876v10.28814c0 1.1034-.8847 1.9881-1.988 1.9881h-10.28823c-1.09343 0-1.98805-.8847-1.98805-1.9881h12.27628v-12.2762c1.1033 0 1.988.89463 1.988 1.98806z"/>
+    <path clip-rule="evenodd" fill-rule="evenodd" d="m15.6512 3.375h-10.28814c-1.09344 0-1.98806.89462-1.98806 1.98806v10.28814c0 1.1034.89462 1.9881 1.98806 1.9881h10.28814c1.1034 0 1.9881-.8847 1.9881-1.9881v-10.28814c0-1.09344-.8847-1.98806-1.9881-1.98806zm0 12.2762h-10.28814v-10.28814h10.28814z"/>
+    <path d="m13.075 8.48262c-.0657-.34763-.2067-.65769-.3946-.93956-.2724-.4134-.6576-.74225-1.1086-.93956-.3288-.14093-.6858-.22549-1.071-.22549-.3758 0-.73286.08456-1.06169.22549-.45097.19731-.83617.52616-1.10863.93956-.29125.41341-.45096.92077-.45096 1.46572 0 .17851.01879.35703.05637.52615 0 .0094 0 .01879.00939.03758.01879.08456.03758.17852.06577.26308.07516.22551.17851.43221.31004.62011.12213.1785.26306.3476.43217.498v3.3072l1.74754-1.6442 1.7568 1.6442v-3.3072c.3383-.3007.5919-.6859.7423-1.11811.0281-.08456.0469-.17852.0657-.26308.0094-.01879.0094-.02818.0094-.03758.0376-.16912.0564-.34764.0564-.52615 0-.17852-.0188-.35704-.0564-.52616zm-1.3529.52616c0 .66708-.5449 1.21202-1.2213 1.21202-.6671 0-1.21201-.54494-1.21201-1.21202 0-.18792.03758-.36643.12213-.52616.1879-.4134.61068-.69527 1.08988-.69527.4885 0 .9113.28187 1.0992.69527.0845.15973.1221.33824.1221.52616z"/>
+  </g>
+  <text x="518" y="386" font-family="JetBrains Mono, monospace" font-size="12"
+        letter-spacing="0.4" fill="#1A1814">payapp-prod-cert-map</text>
+  <text x="518" y="403" font-family="JetBrains Mono, monospace" font-size="11"
+        letter-spacing="0.2" fill="#5C564B">*.payapp.ga + payapp.ga</text>
+
+  <rect x="734" y="365" width="236" height="50" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+  <rect x="748" y="378" width="9" height="9" fill="#A4502F"/>
+  <text x="768" y="386" font-family="JetBrains Mono, monospace" font-size="12"
+        letter-spacing="0.4" fill="#1A1814">payapp-tls12</text>
+  <text x="748" y="403" font-family="JetBrains Mono, monospace" font-size="11"
+        letter-spacing="0.2" fill="#5C564B">TLS 1.2 minimum · Modern</text>
+
+  <!-- ====================== La sortie ====================== -->
+
+  <line x1="1033" y1="349" x2="1033" y2="450" stroke="#A4502F" stroke-width="1.8"
+        marker-end="url(#fleche-tc)"/>
+
+  <rect x="880" y="456" width="238" height="66" rx="3" fill="#F5F1E8" stroke="#D9D2C0"/>
+  <!-- Icone officielle Cloud Run, 24px -> 30px. -->
+  <g transform="translate(896,474) scale(1.25)">
+    <polygon fill="#aecbfa" points="8.9 2.63 12.02 12 21.38 12 8.9 2.63"/>
+    <polygon fill="#4285f4" points="21.38 12 12.02 12 8.9 21.38 21.38 12"/>
+    <polygon fill="#4285f4" points="3.44 21.38 6.57 19.81 8.9 12 5.78 12 3.44 21.38"/>
+    <polygon fill="#aecbfa" points="3.44 2.63 5.78 12 8.9 12 6.57 4.19 3.44 2.63"/>
+  </g>
+  <text x="936" y="481" font-family="JetBrains Mono, monospace" font-size="12.5"
+        letter-spacing="0.6" fill="#1A1814">CLOUD RUN</text>
+  <text x="936" y="497" font-family="JetBrains Mono, monospace" font-size="11"
+        letter-spacing="0.2" fill="#5C564B">service api</text>
+  <text x="936" y="513" font-family="JetBrains Mono, monospace" font-size="11"
+        letter-spacing="0.2" fill="#5C564B">ingress interne + ALB</text>
+
+  <!-- Accroche secondaire, dans le vide sous la colonne d'entree. -->
+  <text x="80" y="492" font-family="Newsreader, Georgia, serif" font-size="22"
+        fill="#5C564B">Un seul point d’entrée. Un certificat pour tous les sous-domaines.</text>
+
+  <!-- Filet bas. -->
+  <line x1="80" y1="538" x2="1120" y2="538" stroke="#D9D2C0" stroke-width="1"/>
+
+  <!-- Pied. -->
+  <text x="80" y="560" font-family="JetBrains Mono, monospace" font-size="20"
+        letter-spacing="2" fill="#5C564B">CERTIFICAT WILDCARD · TLS 1.2 · SERVERLESS NEG</text>
+
+  <!-- Signature LinkedIn, en haut a droite, sur la ligne du kicker.
+       Obligatoire sur toute cover d'architecture. Le bloc est cale a droite
+       sur x=1120, bord de la zone de securite : il survit au recadrage 16/9.
+       Arial et non une webfont pour le sigle : la police est installee sur la
+       machine, le sigle ne depend donc pas du chargement de Google Fonts. -->
+  <g transform="translate(964,72)">
+    <rect x="0" y="0" width="30" height="30" rx="5" fill="#0A66C2"/>
+    <text x="15" y="21.5" font-family="Arial, Helvetica, sans-serif" font-size="16"
+          font-weight="700" fill="#FFFFFF" text-anchor="middle">in</text>
+  </g>
+  <text x="1120" y="88" text-anchor="end" font-family="JetBrains Mono, monospace"
+        font-size="14" letter-spacing="0.5" fill="#1A1814">Romaric BANGA</text>
+  <text x="1120" y="103" text-anchor="end" font-family="JetBrains Mono, monospace"
+        font-size="11" letter-spacing="0.2" fill="#5C564B">in/romaric-banga</text>
+</svg>
