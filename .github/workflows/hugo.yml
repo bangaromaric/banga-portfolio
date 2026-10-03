@@ -32,7 +32,12 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.146.0'
+          # Doit rester aligné sur la version utilisée en local. Une CI plus
+          # ancienne que le poste de travail laisse passer des templates qui
+          # buildent chez soi et cassent en production.
+          # `python scripts/hugo_doctor.py` compare
+          # cette valeur à `hugo version`.
+          hugo-version: '0.150.0'
           extended: true
 
       - name: Cache Hugo resources
@@ -49,6 +54,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
+      - name: Lint Hugo (config, templates, dérives)
+        run: |
+          python scripts/hugo_doctor.py --selftest
+          python scripts/hugo_doctor.py --ci
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
@@ -58,6 +68,7 @@ jobs:
             --gc \
             --minify \
             --enableGitInfo \
+            --panicOnWarning \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
