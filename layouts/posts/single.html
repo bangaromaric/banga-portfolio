@@ -64,11 +64,18 @@
     }}
 
     <footer class="post-single-editorial__footer">
+        {{- /* Pastilles non cliquables : les pages de taxonomie ne sont plus
+             generees (disableKinds dans hugo.toml), donc .GetTerms ne renvoie
+             plus rien et un lien pointerait vers une 404. On lit directement le
+             frontmatter. Les tags continuent de servir au calcul des articles
+             connexes, qui est la vraie navigation par sujet du site. */ -}}
+        {{- with $p.Params.tags }}
         <ul class="post-single-editorial__tags">
-            {{- range $p.GetTerms "tags" }}
-            <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+            {{- range . }}
+            <li><span>{{ . }}</span></li>
             {{- end }}
         </ul>
+        {{- end }}
         <a class="meta-link" href="/posts/">← Tous les articles</a>
     </footer>
 

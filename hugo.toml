@@ -24,6 +24,14 @@ title = 'BANGA Romaric | Développeur Spring & Google Cloud | GDG Libreville | G
 theme = 'PaperMod'
 enableGitInfo = true
 
+# Pas de pages de taxonomie. Elles representaient 33 des 50 pages generees et
+# 33 flux RSS, pour un contenu maigre : un titre et deux liens. La navigation
+# par sujet du site passe par la section « Articles connexes », calculee par
+# [related] a partir du frontmatter, qui n'a pas besoin de ces pages.
+# Corollaire indispensable : aucun template ne doit plus lier vers /tags/ ni
+# /categories/, sinon les liens pointent vers des 404.
+disableKinds = ["taxonomy", "term"]
+
 
 # ----------------------------------------------------------------------------
 # [params] : clés simples UNIQUEMENT. Toute clé ajoutée plus bas dans le fichier

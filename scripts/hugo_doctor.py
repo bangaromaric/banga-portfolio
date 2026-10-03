@@ -439,25 +439,53 @@ def check_theme_untouched() -> None:
 # ----------------------------------------------------------------------------
 
 
-def check_indexing_coherence() -> None:
+RX_TAXO_LINK = re.compile(
+    r'href="[^"]*/(tags|categories)/|GetTerms\s+"(tags|categories)"'
+)
+
+
+def check_indexing_coherence(config: dict) -> None:
     section("Indexation")
+
+    disabled = {str(k).lower() for k in (config.get("disableKinds") or [])}
+    taxo_off = {"taxonomy", "term"} <= disabled
+
     robots = ROOT / "static" / "robots.txt"
-    if not robots.exists():
-        say(NOTE, "pas de static/robots.txt")
-        return
-    text = read(robots)
+    text = read(robots) if robots.exists() else ""
     disallowed = re.findall(r"^Disallow:\s*(\S+)", text, flags=re.M)
     taxo_blocked = [d for d in disallowed if d.rstrip("/") in ("/tags", "/categories")]
-    if not taxo_blocked:
-        say(OK, "robots.txt ne bloque pas les taxonomies")
+
+    # Les templates qui pointent encore vers une page de taxonomie.
+    linkers = []
+    for f in template_files():
+        hit = RX_TAXO_LINK.search(read(f))
+        if hit:
+            linkers.append(f"{str(f.relative_to(ROOT)).replace(chr(92), '/')} ({hit.group(0)[:28]})")
+
+    if taxo_off:
+        if linkers:
+            say(
+                ERR,
+                "les pages de taxonomie sont desactivees mais encore liees",
+                linkers[0],
+                "disableKinds supprime les pages : ces liens pointent vers des 404.",
+                "lire les tags depuis .Params.tags et ne pas en faire des liens.",
+                *linkers[1:3],
+            )
+        else:
+            say(OK, "taxonomies desactivees et plus aucun lien vers elles")
+        if taxo_blocked:
+            say(
+                WARN,
+                "robots.txt bloque encore des taxonomies qui n'existent plus",
+                ", ".join(taxo_blocked),
+                "regle morte, a retirer pour ne pas laisser croire a une protection.",
+            )
         return
 
-    linked = False
-    for f in template_files():
-        if 'GetTerms "tags"' in read(f) or "GetTerms \"categories\"" in read(f):
-            linked = True
-            break
-    if linked:
+    if not taxo_blocked:
+        say(OK, "robots.txt ne bloque pas les taxonomies")
+    elif linkers:
         say(
             WARN,
             "taxonomies bloquees dans robots.txt mais liees depuis les templates",
@@ -595,7 +623,7 @@ def main(argv: list[str]) -> int:
     check_version_drift()
     check_config_guards(config)
     check_theme_untouched()
-    check_indexing_coherence()
+    check_indexing_coherence(config)
     if not args.ci:
         check_build_clean()
 

@@ -238,7 +238,12 @@
 }
 
 .post-single-editorial__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; padding: 0; margin: 0; }
+/* Les pastilles ne sont plus des liens : les pages de taxonomie ne sont plus
+   generees (disableKinds dans hugo.toml). Le selecteur vise donc le <span>
+   et garde le <a> pour ne rien casser si un lien revient un jour. */
+.post-single-editorial__tags span,
 .post-single-editorial__tags a {
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.1em;

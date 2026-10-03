@@ -1,12 +1,15 @@
 User-agent: *
 Allow: /
 
-# Pages taxonomy générées (thin content) — pas d'index
-Disallow: /tags/
-Disallow: /categories/
+# Les pages de tags et de catégories ne sont plus générées du tout
+# (disableKinds dans hugo.toml), donc plus rien à bloquer ici.
+# Un Disallow serait même contre-productif : il empêche un robot de LIRE la
+# page, donc de lire un éventuel noindex qui s'y trouverait.
+
+# Page de recherche éventuelle (thin content)
 Disallow: /search/
 
-# Pages newsletter transientes — accessibles uniquement via redirects Buttondown
+# Pages newsletter transientes : accessibles uniquement via redirects Buttondown
 Disallow: /bienvenue/
 Disallow: /verification/
 
