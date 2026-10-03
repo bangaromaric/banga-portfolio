@@ -138,7 +138,7 @@ def find_misplaced_params(
 def collect_param_refs() -> dict[str, set[str]]:
     referenced: dict[str, set[str]] = {}
     for f in template_files() + theme_files():
-        text = read(f)
+        text = sans_commentaires(read(f))
         rel = str(f.relative_to(ROOT)).replace("\\", "/")
         for rx in PARAM_REFS:
             for name in rx.findall(text):
@@ -234,13 +234,35 @@ TEMPLATE_SMELLS = [
 RX_PARTIAL_CACHED = re.compile(r'partialCached\s+"[^"]+"\s+\.?[\w$]*\s*(-?\}\})')
 
 
+RX_GO_COMMENT = re.compile(r"\{\{-?\s*/\*.*?\*/\s*-?\}\}", re.S)
+
+
+def sans_commentaires(text: str) -> str:
+    """Neutralise les commentaires Go template, en gardant les numeros de ligne.
+
+    Les detecteurs lisaient le texte brut, donc un commentaire qui NOMME une API
+    obsolete pour expliquer pourquoi on ne s'en sert pas etait signale comme un
+    usage. C'est arrive des le premier cas reel : layouts/partials/post-toc.html
+    explique en commentaire que le partial de PaperMod reconstruit son arbre a
+    coups de .Scratch, et le linter l'a compte comme un appel a .Scratch.
+
+    On remplace chaque commentaire par des espaces de meme longueur, les sauts de
+    ligne conserves : les positions signalees restent exactes.
+    """
+    def blanchir(m: re.Match) -> str:
+        saut = chr(10)
+        return "".join(saut if c == saut else " " for c in m.group(0))
+
+    return RX_GO_COMMENT.sub(blanchir, text)
+
+
 def check_template_apis() -> None:
     section("APIs de template")
     hits = 0
     seen: set[tuple[str, int, str]] = set()
 
     for f in template_files():
-        text = read(f)
+        text = sans_commentaires(read(f))
         rel = str(f.relative_to(ROOT)).replace("\\", "/")
 
         for pattern, level, message in TEMPLATE_SMELLS:
@@ -286,6 +308,68 @@ def check_render_hooks() -> None:
     if hooks:
         noms = ", ".join(h.stem.replace("render-codeblock-", "") for h in hooks)
         say(NOTE, f"{len(hooks)} hook(s) de fence", noms)
+
+
+RX_TOC_PARTIAL = re.compile(r'\{\{-?\s*partial(?:Cached)?\s+"post-toc(?:\.html)?"')
+
+
+def toc_branche(src: str) -> bool:
+    """Le template appelle-t-il le partial de sommaire ?"""
+    return bool(RX_TOC_PARTIAL.search(src))
+
+
+def check_toc() -> None:
+    """Le sommaire doit rester branche sur le template des articles.
+
+    Surcharger n'est pas dupliquer (CLAUDE.md §12.8) : layouts/posts/single.html
+    remplace le template PaperMod, donc tout ce que PaperMod appelait cesse de
+    l'etre. C'est exactement ce qui est arrive au sommaire, pendant des mois :
+    showToc: true etait renseigne dans deux articles, UseHugoToc = true dans
+    hugo.toml, et aucune page n'a jamais rendu de sommaire, parce que plus
+    personne n'appelait partials/toc.html. Rien ne signalait la panne.
+
+    Ce controle verifie la chaine complete : le partial existe, et le template
+    l'appelle.
+    """
+    section("Sommaire des articles")
+
+    partial = ROOT / "layouts" / "partials" / "post-toc.html"
+    template = ROOT / "layouts" / "posts" / "single.html"
+
+    if not partial.exists():
+        say(ERR, "layouts/partials/post-toc.html absent",
+            "sans lui aucun article ne rend de sommaire")
+        return
+
+    if not template.exists():
+        say(ERR, "layouts/posts/single.html absent")
+        return
+
+    src = sans_commentaires(template.read_text(encoding="utf-8", errors="replace"))
+    if not toc_branche(src):
+        say(ERR, "layouts/posts/single.html n'appelle pas post-toc.html",
+            "le sommaire est inerte, comme avant octobre 2026",
+            "ajouter {{ partial \"post-toc.html\" . }} avant {{ .Content }}")
+        return
+
+    say(OK, "post-toc.html present et appele par posts/single.html")
+
+    # Le seuil du partial et celui du linter editorial doivent rester accordes,
+    # sinon l'audit reclame un sommaire que le template refuse d'afficher.
+    seuil_tpl = re.search(r"\$seuil\s*:=\s*(\d+)",
+                          partial.read_text(encoding="utf-8", errors="replace"))
+    audit = ROOT / ".claude" / "skills" / "seo-article" / "scripts" / "audit_article.py"
+    if seuil_tpl and audit.exists():
+        seuil_audit = re.search(r"TOC_H2_THRESHOLD\s*=\s*(\d+)",
+                                audit.read_text(encoding="utf-8", errors="replace"))
+        if seuil_audit and seuil_audit.group(1) != seuil_tpl.group(1):
+            say(WARN,
+                f"seuils desaccordes : partial {seuil_tpl.group(1)}, "
+                f"audit {seuil_audit.group(1)}",
+                "le linter reclamerait un sommaire que le template n'affiche pas")
+        elif seuil_audit:
+            say(OK, f"seuil accorde entre le partial et l'audit : "
+                    f"{seuil_tpl.group(1)} titres de niveau 2")
 
 
 # ----------------------------------------------------------------------------
@@ -588,6 +672,24 @@ def selftest() -> int:
             print(f"  ECHEC partialCached : {source}")
             failures += 1
 
+    # Fixture 3 : le sommaire debranche du template. Panne reellement vecue sur
+    # ban.ga jusqu'en octobre 2026 : showToc renseigne, UseHugoToc actif, et
+    # aucune page ne rendait de sommaire faute d'appel au partial.
+    cas_toc = [
+        ('{{ partial "post-toc.html" . }}', True),
+        ('{{- partial "post-toc" . -}}', True),
+        ('{{ partialCached "post-toc.html" . .Page }}', True),
+        ('{{ .Content }}', False),
+        ('{{ partial "toc.html" . }}', False),
+    ]
+    for source, attendu in cas_toc:
+        trouve = toc_branche(source)
+        if trouve == attendu:
+            print(f"  ok    sommaire : {'detecte' if attendu else 'ignore'} -> {source[:46]}")
+        else:
+            print(f"  ECHEC sommaire : {source}")
+            failures += 1
+
     print(f"\n  {failures} echec(s)")
     return 1 if failures else 0
 
@@ -620,6 +722,7 @@ def main(argv: list[str]) -> int:
     check_content_frontmatter()
     check_template_apis()
     check_render_hooks()
+    check_toc()
     check_version_drift()
     check_config_guards(config)
     check_theme_untouched()

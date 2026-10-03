@@ -42,6 +42,11 @@
     {{- end }}
     {{- end }}
 
+    {{- /* Sommaire. Appel non cache et non conditionne par le front matter : le
+         partial decide lui-meme a partir du nombre de titres. Voir
+         layouts/partials/post-toc.html pour la regle et son historique. */ -}}
+    {{ partial "post-toc.html" . }}
+
     <div class="post-single-editorial__body">
         {{ .Content }}
     </div>

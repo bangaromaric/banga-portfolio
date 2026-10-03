@@ -1,0 +1,58 @@
+{{- /*
+  Sommaire d'un article. Partial maison, et non themes/PaperMod/layouts/partials/toc.html :
+  celui de PaperMod reconstruit l'arborescence a coups de findRE et de .Scratch,
+  alors que .Fragments.Headings donne deja l'arbre, avec les memes id que les
+  ancres posees sur les titres par Goldmark.
+
+  OBLIGATOIRE, et volontairement pas laisse au bon vouloir du front matter : le
+  sommaire s'affiche des que l'article atteint SEUIL titres de niveau 2. Un
+  showToc: true dans le front matter le force en dessous du seuil ; un
+  showToc: false l'interdit, mais le linter editorial le refuse au-dela de
+  1 500 mots. L'histoire de ce choix : showToc: true etait renseigne dans deux
+  articles et n'a jamais rien rendu, parce que layouts/posts/single.html
+  surcharge le template PaperMod et n'appelait aucun partial de sommaire. Le
+  parametre avait l'air actif et etait inerte, exactement le piege decrit en
+  §12.8 de CLAUDE.md. scripts/hugo_doctor.py verifie desormais que ce partial
+  est bien appele, pour que la panne ne puisse pas revenir en silence.
+
+  Niveau 2 uniquement. Sur un article de dix-huit sections, ajouter les H3
+  doublerait la liste et ferait perdre la vue d'ensemble, qui est tout l'interet
+  du sommaire. Le lecteur atterrit sur l'etape, les sous-titres sont a portee de
+  regard.
+*/ -}}
+
+{{- $seuil := 6 -}}
+{{- /* .Fragments.Headings enveloppe l'arbre dans un noeud racine de niveau 0,
+     dont les enfants sont les H2. On balaie donc les deux niveaux plutot que de
+     supposer l'un ou l'autre : selon le contenu, un H2 peut se presenter comme
+     racine ou comme enfant de la racine synthetique. */ -}}
+{{- $titres := slice -}}
+{{- range .Fragments.Headings -}}
+  {{- if eq .Level 2 -}}
+    {{- $titres = $titres | append . -}}
+  {{- end -}}
+  {{- range .Headings -}}
+    {{- if eq .Level 2 -}}
+      {{- $titres = $titres | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $demande := .Params.showToc -}}
+{{- $afficher := and (ne $demande false) (or (eq $demande true) (ge (len $titres) $seuil)) -}}
+
+{{- if and $afficher $titres -}}
+<nav class="post-toc" aria-labelledby="post-toc-title">
+  <details open>
+    <summary class="post-toc__summary">
+      <span id="post-toc-title" class="post-toc__label">Sommaire</span>
+      <span class="post-toc__count">{{ len $titres }} sections</span>
+    </summary>
+    <ol class="post-toc__list">
+      {{- range $titres }}
+      <li class="post-toc__item"><a href="#{{ .ID }}">{{ .Title | plainify }}</a></li>
+      {{- end }}
+    </ol>
+  </details>
+</nav>
+{{- end -}}

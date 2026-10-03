@@ -1,0 +1,141 @@
+/* ============================================================
+   Sommaire d'article (.post-toc), rendu par layouts/partials/post-toc.html.
+
+   Zero valeur en dur : uniquement des tokens de 00-tokens.css, donc le mode
+   sombre suit sans bloc .dark dedie (CLAUDE.md §11.8).
+
+   Barre laterale OCHRE, comme les figures de 14-diagrams.css. Sur ce site le
+   terracotta signifie "code ou citation", et blockquote comme pre le portent
+   deja. Le sommaire n'est ni l'un ni l'autre : c'est un appareil de lecture,
+   au meme titre qu'une legende de figure.
+   ============================================================ */
+
+.post-toc {
+    max-width: 720px;
+    margin: var(--s-7) auto var(--s-8);
+    padding: var(--s-4) var(--s-5);
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--ochre);
+    border-radius: 3px;
+}
+
+/* Le marqueur natif de <summary> est remplace par un chevron maison, pour
+   qu'il tourne avec l'etat ouvert sans dependre du rendu du navigateur. */
+.post-toc summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-4);
+}
+
+.post-toc summary::-webkit-details-marker {
+    display: none;
+}
+
+.post-toc__label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-2);
+}
+
+.post-toc__label::before {
+    content: "";
+    display: inline-block;
+    width: 0.52em;
+    height: 0.52em;
+    margin-right: 0.9em;
+    border-right: 1.5px solid var(--ochre);
+    border-bottom: 1.5px solid var(--ochre);
+    transform: translateY(-0.15em) rotate(45deg);
+    transition: transform 200ms var(--ease-out-soft);
+}
+
+.post-toc details[open] .post-toc__label::before {
+    transform: translateY(0.05em) rotate(-135deg);
+}
+
+.post-toc__count {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    white-space: nowrap;
+}
+
+.post-toc__list {
+    margin: var(--s-4) 0 0;
+    padding: 0 0 0 var(--s-5);
+    counter-reset: toc;
+    list-style: none;
+}
+
+.post-toc__item {
+    counter-increment: toc;
+    position: relative;
+    margin: 0 0 var(--s-2);
+    line-height: 1.45;
+}
+
+/* Numerotation en mono dans la marge : elle donne la profondeur de l'article
+   d'un coup d'oeil, ce qu'une puce ne fait pas. */
+.post-toc__item::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: calc(-1 * var(--s-5));
+    top: 0.15em;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+}
+
+.post-toc__item a {
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    background-image: linear-gradient(var(--rule-strong), var(--rule-strong));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    transition: color 200ms var(--ease-out-soft),
+                background-size 200ms var(--ease-out-soft);
+}
+
+.post-toc__item a:hover {
+    color: var(--terracotta);
+    background-image: linear-gradient(var(--terracotta), var(--terracotta));
+    background-size: 100% 2px;
+}
+
+/* Deux colonnes sur grand ecran : dix-huit sections tiennent alors sans
+   defilement imbrique, qui est toujours penible dans une page. La borne reste
+   comme garde-fou pour un article qui depasserait la vingtaine de sections. */
+@media (min-width: 721px) {
+    .post-toc__list {
+        max-height: 30rem;
+        overflow-y: auto;
+        columns: 2;
+        column-gap: var(--s-6);
+    }
+
+    .post-toc__item {
+        break-inside: avoid;
+    }
+}
+
+@media (max-width: 720px) {
+    .post-toc {
+        margin: var(--s-6) auto var(--s-7);
+    }
+
+    .post-toc__list {
+        max-height: 22rem;
+        overflow-y: auto;
+    }
+}
