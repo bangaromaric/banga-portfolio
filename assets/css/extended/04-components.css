@@ -34,6 +34,12 @@
 .btn::after { content: " →"; transition: transform 200ms; }
 .btn:hover::after { transform: translateX(3px); }
 
+/* `.no-arrow` supprime aussi la fleche automatique du bouton, conformement a
+   CLAUDE.md §11.3. La regle manquait : les boutons dont le libelle portait deja
+   une fleche (« Code source ↗ », « Mes services → ») en affichaient deux.
+   A reserver aux boutons qui ecrivent leur propre fleche dans le libelle. */
+.btn.no-arrow::after { content: none; }
+
 .tag-pill {
     display: inline-block;
     font-family: var(--font-mono);

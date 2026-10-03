@@ -126,3 +126,9 @@
     inset: 0;
     background-image: none !important;
 }
+
+/* Chapo d'une page de liste. Remplace un style= inline : .prose porte deja
+   max-width, seule la respiration verticale etait a ajouter. */
+.list-page__intro {
+    padding: var(--s-6) 0;
+}

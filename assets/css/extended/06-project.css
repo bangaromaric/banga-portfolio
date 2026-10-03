@@ -213,3 +213,12 @@
     gap: var(--s-3);
     flex-wrap: wrap;
 }
+
+/* Lien de retour en bas d'une fiche projet. Remplace un style= inline. */
+.project-single__back {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    margin-top: var(--s-7);
+}

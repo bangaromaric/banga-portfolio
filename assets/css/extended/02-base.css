@@ -46,8 +46,11 @@ hr, .rule {
     border-radius: 1px;
 }
 
-a[href^="http"]:not(.no-arrow)::after,
-a[href^="mailto"]:not(.no-arrow)::after {
+/* Les boutons sont exclus : ils gerent leur propre fleche via .btn::after
+   (04-components.css). Sans ce :not(.btn), un bouton mailto ou externe cumulait
+   la fleche du lien et celle du bouton. */
+a[href^="http"]:not(.no-arrow):not(.btn)::after,
+a[href^="mailto"]:not(.no-arrow):not(.btn)::after {
     content: " ↗";
     font-family: var(--font-mono);
     font-size: 0.78em;

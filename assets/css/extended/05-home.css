@@ -359,3 +359,11 @@
     letter-spacing: 0.05em;
     color: var(--ink);
 }
+
+/* Lien de carte etendu a toute la carte, pour que l'ensemble soit cliquable
+   sans imbriquer de balise <a>. .project-card porte deja position: relative.
+   Remplace un style="position:absolute;inset:0;" inline. */
+.project-card__link {
+    position: absolute;
+    inset: 0;
+}
