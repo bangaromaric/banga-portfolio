@@ -540,6 +540,7 @@ Mettre un load balancer devant Cloud Run, ça se décide une fois et ça se vit 
 - 🧭 **Consulting & audit** : répondre à un questionnaire de sécurité partenaire sans refaire toute votre infrastructure. [Discutons d'un projet](mailto:bangaromaric@gmail.com)
 - 📖 **Aller plus loin** : [« Spring Native + Cloud Run : cold-start ÷18, RAM ÷3 »]({{< ref "/posts/spring-native-cloud-run" >}}) (l'épisode précédent, qui déploie le service exposé ici) et [« Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith »]({{< ref "/posts/architecture-ia-spring-modulith" >}}) (le pendant architectural, côté code).
 - 🗂️ **Cas concret** : [MboloPay]({{< ref "/projects/mbolopay" >}}), le mobile money pédagogique dont les contextes bornés se prêtent bien aux URL masks décrits plus haut.
+- 🔐 **Second cas concret** : [Pli]({{< ref "/projects/pli" >}}), un service Go exposé sous son propre domaine, où la politique TLS n'a rien de théorique puisque le produit tout entier repose sur une promesse de confidentialité.
 - 🌍 **Communauté** : [GDG Libreville](/gdg/), où ce genre de soirée de dépannage finit souvent en atelier.
 
 *Si tu dois toi aussi passer tes services Cloud Run derrière un load balancer, ou répondre au questionnaire de sécurité d'un partenaire, écris-moi via [ban.ga](https://ban.ga/). Mbolo.*

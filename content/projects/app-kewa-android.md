@@ -13,7 +13,7 @@ technologies: ["Android", "Kotlin", "Java", "Firebase", "Material Design"]
 appType: "MobileApplication"
 playstore: "https://play.google.com/store/apps/details?id=ga.aninf.examen"
 featured: false
-weight: 3
+weight: 4
 showToc: false
 ---
 

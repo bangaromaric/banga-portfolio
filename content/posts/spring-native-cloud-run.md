@@ -352,6 +352,7 @@ MOUSSAVOU a poussé son MVP natif en prod. Cold-start mesuré : 187 ms. Facture 
 - **Liberica NIK** : [bell-sw.com/pages/downloads/native-image-kit/](https://bell-sw.com/pages/downloads/native-image-kit/) — la distribution GraalVM que j'utilise sous Windows.
 - **Architecture sous-jacente** : pour le DDD + Hexagonal + Spring Modulith qui structure MboloPay, voir [*« Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith »*]({{< ref "/posts/architecture-ia-spring-modulith" >}}) — l'article précédent où MOUSSAVOU apprend à modéliser son domaine.
 - **Fiche projet MboloPay** : [/projects/mbolopay/]({{< ref "/projects/mbolopay" >}}) — résumé technique, stack complète, démo en ligne.
+- **Le contrepoint, sans GraalVM** : [Pli]({{< ref "/projects/pli" >}}), un service Go qui démarre en millisecondes et tient dans un conteneur de 44 Mo, sans aucune compilation native à entretenir. Le natif rattrape la JVM, il ne rattrape pas un langage qui n'a jamais eu ce problème.
 
 ---
 
