@@ -1,5 +1,5 @@
 ---
-title: "L'IA ne remplace pas les développeurs — elle dissout ce qui les unissait"
+title: "L'IA ne remplace pas les développeurs, elle dissout ce qui les unissait"
 heroTitle: "L'IA et la [division silencieuse] des équipes"
 date: 2026-06-03
 draft: false
@@ -11,8 +11,8 @@ slug: "ia-division-developpeurs"
 showToc: false
 cover:
     image: "/images/ia-division-developpeurs-cover.jpg"
-    alt: "Deux développeurs africains se faisant face à un bureau partagé scindé par une ligne, l'IA circulant entre leurs écrans sous forme de réseau neuronal et de circuits — la division silencieuse des équipes, BANGA Romaric"
-    caption: "« L'IA ne te remplace pas. Un collègue le fera. » — la division silencieuse, en une image"
+    alt: "Deux développeurs africains se faisant face à un bureau partagé scindé par une ligne, l'IA circulant entre leurs écrans sous forme de réseau neuronal et de circuits : la division silencieuse des équipes, BANGA Romaric"
+    caption: "« L'IA ne te remplace pas. Un collègue le fera. » : la division silencieuse, en une image"
 ---
 
 Lundi matin, Libreville. L'open-space est encore à moitié vide, la clim met du temps à rafraîchir la pièce, et Ndong ouvre le dépôt du projet avant même d'avoir touché à son café. Le sprint prévoyait qu'il construise trois endpoints cette semaine. Sa zone à lui, le backend, son métier depuis sept ans. Ils sont déjà là. Commités pendant le week-end. Signés Mavoungou, le référent frontend de l'équipe. Avec l'IA.
@@ -98,7 +98,7 @@ La réponse ne dépend pas de la machine. Elle dépend de nous, et de ce que les
 
 La bonne nouvelle de cet essai (« la seule collaboration qui survivra est celle qu'on choisit ») ne se décrète pas, elle s'outille. C'est concrètement ce que je fais avec les équipes, ici au Gabon et ailleurs en zone francophone :
 
-- 🎓 **Formation entreprise** — structurer le code généré par l'IA (DDD, hexagonal, tests d'architecture) pour que les « 20 % » restent visibles, même quand l'IA produit les 80 % en un clic. [Voir les formats →](/about/#services)
-- 🧭 **Consulting & audit** — recomposer une organisation où l'IA libère du temps pour l'architecture et le métier, au lieu de fragmenter l'équipe. [Discutons d'un projet](mailto:bangaromaric@gmail.com)
-- 📖 **Aller plus loin** — [Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith]({{< ref "/posts/architecture-ia-spring-modulith" >}}), le pendant technique de cet essai.
-- 🗂️ **Cas concret** — [MboloPay]({{< ref "/projects/mbolopay" >}}), où la logique métier Airtel/Moov est modélisée à la main, pas devinée par l'IA.
+- 🎓 **Formation entreprise** : structurer le code généré par l'IA (DDD, hexagonal, tests d'architecture) pour que les « 20 % » restent visibles, même quand l'IA produit les 80 % en un clic. [Voir les formats →](/about/#services)
+- 🧭 **Consulting & audit** : recomposer une organisation où l'IA libère du temps pour l'architecture et le métier, au lieu de fragmenter l'équipe. [Discutons d'un projet](mailto:bangaromaric@gmail.com)
+- 📖 **Aller plus loin** : [Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith]({{< ref "/posts/architecture-ia-spring-modulith" >}}), le pendant technique de cet essai.
+- 🗂️ **Cas concret** : [MboloPay]({{< ref "/projects/mbolopay" >}}), où la logique métier Airtel/Moov est modélisée à la main, pas devinée par l'IA.

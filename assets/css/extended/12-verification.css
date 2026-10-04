@@ -1,7 +1,7 @@
-/* Page /verification/ — attente post-form, avant double opt-in.
+/* Page /verification/, attente post-form, avant double opt-in.
    Cible : visiteur qui vient de soumettre son email à Mbolo Letter.
    Voir layouts/_default/verification.html.
-   UX : Single Task UI — focus laser sur l'action "aller cliquer le lien email".
+   UX : Single Task UI : focus laser sur l'action "aller cliquer le lien email".
    Respect strict du design system §11. */
 
 .verification {
@@ -48,7 +48,7 @@
     margin: 0;
 }
 
-/* ─── STATUS DOT — pulsing pattern (§11.3 availability) ── */
+/* ─── STATUS DOT : pulsing pattern (§11.3 availability) ── */
 
 .verification__status {
     display: inline-flex;
@@ -88,7 +88,7 @@
     .verification__status-dot { animation: none; }
 }
 
-/* ─── INSTRUCTION — la phrase clé ──────────────────────── */
+/* ─── INSTRUCTION : la phrase clé ──────────────────────── */
 
 .verification__instruction {
     margin: var(--s-5) 0 var(--s-8);
@@ -124,7 +124,7 @@
     margin: 0 0 var(--s-5);
 }
 
-/* ─── INBOX PROVIDERS — grid 2x2 ───────────────────────── */
+/* ─── INBOX PROVIDERS : grid 2x2 ───────────────────────── */
 
 .verification__providers-grid {
     display: grid;
@@ -180,7 +180,7 @@
     outline-offset: 3px;
 }
 
-/* ─── TROUBLESHOOTING — liste sobre ────────────────────── */
+/* ─── TROUBLESHOOTING : liste sobre ────────────────────── */
 
 .verification__help-list {
     list-style: none;

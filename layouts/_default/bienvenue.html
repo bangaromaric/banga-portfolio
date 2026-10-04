@@ -2,7 +2,7 @@
     Layout : page de bienvenue post-confirmation Mbolo Letter.
     Cible : visiteurs qui viennent de cliquer le lien de double opt-in Buttondown.
     Configurée comme cible du redirect "After confirming" dans Buttondown.
-    Volontairement noindex + hors sitemap + hors menu — accessible uniquement via le redirect.
+    Volontairement noindex + hors sitemap + hors menu, accessible uniquement via le redirect.
 */ -}}
 {{ define "main" }}
 {{- $p := . -}}
@@ -87,18 +87,18 @@
     </section>
 
     {{ partial "share-buttons" (dict
-        "title" "Mbolo Letter — newsletter Spring, Cloud & IA générative depuis Libreville"
+        "title" "Mbolo Letter : newsletter Spring, Cloud & IA générative depuis Libreville"
         "url" "https://ban.ga/newsletter/"
         "placement" "bienvenue"
         "tweetText" "J'ai découvert Mbolo Letter, une newsletter technique francophone sur Spring, Cloud et IA générative écrite depuis Libreville par @bangaromaric"
-        "waText" "Je te recommande Mbolo Letter, une newsletter technique francophone sur Spring/Cloud/IA depuis Libreville — https://ban.ga/newsletter/"
+        "waText" "Je te recommande Mbolo Letter, une newsletter technique francophone sur Spring/Cloud/IA depuis Libreville : https://ban.ga/newsletter/"
         "emailSubject" "Newsletter à découvrir : Mbolo Letter"
-        "emailBody" "Salut,\n\nJe pense que cette newsletter technique va te plaire — Spring, Cloud, IA générative, écrite depuis Libreville par Romaric BANGA :\n\nhttps://ban.ga/newsletter/\n\n1-2 emails par mois, désinscription en un clic, aucun spam.")
+        "emailBody" "Salut,\n\nJe pense que cette newsletter technique va te plaire : Spring, Cloud, IA générative, écrite depuis Libreville par Romaric BANGA :\n\nhttps://ban.ga/newsletter/\n\n1-2 emails par mois, désinscription en un clic, aucun spam.")
     }}
 
     <footer class="bienvenue__closing">
-        <p class="bienvenue__closing-line">Pour me répondre directement, tu peux toujours répondre à n'importe quel email de Mbolo Letter — ça atterrit dans ma vraie boîte. Je lis tout.</p>
-        <p class="bienvenue__signature">— Romaric · <em>Mbolo.</em></p>
+        <p class="bienvenue__closing-line">Pour me répondre directement, tu peux toujours répondre à n'importe quel email de Mbolo Letter, ça atterrit dans ma vraie boîte. Je lis tout.</p>
+        <p class="bienvenue__signature">Romaric · <em>Mbolo.</em></p>
     </footer>
 
 </article>

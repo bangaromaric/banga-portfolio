@@ -2,7 +2,7 @@
     Layout : page d'attente post-soumission form Mbolo Letter (pre-double-opt-in).
     Cible : visiteur qui vient de saisir son email mais n'a PAS encore cliqué le lien de confirmation.
     Configurée comme cible du redirect "After subscribing" dans Buttondown.
-    UX : Single Task UI — TOUT pousse vers une seule action (cliquer le lien dans l'email).
+    UX : Single Task UI : TOUT pousse vers une seule action (cliquer le lien dans l'email).
     Volontairement noindex + hors sitemap + hors menu.
 */ -}}
 {{ define "main" }}
@@ -24,7 +24,7 @@
     </div>
 
     <section class="verification__instruction">
-        <p>Clique le lien dans l'email pour finaliser ton inscription à <strong>Mbolo Letter</strong>. Il arrive dans les prochaines secondes — parfois jusqu'à <strong>5 minutes</strong> selon ton fournisseur.</p>
+        <p>Clique le lien dans l'email pour finaliser ton inscription à <strong>Mbolo Letter</strong>. Il arrive dans les prochaines secondes, parfois jusqu'à <strong>5 minutes</strong> selon ton fournisseur.</p>
     </section>
 
     <section class="verification__providers" aria-labelledby="verification-providers-title">
@@ -55,12 +55,12 @@
             <li>Vérifie le dossier <strong>Promotions</strong> (Gmail) ou <strong>Indésirables</strong> (Outlook).</li>
             <li>Cherche le sujet <em>« Confirm your subscription to Mbolo Letter »</em> ou l'expéditeur <code>mbolo@newsletter.ban.ga</code>.</li>
             <li>Ajoute <code>mbolo@newsletter.ban.ga</code> à tes contacts pour que les futurs envois arrivent en boîte principale.</li>
-            <li>Si après 10 minutes toujours rien, écris-moi à <a href="mailto:bangaromaric@gmail.com?subject=Email%20de%20confirmation%20Mbolo%20Letter%20non%20re%C3%A7u">bangaromaric@gmail.com</a> — je vérifie côté Buttondown.</li>
+            <li>Si après 10 minutes toujours rien, écris-moi à <a href="mailto:bangaromaric@gmail.com?subject=Email%20de%20confirmation%20Mbolo%20Letter%20non%20re%C3%A7u">bangaromaric@gmail.com</a>, je vérifie côté Buttondown.</li>
         </ul>
     </section>
 
     <footer class="verification__closing">
-        <p class="verification__signature">— Romaric&nbsp;·&nbsp;<em>Mbolo.</em></p>
+        <p class="verification__signature">Romaric&nbsp;·&nbsp;<em>Mbolo.</em></p>
     </footer>
 
 </article>

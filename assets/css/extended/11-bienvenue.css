@@ -1,4 +1,4 @@
-/* Page /bienvenue/ — post-confirmation Mbolo Letter.
+/* Page /bienvenue/, post-confirmation Mbolo Letter.
    Cible : visiteurs juste confirmés par double opt-in Buttondown.
    Voir layouts/_default/bienvenue.html.
    Respect strict du design system §11 : tokens uniquement, Fraunces + Newsreader + JetBrains Mono,
@@ -88,7 +88,7 @@
     color: var(--ink);
 }
 
-/* ─── ARTICLES — liste numérotée editorial ─────────────── */
+/* ─── ARTICLES : liste numérotée editorial ─────────────── */
 
 .bienvenue__article-list {
     list-style: none;
@@ -171,7 +171,7 @@
     border-bottom: none;
 }
 
-/* ─── DOORS — 3 cards parallèles ───────────────────────── */
+/* ─── DOORS : 3 cards parallèles ───────────────────────── */
 
 .bienvenue__doors-grid {
     display: grid;
@@ -259,7 +259,7 @@
     color: var(--terracotta-hot);
 }
 
-/* ─── SHARE INTRO — pitch au-dessus du partial share-buttons ── */
+/* ─── SHARE INTRO : pitch au-dessus du partial share-buttons ── */
 
 .bienvenue__share-pitch {
     font-size: 1.02rem;

@@ -1,5 +1,5 @@
 ---
-title: "Romaric BANGA — Développeur Spring Certifié & GCP Cloud Engineer | Gabon"
+title: "Romaric BANGA, développeur Spring certifié & GCP Cloud Engineer | Gabon"
 description: "Lead Spring developer à l'ANINF, VMware Spring Certified Professional 2024 v2, Google Cloud Associate Engineer, créateur de l'Assistant IA Gabonais, organisateur du Google Developers Group Libreville."
 date: 2025-09-01
 kicker: "§ À propos"
@@ -16,40 +16,40 @@ sidebarNav:
 
 ## Présentation {#presentation}
 
-Je suis développeur Spring depuis 2014, basé à Libreville. Mon métier au quotidien : concevoir et maintenir des systèmes Spring qui servent l'administration gabonaise — chez l'[Agence Nationale d'Infrastructures Numériques et de Fréquences](https://aninf.ga/), où je travaille depuis 2017.
+Je suis développeur Spring depuis 2014, basé à Libreville. Mon métier au quotidien : concevoir et maintenir des systèmes Spring qui servent l'administration gabonaise, chez l'[Agence Nationale d'Infrastructures Numériques et de Fréquences](https://aninf.ga/), où je travaille depuis 2017.
 
 J'ai trois préoccupations qui guident chaque projet. **Que ce qui part en production tienne dans le temps.** Que les équipes locales puissent reprendre et faire évoluer le code après moi. Et que les outils que nous construisons servent des gens, pas seulement des cahiers des charges.
 
-À côté de l'ANINF, je porte deux engagements visibles : l'**Assistant IA Gabonais** — un prototype Spring AI pour rendre les démarches administratives intelligibles — et l'animation du **Google Developers Group Libreville**, la plus grande communauté tech du Gabon (400+ membres actifs).
+À côté de l'ANINF, je porte deux engagements visibles : l'**Assistant IA Gabonais** (un prototype Spring AI pour rendre les démarches administratives intelligibles) et l'animation du **Google Developers Group Libreville**, la plus grande communauté tech du Gabon (400+ membres actifs).
 
 ## Parcours {#parcours}
 
 <ul class="timeline">
   <li>
-    <div class="timeline__period">2017 — aujourd'hui · 7+ ans</div>
-    <h3 class="timeline__role">Lead Developer Spring — <span class="timeline__company">ANINF</span></h3>
+    <div class="timeline__period">2017 à aujourd'hui · 7+ ans</div>
+    <h3 class="timeline__role">Lead Developer Spring · <span class="timeline__company">ANINF</span></h3>
     <p class="timeline__detail">Architecture microservices Spring Boot pour applications gouvernementales. ETL Talend (base à base). Maintenance et évolution de KEWA Android (100k+ téléchargements). Systèmes critiques : gestion des fréquences nationales, parc informatique GLPI.</p>
   </li>
   <li>
-    <div class="timeline__period">2016 — 2017</div>
-    <h3 class="timeline__role">Responsable IT — <span class="timeline__company">Jobs Conseil</span></h3>
+    <div class="timeline__period">2016-2017</div>
+    <h3 class="timeline__role">Responsable IT · <span class="timeline__company">Jobs Conseil</span></h3>
     <p class="timeline__detail">Infrastructure IT, plans techniques 2D, affichage dynamique. Support et formation des équipes internes.</p>
   </li>
   <li>
     <div class="timeline__period">2016 · Mission</div>
-    <h3 class="timeline__role">DevOps & Mobile — <span class="timeline__company">Campus Numérique</span></h3>
+    <h3 class="timeline__role">DevOps & Mobile · <span class="timeline__company">Campus Numérique</span></h3>
     <p class="timeline__detail">Passerelle SMS (Kannel), MPLS open source, application Android + serveur de messagerie Linux.</p>
   </li>
   <li>
     <div class="timeline__period">2015 · Mission</div>
-    <h3 class="timeline__role">Full-Stack Developer — <span class="timeline__company">J&amp;D Consulting</span></h3>
+    <h3 class="timeline__role">Full-Stack Developer · <span class="timeline__company">J&amp;D Consulting</span></h3>
     <p class="timeline__detail">Applications métier : gestion de flotte automobile avec notifications SMS/Email, centre d'appel avec intégrations systèmes.</p>
   </li>
 </ul>
 
 ## Credentials {#credentials}
 
-Trois certifications officielles qui valident la maîtrise du stack Spring, du cloud Google, et du développement Android natif. Toutes attribuées par les éditeurs eux-mêmes — VMware (Broadcom) et Google.
+Trois certifications officielles qui valident la maîtrise du stack Spring, du cloud Google, et du développement Android natif. Toutes attribuées par les éditeurs eux-mêmes, VMware (Broadcom) et Google.
 
 <div class="credentials">
 
@@ -60,7 +60,7 @@ Trois certifications officielles qui valident la maîtrise du stack Spring, du c
     <div class="credential-card__body">
       <span class="credential-card__org">VMware · Broadcom</span>
       <h3 class="credential-card__title">Spring Certified Professional 2024 [v2]</h3>
-      <p class="credential-card__desc">Validation officielle de l'expertise Spring et Spring Boot — Actuator, AOP, auto-configuration, component scanning, sécurité, data access et observabilité.</p>
+      <p class="credential-card__desc">Validation officielle de l'expertise Spring et Spring Boot : Actuator, AOP, auto-configuration, component scanning, sécurité, data access et observabilité.</p>
     </div>
     <div class="credential-card__meta">
       <span class="credential-card__date">Janvier 2026</span>
@@ -75,7 +75,7 @@ Trois certifications officielles qui valident la maîtrise du stack Spring, du c
     <div class="credential-card__body">
       <span class="credential-card__org">Google Cloud</span>
       <h3 class="credential-card__title">Associate Cloud Engineer</h3>
-      <p class="credential-card__desc">Architecture, déploiement, opération et maintenance d'applications et de services sur Google Cloud Platform — Compute, networking, stockage, IAM, observabilité.</p>
+      <p class="credential-card__desc">Architecture, déploiement, opération et maintenance d'applications et de services sur Google Cloud Platform : Compute, networking, stockage, IAM, observabilité.</p>
     </div>
     <div class="credential-card__meta">
       <span class="credential-card__date">Juin 2025</span>
@@ -89,8 +89,8 @@ Trois certifications officielles qui valident la maîtrise du stack Spring, du c
     </div>
     <div class="credential-card__body">
       <span class="credential-card__org">Google</span>
-      <h3 class="credential-card__title">Associate Android Developer — Kotlin</h3>
-      <p class="credential-card__desc">Conception, développement et publication d'applications Android natives en Kotlin — UI, persistance Room, navigation, tests instrumentés, intégration Firebase.</p>
+      <h3 class="credential-card__title">Associate Android Developer · Kotlin</h3>
+      <p class="credential-card__desc">Conception, développement et publication d'applications Android natives en Kotlin : UI, persistance Room, navigation, tests instrumentés, intégration Firebase.</p>
     </div>
     <div class="credential-card__meta">
       <span class="credential-card__date">Mars 2021</span>
@@ -100,13 +100,13 @@ Trois certifications officielles qui valident la maîtrise du stack Spring, du c
 
 </div>
 
-<p class="credentials__aggregate"><em>Profil agrégé sur <a href="https://g.dev/romaricbanga" rel="noopener">g.dev/romaricbanga ↗</a> — toutes mes certifications Google, badges GDG et contributions communauté en un seul endroit.</em></p>
+<p class="credentials__aggregate"><em>Profil agrégé sur <a href="https://g.dev/romaricbanga" rel="noopener">g.dev/romaricbanga ↗</a>, toutes mes certifications Google, badges GDG et contributions communauté en un seul endroit.</em></p>
 
 ## Expertise {#expertise}
 
 ### Formation
 
-- **Master Systèmes d'Information** (2022) — conception des systèmes d'information
+- **Master Systèmes d'Information** (2022) : conception des systèmes d'information
 - **Licence Pro Bases de données & Réseaux** (2016)
 - **DUT Informatique de Gestion** (2015)
 
@@ -126,13 +126,13 @@ Trois certifications officielles qui valident la maîtrise du stack Spring, du c
 J'organise le [Google Developers Group Libreville](https://gdg.community.dev/gdg-libreville/) depuis 2021. Notre mission : démocratiser l'accès aux technologies Google et faire grandir l'écosystème tech en Afrique centrale.
 
 - **400+ développeurs** actifs dans la communauté
-- **25+ événements** organisés depuis 2021 — meetups, workshops, hackathons, study jams
+- **25+ événements** organisés depuis 2021 : meetups, workshops, hackathons, study jams
 - **DevFest Libreville 2023** : 400+ participants, plus grand événement tech du pays cette année-là
 - **Women Techmakers** : programme de mentorat avec 50+ développeuses accompagnées
 - Reconnu **Partner of the Year** par le programme Google for Developers
 - Couverture régulière par Gabon Télévision, *L'Union*, *Africa Tech News*
 
-> *« GDG Libreville transforme l'écosystème tech gabonais. »* — Dr. Pascaline Mba, Ministre de l'Économie Numérique
+> *« GDG Libreville transforme l'écosystème tech gabonais. »* (Dr. Pascaline Mba, Ministre de l'Économie Numérique)
 
 ## Services {#services}
 
@@ -142,7 +142,7 @@ Architecture d'applications Spring, audit de code, migration cloud, mise en plac
 
 ### Formation entreprise
 
-Sessions sur mesure — Spring Framework, IA générative avec Spring AI, bonnes pratiques GCP, sécurité Keycloak. Formats 1 à 5 jours, en présentiel à Libreville ou à distance. *Public visé : équipes de développeurs intermédiaires à seniors.*
+Sessions sur mesure : Spring Framework, IA générative avec Spring AI, bonnes pratiques GCP, sécurité Keycloak. Formats 1 à 5 jours, en présentiel à Libreville ou à distance. *Public visé : équipes de développeurs intermédiaires à seniors.*
 
 ### Conférences et talks
 
@@ -154,9 +154,9 @@ Le plus simple est l'email. Je réponds sous 48h ouvrées.
 
 {{< newsletter-signup placement="about" >}}
 
-- **Email** — [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com?subject=Collaboration%20technique)
-- **LinkedIn** — [linkedin.com/in/romaric-banga](https://www.linkedin.com/in/romaric-banga/)
-- **GitHub** — [github.com/bangaromaric](https://github.com/bangaromaric)
-- **Facebook** — [Romaric Banga](https://www.facebook.com/profile.php?id=61585782202218)
-- **Profil Google Developer** — [g.dev/romaricbanga](https://g.dev/romaricbanga)
-- **Localisation** — Libreville, Gabon (UTC+1)
+- **Email** : [bangaromaric@gmail.com](mailto:bangaromaric@gmail.com?subject=Collaboration%20technique)
+- **LinkedIn** : [linkedin.com/in/romaric-banga](https://www.linkedin.com/in/romaric-banga/)
+- **GitHub** : [github.com/bangaromaric](https://github.com/bangaromaric)
+- **Facebook** : [Romaric Banga](https://www.facebook.com/profile.php?id=61585782202218)
+- **Profil Google Developer** : [g.dev/romaricbanga](https://g.dev/romaricbanga)
+- **Localisation** : Libreville, Gabon (UTC+1)

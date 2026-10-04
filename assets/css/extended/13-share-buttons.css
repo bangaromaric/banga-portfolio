@@ -1,7 +1,7 @@
-/* Boutons de partage — partial layouts/partials/share-buttons.html
+/* Boutons de partage : partial layouts/partials/share-buttons.html
    Utilisé en bas d'article (posts/single.html) et sur /bienvenue/.
    5 plateformes : LinkedIn, X, WhatsApp, Email, Copy link.
-   Respect strict du design system §11 — tokens, mono labels, terracotta accent. */
+   Respect strict du design system §11 : tokens, mono labels, terracotta accent. */
 
 .post-share {
     max-width: 720px;

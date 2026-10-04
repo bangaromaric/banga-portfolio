@@ -17,6 +17,6 @@ build:
 
 Tu viens de confirmer ton inscription. C'est fait, c'est officiel.
 
-Tu vas recevoir un email à chaque nouvel article publié sur ban.ga, plus une lettre de fond une fois par mois quand l'occasion se présente — retours de mission anonymisés, choses qu'on ne dit pas dans les articles publics.
+Tu vas recevoir un email à chaque nouvel article publié sur ban.ga, plus une lettre de fond une fois par mois quand l'occasion se présente : retours de mission anonymisés, choses qu'on ne dit pas dans les articles publics.
 
 En attendant le prochain envoi, voici quelques pistes pour commencer.

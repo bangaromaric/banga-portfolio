@@ -1,5 +1,5 @@
 ---
-title: "Spring Native + Cloud Run — cold-start ÷18, RAM ÷3 sur MboloPay | Gabon"
+title: "Spring Native + Cloud Run : cold-start ÷18, RAM ÷3 sur MboloPay | Gabon"
 heroTitle: "Cold-start [÷18] avec Spring Native"
 date: 2026-05-19
 description: "Cold-start Spring Boot ÷18 et RAM ÷3 avec Spring Native + GraalVM sur Cloud Run. Benchmark mesuré au Gabon, 5 pièges Windows, profil Maven -Pnative."
@@ -9,15 +9,15 @@ draft: false
 showToc: true
 cover:
     image: "/images/spring-native-cloud-run-cover.jpg"
-    alt: "Architecture Spring Native + GraalVM + Google Cloud Run — flow de compilation AOT vers déploiement serverless, par Romaric BANGA"
+    alt: "Architecture Spring Native + GraalVM + Google Cloud Run : flow de compilation AOT vers déploiement serverless, par Romaric BANGA"
     caption: "Spring → GraalVM AOT → image OCI → Cloud Run serverless"
 ---
 
-23 h 47, un dimanche soir à Libreville, au Gabon. MOUSSAVOU, la développeuse de mon article précédent — [*« Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith »*]({{< ref "/posts/architecture-ia-spring-modulith" >}}) —, vient d'envoyer un screenshot sur le WhatsApp de l'équipe. Le screenshot, c'est la console Cloud Run en prod. Six mois de boulot. PayApp, sa fintech fictive de Libreville, vient enfin de pousser son MVP en ligne. Et ça crashe.
+23 h 47, un dimanche soir à Libreville, au Gabon. MOUSSAVOU, la développeuse de mon article précédent ([*« Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith »*]({{< ref "/posts/architecture-ia-spring-modulith" >}})), vient d'envoyer un screenshot sur le WhatsApp de l'équipe. Le screenshot, c'est la console Cloud Run en prod. Six mois de boulot. PayApp, sa fintech fictive de Libreville, vient enfin de pousser son MVP en ligne. Et ça crashe.
 
 Pas un crash franc, propre, qu'on lit dans une stack-trace. Le pire genre de crash : un crash *silencieux*. L'API tourne. Les endpoints répondent. Mais une requête sur trois retourne un timeout côté mobile. Les utilisateurs entrent leur OTP, attendent 4 secondes, voient *« Connexion impossible »*, ferment l'app. MOUSSAVOU regarde les logs : `Started PayAppApplication in 3.842 seconds`. À chaque cold-start. Cloud Run scale à zéro quand personne ne se connecte la nuit ; au premier appel du matin, l'instance met **presque 4 secondes** à booter, et l'OTP arrive avant que Spring soit prêt à le valider.
 
-Et c'est là que ça pique économiquement. Un cold-start de 3,8 secondes, c'est **3,8 secondes de vCPU et de RAM facturées par Cloud Run** — qu'il y ait une transaction qui aboutisse au bout, ou pas. Chaque utilisateur qui timeout retry. Chaque retry réveille une nouvelle instance, donc un nouveau cold-start. La nuit où personne ne se connecte, `min-instances=0` maintient bien le coût à zéro — comme prévu. Mais le matin, 200 utilisateurs qui re-tentent leur OTP trois fois chacun, ça fait 600 cold-starts × 3,8 s = **2 280 vCPU-secondes brûlées avant qu'une seule transaction ne réussisse**. Plus 182 GB-secondes de RAM, pour la même raison. Le scale-to-zero protège la facture la nuit ; il ne fait rien contre les pics d'échec en cascade le matin.
+Et c'est là que ça pique économiquement. Un cold-start de 3,8 secondes, c'est **3,8 secondes de vCPU et de RAM facturées par Cloud Run**, qu'il y ait une transaction qui aboutisse au bout, ou pas. Chaque utilisateur qui timeout retry. Chaque retry réveille une nouvelle instance, donc un nouveau cold-start. La nuit où personne ne se connecte, `min-instances=0` maintient bien le coût à zéro, comme prévu. Mais le matin, 200 utilisateurs qui re-tentent leur OTP trois fois chacun, ça fait 600 cold-starts × 3,8 s = **2 280 vCPU-secondes brûlées avant qu'une seule transaction ne réussisse**. Plus 182 GB-secondes de RAM, pour la même raison. Le scale-to-zero protège la facture la nuit ; il ne fait rien contre les pics d'échec en cascade le matin.
 
 Le lundi matin, premier dépassement du free tier. Quelques milliers de FCFA. Pour PayApp, c'est rien. Pour MOUSSAVOU qui paye son cloud avec sa bourse de fin d'études, c'est un choc. Sa première vraie facture cloud, et elle ne comprend pas encore pourquoi.
 
@@ -47,9 +47,9 @@ Le problème, c'est que Cloud Run te facture à la seconde pendant ces 15 minute
 
 Spring Native, c'est Spring qui dit à GraalVM : *« regarde mon code, devine TOUT à l'avance, compile-moi un binaire qui démarre comme un kiosque qui n'a rien à organiser parce qu'il a tout préparé la veille »*.
 
-Sous le capot, c'est **GraalVM Native Image**. Un compilateur AOT — *Ahead-of-Time* — qui prend ton bytecode Java et le transforme en exécutable natif (`.exe` sous Windows, ELF sous Linux). Plus de JVM au runtime. Plus de JIT. Plus de classpath scan. Plus de réflexion paresseuse. Tout est résolu à la compilation.
+Sous le capot, c'est **GraalVM Native Image**. Un compilateur AOT (*Ahead-of-Time*) qui prend ton bytecode Java et le transforme en exécutable natif (`.exe` sous Windows, ELF sous Linux). Plus de JVM au runtime. Plus de JIT. Plus de classpath scan. Plus de réflexion paresseuse. Tout est résolu à la compilation.
 
-> 📝 **Note de terminologie**. *« Spring Native »* était à l'origine un projet incubator séparé (le module `spring-native`, 2021-2022) qui prototypait le support GraalVM. Depuis **Spring Boot 3 (novembre 2022)**, ce support a été **intégré directement au core Spring Boot** et le module séparé a été déprécié — la doc officielle parle désormais de *« GraalVM Native Image support »*. Le nom *« Spring Native »* reste largement utilisé par habitude dans la communauté (et dans cet article) comme raccourci pour désigner *« la compilation native d'une appli Spring Boot via GraalVM + Spring AOT »*. C'est cette intégration qu'on décortique ici, pas un projet séparé.
+> 📝 **Note de terminologie**. *« Spring Native »* était à l'origine un projet incubator séparé (le module `spring-native`, 2021-2022) qui prototypait le support GraalVM. Depuis **Spring Boot 3 (novembre 2022)**, ce support a été **intégré directement au core Spring Boot** et le module séparé a été déprécié, la doc officielle parle désormais de *« GraalVM Native Image support »*. Le nom *« Spring Native »* reste largement utilisé par habitude dans la communauté (et dans cet article) comme raccourci pour désigner *« la compilation native d'une appli Spring Boot via GraalVM + Spring AOT »*. C'est cette intégration qu'on décortique ici, pas un projet séparé.
 
 Le compilateur fait ce qu'on appelle de la **closed-world analysis** : il considère que ton application est fermée, qu'aucune classe ne sera ajoutée au runtime, qu'aucun proxy dynamique ne sera créé à la volée. À partir de là, il peut suivre toutes les références depuis le `main()`, marquer les classes utilisées, jeter le reste, et compiler le minimum vital.
 
@@ -57,11 +57,11 @@ L'image native qui en sort est plus grosse en taille (~180 Mo vs ~50 Mo pour le 
 
 Quand je préparais la certification Spring Pro 2024 v2, j'ai compris que la vraie magie n'était pas GraalVM. C'était l'intégration **Spring AOT**. Spring Boot 4 inclut désormais un plugin Maven, `spring-boot-maven-plugin:process-aot`, qui s'exécute **avant** la compilation native. Ce plugin lit ta configuration, simule le démarrage Spring, calcule à l'avance quelles classes seront utilisées, quels beans seront créés, quels endpoints seront exposés. Il génère du code Java qui *remplace* la réflexion runtime par du code direct. Puis GraalVM compile ce code direct.
 
-> 💡 **L'éclair de compréhension** : Spring Native n'est pas une nouvelle façon d'écrire Spring. Ton code reste exactement le même — `@RestController`, `@Service`, `@Repository`, `@Transactional`, tout marche. Ce qui change, c'est le *quand* : ce que Spring fait normalement au démarrage de la JVM, il le fait maintenant au moment du `mvnw -Pnative`. Le runtime n'a plus rien à apprendre, il sait déjà.
+> 💡 **L'éclair de compréhension** : Spring Native n'est pas une nouvelle façon d'écrire Spring. Ton code reste exactement le même : `@RestController`, `@Service`, `@Repository`, `@Transactional`, tout marche. Ce qui change, c'est le *quand* : ce que Spring fait normalement au démarrage de la JVM, il le fait maintenant au moment du `mvnw -Pnative`. Le runtime n'a plus rien à apprendre, il sait déjà.
 
-La contrepartie de la closed-world analysis, c'est qu'elle n'aime pas les surprises. Tout ce qui repose sur de la réflexion dynamique, des proxies créés à la volée, des classes chargées par `Class.forName(nom)` à partir d'une string lue dans un fichier de config — tout ça ne marche pas par défaut. Il faut **prévenir GraalVM** que ces classes existent, via des *hints* (annotations `@RegisterReflectionForBinding`, configurations JSON `reflect-config.json`, ou processeurs `RuntimeHintsRegistrar`).
+La contrepartie de la closed-world analysis, c'est qu'elle n'aime pas les surprises. Tout ce qui repose sur de la réflexion dynamique, des proxies créés à la volée, des classes chargées par `Class.forName(nom)` à partir d'une string lue dans un fichier de config, tout ça ne marche pas par défaut. Il faut **prévenir GraalVM** que ces classes existent, via des *hints* (annotations `@RegisterReflectionForBinding`, configurations JSON `reflect-config.json`, ou processeurs `RuntimeHintsRegistrar`).
 
-La bonne nouvelle : Spring Boot 4 connaît son propre framework, donc il génère automatiquement les hints pour 80 % des cas (les annotations Spring, JPA, Jackson, Web). Les 20 % restants — typiquement les libs tierces ou un usage exotique — demandent des hints custom. On y reviendra dans la section sur les pièges.
+La bonne nouvelle : Spring Boot 4 connaît son propre framework, donc il génère automatiquement les hints pour 80 % des cas (les annotations Spring, JPA, Jackson, Web). Les 20 % restants (typiquement les libs tierces ou un usage exotique) demandent des hints custom. On y reviendra dans la section sur les pièges.
 
 ## Le benchmark MboloPay
 
@@ -80,17 +80,17 @@ Voici les mesures réelles, faites sur [MboloPay]({{< ref "/projects/mbolopay" >
 
 Quelques observations qui valent plus que les chiffres bruts.
 
-**Ligne 1 — Boot → Tomcat init (×33)**. C'est là que la closed-world analysis gagne le plus. La JVM passe 1,2 seconde à scanner les classes annotées dans tous les JARs du classpath. Le binaire natif a déjà résolu tout ça à la compilation : il sait à 36 ms quels beans existent.
+**Ligne 1 : Boot → Tomcat init (×33)**. C'est là que la closed-world analysis gagne le plus. La JVM passe 1,2 seconde à scanner les classes annotées dans tous les JARs du classpath. Le binaire natif a déjà résolu tout ça à la compilation : il sait à 36 ms quels beans existent.
 
-**Ligne 3 — JPA init (×55)**. Hibernate fait beaucoup de réflexion pour mapper entités → tables. AOT pré-calcule ce mapping. Le runtime n'a plus qu'à brancher.
+**Ligne 3 : JPA init (×55)**. Hibernate fait beaucoup de réflexion pour mapper entités → tables. AOT pré-calcule ce mapping. Le runtime n'a plus qu'à brancher.
 
-**Ligne 5 — Total (×18.2)**. C'est le chiffre à retenir. 3,74 secondes deviennent 205 ms. Si ton service Cloud Run scale à zéro la nuit et redémarre au premier appel le matin, l'utilisateur attend 205 ms au lieu de 3,7 secondes. Sur un OTP fintech, c'est la différence entre une transaction qui passe et une transaction perdue.
+**Ligne 5 : Total (×18.2)**. C'est le chiffre à retenir. 3,74 secondes deviennent 205 ms. Si ton service Cloud Run scale à zéro la nuit et redémarre au premier appel le matin, l'utilisateur attend 205 ms au lieu de 3,7 secondes. Sur un OTP fintech, c'est la différence entre une transaction qui passe et une transaction perdue.
 
-**Ligne 6 — RAM ÷3**. 250 Mo deviennent 80 Mo. Sur Cloud Run, ça veut dire que tu peux baisser ton allocation mémoire de 512 MiB à 256 MiB, et payer la moitié de ce que tu paies par instance-seconde.
+**Ligne 6 : RAM ÷3**. 250 Mo deviennent 80 Mo. Sur Cloud Run, ça veut dire que tu peux baisser ton allocation mémoire de 512 MiB à 256 MiB, et payer la moitié de ce que tu paies par instance-seconde.
 
-**Ligne 7 — Taille ×3 (le compromis)**. Le binaire natif est trois fois plus gros que le JAR. Si tu pushes ton image sur Artifact Registry tous les jours, ça finit par coûter de la bande passante. Pas une catastrophe, mais à noter.
+**Ligne 7 : Taille ×3 (le compromis)**. Le binaire natif est trois fois plus gros que le JAR. Si tu pushes ton image sur Artifact Registry tous les jours, ça finit par coûter de la bande passante. Pas une catastrophe, mais à noter.
 
-**Ligne 8 — Build time ×12 (l'autre compromis)**. Compiler le binaire prend 2 minutes en local sur ma machine, et 7 à 12 minutes en CI (Cloud Build, GitHub Actions, GitLab CI). C'est la limite. Si tu déploies 30 fois par jour, tu vas attendre. Si tu déploies une fois par jour ou deux fois par semaine, c'est invisible.
+**Ligne 8 : Build time ×12 (l'autre compromis)**. Compiler le binaire prend 2 minutes en local sur ma machine, et 7 à 12 minutes en CI (Cloud Build, GitHub Actions, GitLab CI). C'est la limite. Si tu déploies 30 fois par jour, tu vas attendre. Si tu déploies une fois par jour ou deux fois par semaine, c'est invisible.
 
 > ⚠️ **Piège classique** : ne compare pas le *steady-state* de la JVM (après warm-up JIT) avec le natif. À chaud, la JVM peut être *plus rapide* qu'AOT sur certaines opérations parce que le JIT a optimisé le code en fonction du profile d'exécution réel. Le gain du natif est sur le **démarrage** et l'**empreinte mémoire**, pas sur le débit en charge soutenue.
 
@@ -129,7 +129,7 @@ Pour produire une image Docker directement, c'est encore plus simple :
 ./mvnw -Pnative spring-boot:build-image
 ```
 
-Spring Boot délègue à **Paketo Buildpacks** — précisément au builder `paketobuildpacks/builder-noble-java-tiny`, optimisé pour les images natives Java. Pas de Dockerfile à écrire. Le buildpack détecte que tu es en mode natif, télécharge GraalVM, compile, et produit une image OCI minuscule (Ubuntu Noble distroless-like) prête à pousser sur Artifact Registry.
+Spring Boot délègue à **Paketo Buildpacks**, précisément au builder `paketobuildpacks/builder-noble-java-tiny`, optimisé pour les images natives Java. Pas de Dockerfile à écrire. Le buildpack détecte que tu es en mode natif, télécharge GraalVM, compile, et produit une image OCI minuscule (Ubuntu Noble distroless-like) prête à pousser sur Artifact Registry.
 
 > **À retenir** : la philosophie Spring Boot 4 est *« si tu suis les conventions, on s'occupe de tout »*. Pas de `@ImportRuntimeHints` à câbler. Pas de `RuntimeHintsRegistrar` custom. Pour 80 % d'une app Spring standard (Web + Data JPA + Modulith), tu ne touches rien d'autre que les deux plugins ci-dessus. Les 20 % restants, ce sont les hints pour les libs tierces ou les usages exotiques. Pile ce qu'on va voir maintenant.
 
@@ -137,11 +137,11 @@ Spring Boot délègue à **Paketo Buildpacks** — précisément au builder `pak
 
 Tout ce qui précède donne l'impression que c'est facile. Ça l'est, quand tu connais les pièges. Voilà ceux qui m'ont fait perdre du temps. Quand MOUSSAVOU a basculé en natif, elle est tombée sur exactement les trois premiers en deux jours.
 
-### Piège 1 — La console H2 ne marche plus
+### Piège 1 : La console H2 ne marche plus
 
 C'est le piège qui pique. En mode JVM, `http://localhost:8080/h2-console` te donne une UI pratique pour inspecter ta base H2 en dev. En mode natif, tu vois une page blanche et un log d'erreur cryptique. La servlet H2 utilise de la réflexion dynamique qui n'est pas pré-enregistrée dans les hints AOT.
 
-> **Solution honnête** : pour la dev locale, utilise la JVM standard (`./mvnw spring-boot:run`). Le mode natif est pour la prod ou pour mesurer le cold-start. Si tu veux vraiment l'h2-console en natif, il faut écrire un `RuntimeHintsRegistrar` custom qui enregistre toutes les classes de la servlet H2 — quelques dizaines de lignes, faisable mais pénible.
+> **Solution honnête** : pour la dev locale, utilise la JVM standard (`./mvnw spring-boot:run`). Le mode natif est pour la prod ou pour mesurer le cold-start. Si tu veux vraiment l'h2-console en natif, il faut écrire un `RuntimeHintsRegistrar` custom qui enregistre toutes les classes de la servlet H2, quelques dizaines de lignes, faisable mais pénible.
 
 **Pour les curieux qui veulent quand même essayer**, voici le squelette minimal du registrar à placer dans `src/main/java/.../config/H2ConsoleHints.java` :
 
@@ -185,12 +185,12 @@ public class H2ConsoleHints {
 Trois registrations, trois raisons distinctes :
 
 - **`reflection.registerType(JakartaWebServlet)`** : Spring Boot 4 utilise Jakarta EE, la servlet H2 correspondante est `JakartaWebServlet` (pas `WebServlet`, qui était la version `javax` de Spring Boot 2). GraalVM doit la connaître à la compilation parce que Spring l'instancie via réflexion au démarrage.
-- **`resources.registerPattern("org/h2/server/web/*")`** : la console est une SPA dont le HTML/CSS/JS vivent **dans le JAR `h2-*.jar`**. Sans cette ligne, l'UI s'ouvre mais charge un 404 sur chaque ressource — d'où la fameuse « page blanche ».
+- **`resources.registerPattern("org/h2/server/web/*")`** : la console est une SPA dont le HTML/CSS/JS vivent **dans le JAR `h2-*.jar`**. Sans cette ligne, l'UI s'ouvre mais charge un 404 sur chaque ressource, d'où la fameuse « page blanche ».
 - **`reflection.registerType("org.h2.Driver")`** : appelé via `Class.forName("org.h2.Driver")` par certaines configs JPA. Sans le hint, `ClassNotFoundException` au premier accès BDD.
 
 > ⚠️ **Note de réalisme** : ce squelette suffit à *afficher* la console et à *ouvrir une connexion*. Mais la H2 Console utilise une cinquantaine de classes internes (formateurs SQL, parser, session manager) que tu découvriras au fur et à mesure des `ClassNotFoundException` qui pop dans les logs Cloud Run. C'est exactement ce que je voulais dire par *« faisable mais pénible »* : tu construis ton registrar **incrémentalement, en réagissant aux erreurs runtime**. Plan une demi-journée si tu veux vraiment.
 
-### Piège 2 — Spring Boot DevTools est ignoré
+### Piège 2 : Spring Boot DevTools est ignoré
 
 Tu as ajouté `spring-boot-devtools` à ton pom.xml. En JVM, il te donne du hot-reload : tu sauvegardes un fichier, l'app redémarre toute seule en 2 secondes. En natif, DevTools est **ignoré silencieusement**. Pas d'erreur, pas de log. Juste : ton hot-reload ne marche pas.
 
@@ -198,7 +198,7 @@ C'est logique : DevTools repose sur un classloader custom qui recharge les class
 
 **Solution** : dev en JVM, prod en natif. Comme pour H2.
 
-### Piège 3 — Les erreurs AOT bloquent le build
+### Piège 3 : Les erreurs AOT bloquent le build
 
 L'AOT processing tourne **avant** la compilation native. Si ton code a une erreur que l'AOT détecte (typiquement : un bean qui dépend d'une classe absente, une circularité, une config invalide), le build s'arrête là. Aucun binaire ne sort.
 
@@ -213,11 +213,11 @@ C'est un faux ami : tu crois que c'est un problème natif, c'est en réalité un
 
 > **Méthode debug** : commence par t'assurer que `./mvnw spring-boot:run` démarre sans warning. Si la JVM démarre proprement, l'AOT démarrera aussi neuf fois sur dix.
 
-### Piège 4 — Liberica NIK ≠ Liberica JDK
+### Piège 4 : Liberica NIK ≠ Liberica JDK
 
 Celui-là, c'est le grand classique qui fait perdre une demi-journée parce qu'on ne comprend pas le message d'erreur.
 
-Spring Boot 4 demande Java 17 au minimum, mais MboloPay tourne sur **Java 25** pour profiter des dernières optimisations JVM — et surtout pour s'aligner avec Liberica NIK 25, ce qui simplifie l'installation à un seul package au lieu de gérer deux JDK distinctes. Tu as donc installé Liberica JDK 25. Tu lances `./mvnw -Pnative native:compile`. Tu obtiens :
+Spring Boot 4 demande Java 17 au minimum, mais MboloPay tourne sur **Java 25** pour profiter des dernières optimisations JVM, et surtout pour s'aligner avec Liberica NIK 25, ce qui simplifie l'installation à un seul package au lieu de gérer deux JDK distinctes. Tu as donc installé Liberica JDK 25. Tu lances `./mvnw -Pnative native:compile`. Tu obtiens :
 
 ```text
 native-image is not installed in your JAVA_HOME
@@ -237,9 +237,9 @@ native-image --version
 
 Les trois doivent retourner du Java 25 / Liberica NIK 25.
 
-Et sous Windows uniquement, prévois **Visual Studio Build Tools** en plus : GraalVM Native Image utilise `cl.exe` (le compilateur MSVC) pour produire le binaire. Sans MSVC, tu obtiens `Error: Failed to find 'vcvarsall.bat'`. Télécharge les Build Tools (charge de travail « Développement Desktop en C++ »), puis lance la compilation depuis le « x64 Native Tools Command Prompt for VS 2022 » — ce terminal charge l'environnement MSVC automatiquement.
+Et sous Windows uniquement, prévois **Visual Studio Build Tools** en plus : GraalVM Native Image utilise `cl.exe` (le compilateur MSVC) pour produire le binaire. Sans MSVC, tu obtiens `Error: Failed to find 'vcvarsall.bat'`. Télécharge les Build Tools (charge de travail « Développement Desktop en C++ »), puis lance la compilation depuis le « x64 Native Tools Command Prompt for VS 2022 », ce terminal charge l'environnement MSVC automatiquement.
 
-### Piège 5 — `docker-credential-gcr` obligatoire sous Windows
+### Piège 5 : `docker-credential-gcr` obligatoire sous Windows
 
 Celui-là, je l'ai vécu douloureusement la première fois que j'ai voulu pousser une image native sur Artifact Registry depuis Windows. Tu as `gcloud` installé. Tu as fait `gcloud auth login`. Tu lances `./mvnw -Pnative spring-boot:build-image` qui prend 5-10 minutes à compiler. À la toute fin, au moment du push, l'erreur tombe :
 
@@ -253,9 +253,9 @@ Sur macOS et Linux, `gcloud auth configure-docker` installe correctement un help
 docker-credential-gcr configure-docker --registries=<region>-docker.pkg.dev
 ```
 
-Et au passage, ne pas oublier de faire `gcloud auth application-default login` (ADC) en plus de `gcloud auth login`. Ce sont **deux mécanismes d'authentification distincts**. Le premier authentifie la CLI `gcloud`. Le second écrit les credentials que les SDKs et helpers (comme docker-credential-gcr) utilisent. Sans les deux, le push échoue avec `auth: "invalid_grant" "Bad Request"` — **après 10 minutes de build**. C'est rageant.
+Et au passage, ne pas oublier de faire `gcloud auth application-default login` (ADC) en plus de `gcloud auth login`. Ce sont **deux mécanismes d'authentification distincts**. Le premier authentifie la CLI `gcloud`. Le second écrit les credentials que les SDKs et helpers (comme docker-credential-gcr) utilisent. Sans les deux, le push échoue avec `auth: "invalid_grant" "Bad Request"`, **après 10 minutes de build**. C'est rageant.
 
-Quand MOUSSAVOU m'a envoyé le screenshot de l'erreur sur WhatsApp, j'ai souri tristement — parce qu'elle venait de vivre, à la lettre, ce que j'avais vécu un an plus tôt en déployant une appli Spring interne à l'**ANINF**, l'agence où je travaille depuis 7 ans. Exactement la même matinée perdue, exactement la même erreur cryptique d'ADC. Sauf que MOUSSAVOU, elle, n'a pas eu à creuser 4 heures pour comprendre : je lui ai juste envoyé le petit garde-fou que cette expérience m'avait poussé à coder, un script qui vérifie l'ADC avant tout `mvnw build-image` — pas le luxe d'attendre 10 minutes pour découvrir que les credentials sont expirés. Elle l'a immédiatement reproduit dans son propre pipeline PayApp. C'est ce script-là qu'on va décortiquer maintenant.
+Quand MOUSSAVOU m'a envoyé le screenshot de l'erreur sur WhatsApp, j'ai souri tristement, parce qu'elle venait de vivre, à la lettre, ce que j'avais vécu un an plus tôt en déployant une appli Spring interne à l'**ANINF**, l'agence où je travaille depuis 7 ans. Exactement la même matinée perdue, exactement la même erreur cryptique d'ADC. Sauf que MOUSSAVOU, elle, n'a pas eu à creuser 4 heures pour comprendre : je lui ai juste envoyé le petit garde-fou que cette expérience m'avait poussé à coder, un script qui vérifie l'ADC avant tout `mvnw build-image`, pas le luxe d'attendre 10 minutes pour découvrir que les credentials sont expirés. Elle l'a immédiatement reproduit dans son propre pipeline PayApp. C'est ce script-là qu'on va décortiquer maintenant.
 
 ## Le déploiement sur Cloud Run
 
@@ -274,25 +274,25 @@ gcloud run deploy <service-name> \
     --max-instances 5
 ```
 
-Décortiquons. **CPU 1 / Memory 512Mi** suffit largement pour le binaire natif (80 Mo de RAM, on a 6× la marge). **Concurrency 80** : chaque instance encaisse jusqu'à 80 requêtes en parallèle avant que Cloud Run en démarre une nouvelle. **min-instances 0** : c'est le levier financier — quand personne ne t'appelle, tu paies zéro. **max-instances 5** : protection anti-bombe, au-delà tu refuses ou tu fais la queue.
+Décortiquons. **CPU 1 / Memory 512Mi** suffit largement pour le binaire natif (80 Mo de RAM, on a 6× la marge). **Concurrency 80** : chaque instance encaisse jusqu'à 80 requêtes en parallèle avant que Cloud Run en démarre une nouvelle. **min-instances 0** : c'est le levier financier, quand personne ne t'appelle, tu paies zéro. **max-instances 5** : protection anti-bombe, au-delà tu refuses ou tu fais la queue.
 
 Le workflow conceptuel ressemble à ça :
 
-{{< figure src="/images/spring-native-cloud-run-workflow.jpg" alt="Pipeline CI/CD Spring Native vers Cloud Run en six étapes : code Spring + pom.xml, build via Paketo Buildpack, génération d'une image OCI stratifiée, stockage sur Artifact Registry, déploiement par gcloud run deploy, exécution sur Cloud Run serverless — illustration isométrique avec motif pagne ouest-africain par Romaric BANGA" caption="Du code Spring au service Cloud Run : six stations, un artefact qui voyage de gauche à droite puis revient se déployer." loading="lazy" >}}
+{{< figure src="/images/spring-native-cloud-run-workflow.jpg" alt="Pipeline CI/CD Spring Native vers Cloud Run en six étapes : code Spring + pom.xml, build via Paketo Buildpack, génération d'une image OCI stratifiée, stockage sur Artifact Registry, déploiement par gcloud run deploy, exécution sur Cloud Run serverless. Illustration isométrique avec motif pagne ouest-africain par Romaric BANGA" caption="Du code Spring au service Cloud Run : six stations, un artefact qui voyage de gauche à droite puis revient se déployer." loading="lazy" >}}
 
 Pour MboloPay, le service tourne dans **une région européenne**, avec un **custom domain mappé** sur `mbolopay.banga.ga`. Le mapping DNS prend ~5 minutes à propager la première fois, puis c'est invisible.
 
 La cert Google Cloud Engineer m'avait fait comprendre une nuance importante : Cloud Run en mode serverless te facture deux choses, le CPU-seconde et la mémoire-seconde, **uniquement quand une instance est active**. Quand `min-instances=0` et qu'aucune requête n'arrive, ton coût est strictement zéro. Pas « presque zéro ». Zéro.
 
-> ⚠️ **Piège que j'ai vu en mission** : laisser `min-instances 1` « pour éviter les cold-starts ». En natif, le cold-start est de 205 ms — c'est imperceptible. Garder 1 instance chaude 24/7 te facture en continu pour aucun bénéfice mesurable. Reste à `min-instances 0` sauf si tu as un SLA de cold-start < 100 ms et un trafic vraiment intermittent.
+> ⚠️ **Piège que j'ai vu en mission** : laisser `min-instances 1` « pour éviter les cold-starts ». En natif, le cold-start est de 205 ms, c'est imperceptible. Garder 1 instance chaude 24/7 te facture en continu pour aucun bénéfice mesurable. Reste à `min-instances 0` sauf si tu as un SLA de cold-start < 100 ms et un trafic vraiment intermittent.
 
-Pour les permissions, le service tourne sous un service account dédié (placeholder `<service-account>@<your-project>.iam.gserviceaccount.com`) avec uniquement les rôles IAM nécessaires — accès lecture Artifact Registry, et ce dont l'app a besoin pour ses dépendances (typiquement Secret Manager pour les credentials DB, Cloud SQL pour la base de prod). Le principe de moindre privilège n'est pas une option.
+Pour les permissions, le service tourne sous un service account dédié (placeholder `<service-account>@<your-project>.iam.gserviceaccount.com`) avec uniquement les rôles IAM nécessaires : accès lecture Artifact Registry, et ce dont l'app a besoin pour ses dépendances (typiquement Secret Manager pour les credentials DB, Cloud SQL pour la base de prod). Le principe de moindre privilège n'est pas une option.
 
 ## Le pipeline automatisé
 
-Justement, ce script. Sur MboloPay, c'est [~200 lignes de PowerShell à la racine du repo](https://github.com/bangaromaric/mbolopay/blob/main/cloudRunDeploy.ps1) qui enchaînent toute la séquence sans intervention manuelle. Le code complet est public sur GitHub — forkable tel quel, il suffit d'y mettre tes propres project ID, region et nom d'image en haut du fichier. Conceptuellement, voici ce qu'il fait, dans l'ordre — la même séquence que MOUSSAVOU a finalement adaptée pour PayApp :
+Justement, ce script. Sur MboloPay, c'est [~200 lignes de PowerShell à la racine du repo](https://github.com/bangaromaric/mbolopay/blob/main/cloudRunDeploy.ps1) qui enchaînent toute la séquence sans intervention manuelle. Le code complet est public sur GitHub, forkable tel quel, il suffit d'y mettre tes propres project ID, region et nom d'image en haut du fichier. Conceptuellement, voici ce qu'il fait, dans l'ordre, la même séquence que MOUSSAVOU a finalement adaptée pour PayApp :
 
-1. **Vérifications prérequises** : Docker Desktop tourne, `gcloud auth` est valide, ADC est en place, `docker-credential-gcr` est dans le PATH. Si l'un manque, échec immédiat — pas 10 minutes plus tard.
+1. **Vérifications prérequises** : Docker Desktop tourne, `gcloud auth` est valide, ADC est en place, `docker-credential-gcr` est dans le PATH. Si l'un manque, échec immédiat, pas 10 minutes plus tard.
 
 2. **Git sync** : `git checkout main`, `git pull`. On part toujours d'une base à jour.
 
@@ -306,13 +306,13 @@ Justement, ce script. Sur MboloPay, c'est [~200 lignes de PowerShell à la racin
 
 7. **Lecture des logs** : `gcloud run services logs read --limit 50 | grep "Started"`. Mesure du cold-start réel après déploiement. S'il est > 500 ms, alerte rouge.
 
-Durée totale : 7 à 12 minutes. C'est ma limite acceptable pour un déploiement de prod. Si je devais déployer plus souvent que ça, j'irais sur du JVM standard avec un Cloud Run min-instances=1 — sujet de la section suivante.
+Durée totale : 7 à 12 minutes. C'est ma limite acceptable pour un déploiement de prod. Si je devais déployer plus souvent que ça, j'irais sur du JVM standard avec un Cloud Run min-instances=1, sujet de la section suivante.
 
 ## Le coût
 
 Voilà ce que la facture de MOUSSAVOU est devenue après la bascule en natif.
 
-Cloud Run free tier (au moment où j'écris) : 2 millions de requêtes par mois, 360 000 GB-secondes de mémoire, 180 000 vCPU-secondes. Pour une fintech qui démarre, 2M requêtes c'est confortable — disons 1500 utilisateurs actifs qui font 40 requêtes/jour chacun, soit 60 000 requêtes par jour, 1,8M par mois. Sous le seuil.
+Cloud Run free tier (au moment où j'écris) : 2 millions de requêtes par mois, 360 000 GB-secondes de mémoire, 180 000 vCPU-secondes. Pour une fintech qui démarre, 2M requêtes c'est confortable, disons 1500 utilisateurs actifs qui font 40 requêtes/jour chacun, soit 60 000 requêtes par jour, 1,8M par mois. Sous le seuil.
 
 Avec `min-instances=0` et un cold-start de 205 ms, l'instance ne reste chaude que pendant les pics d'activité (par défaut 15 minutes après la dernière requête). La nuit, samedi-dimanche matin, jours fériés : zéro instance, zéro coût. Le service vit gratuitement.
 
@@ -326,7 +326,7 @@ Soyons honnêtes. Le natif n'est pas la solution à tout. Voilà quand je ne l'u
 
 **Tu changes ton code 30 fois par jour**. Si tu es en early-stage produit, en sprint design-prod-design, le build natif de 7-12 minutes en CI va te rendre fou. Reste sur JVM standard, déploie en 2 minutes, garde tes itérations courtes. Tu basculeras en natif quand l'API se stabilisera.
 
-**Ton service tourne 24/7 sans jamais scale à zéro**. Si tu as un trafic continu — disons 10 requêtes/seconde non-stop — ton instance reste chaude en permanence. Le cold-start n'est jamais payé. Et après quelques minutes de warm-up JIT, la JVM optimise le code chaud mieux que ce qu'AOT a pu prédire à la compilation. Sur un workload soutenu, JVM peut être 10-20 % plus rapide en débit. Le natif gagne sur les workloads **serverless / intermittents** — pas sur les workloads stables.
+**Ton service tourne 24/7 sans jamais scale à zéro**. Si tu as un trafic continu (disons 10 requêtes/seconde non-stop), ton instance reste chaude en permanence. Le cold-start n'est jamais payé. Et après quelques minutes de warm-up JIT, la JVM optimise le code chaud mieux que ce qu'AOT a pu prédire à la compilation. Sur un workload soutenu, JVM peut être 10-20 % plus rapide en débit. Le natif gagne sur les workloads **serverless / intermittents**, pas sur les workloads stables.
 
 **Tu utilises massivement de la réflexion dynamique ou des libs tierces non Spring**. Si ton app charge des classes à partir de strings (`Class.forName(config.className)`), si tu as des proxies dynamiques générés à la volée, si tu intègres une lib obscure qui n'a pas de hints AOT… tu peux y arriver, mais le coût d'ingénierie devient significatif. Mesure avant.
 
@@ -337,27 +337,27 @@ Soyons honnêtes. Le natif n'est pas la solution à tout. Voilà quand je ne l'u
 Trois choses, en sortie de cette session de 48h passée à débugger Liberica NIK et docker-credential-gcr :
 
 - **Le cold-start n'est pas une fatalité Java**. Bien configuré, un Spring Boot 4 natif démarre en 200 ms. Ce qui ferme la principale critique adressée à Spring sur serverless.
-- **GraalVM AOT n'est pas magique, c'est juste de l'analyse statique à la compilation**. Spring Boot 4 fait 80 % du travail. Les 20 % restants, ce sont les hints custom — pénible, mais documenté.
+- **GraalVM AOT n'est pas magique, c'est juste de l'analyse statique à la compilation**. Spring Boot 4 fait 80 % du travail. Les 20 % restants, ce sont les hints custom, pénible mais documenté.
 - **L'authentification Cloud sous Windows, c'est trois mécanismes distincts** : `gcloud auth login`, `gcloud auth application-default login`, et `docker-credential-gcr`. Manquer un seul des trois et le pipeline échoue. Apprends à les vérifier en 30 secondes au début de chaque script, pas après 10 minutes de build.
 
 MOUSSAVOU a poussé son MVP natif en prod. Cold-start mesuré : 187 ms. Facture du mois : 0 FCFA. Au dernier meetup GDG Libreville, elle a présenté son retour d'expérience. Trois autres devs de fintech locales au Gabon ont basculé leur stack la semaine suivante.
 
 ## Ressources
 
-- **Repo MboloPay** : [github.com/bangaromaric/mbolopay](https://github.com/bangaromaric/mbolopay) — l'app de démo dont le bench est extrait, avec son `pom.xml`, ses tests d'architecture ArchUnit, sa doc native-image.
-- **Script de déploiement Cloud Run** : [cloudRunDeploy.ps1](https://github.com/bangaromaric/mbolopay/blob/main/cloudRunDeploy.ps1) — le pipeline PowerShell détaillé dans la section *« Le pipeline automatisé »*. Forkable tel quel, à adapter avec tes propres variables d'environnement en haut du fichier.
-- **Démo en ligne** : [mbolopay.banga.ga](https://mbolopay.banga.ga) — tourne sur Cloud Run en mode natif, `min-instances=0`. Cold-start le matin, 200 ms le reste du temps.
-- **GraalVM Native Image** : [graalvm.org](https://www.graalvm.org/) — la doc officielle, dense mais complète.
-- **Spring Boot AOT** : [docs.spring.io/spring-boot/reference/packaging/native-image/](https://docs.spring.io/spring-boot/reference/packaging/native-image/) — guide officiel Spring sur la compilation native.
-- **Liberica NIK** : [bell-sw.com/pages/downloads/native-image-kit/](https://bell-sw.com/pages/downloads/native-image-kit/) — la distribution GraalVM que j'utilise sous Windows.
-- **Architecture sous-jacente** : pour le DDD + Hexagonal + Spring Modulith qui structure MboloPay, voir [*« Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith »*]({{< ref "/posts/architecture-ia-spring-modulith" >}}) — l'article précédent où MOUSSAVOU apprend à modéliser son domaine.
-- **Fiche projet MboloPay** : [/projects/mbolopay/]({{< ref "/projects/mbolopay" >}}) — résumé technique, stack complète, démo en ligne.
+- **Repo MboloPay** : [github.com/bangaromaric/mbolopay](https://github.com/bangaromaric/mbolopay). L'app de démo dont le bench est extrait, avec son `pom.xml`, ses tests d'architecture ArchUnit, sa doc native-image.
+- **Script de déploiement Cloud Run** : [cloudRunDeploy.ps1](https://github.com/bangaromaric/mbolopay/blob/main/cloudRunDeploy.ps1). Le pipeline PowerShell détaillé dans la section *« Le pipeline automatisé »*. Forkable tel quel, à adapter avec tes propres variables d'environnement en haut du fichier.
+- **Démo en ligne** : [mbolopay.banga.ga](https://mbolopay.banga.ga). Tourne sur Cloud Run en mode natif, `min-instances=0`. Cold-start le matin, 200 ms le reste du temps.
+- **GraalVM Native Image** : [graalvm.org](https://www.graalvm.org/). La doc officielle, dense mais complète.
+- **Spring Boot AOT** : [docs.spring.io/spring-boot/reference/packaging/native-image/](https://docs.spring.io/spring-boot/reference/packaging/native-image/). Guide officiel Spring sur la compilation native.
+- **Liberica NIK** : [bell-sw.com/pages/downloads/native-image-kit/](https://bell-sw.com/pages/downloads/native-image-kit/). La distribution GraalVM que j'utilise sous Windows.
+- **Architecture sous-jacente** : pour le DDD + Hexagonal + Spring Modulith qui structure MboloPay, voir [*« Dompter l'IA générative avec DDD, Hexagonal & Spring Modulith »*]({{< ref "/posts/architecture-ia-spring-modulith" >}}). L'article précédent où MOUSSAVOU apprend à modéliser son domaine.
+- **Fiche projet MboloPay** : [/projects/mbolopay/]({{< ref "/projects/mbolopay" >}}). Résumé technique, stack complète, démo en ligne.
 - **Le contrepoint, sans GraalVM** : [Pli]({{< ref "/projects/pli" >}}), un service Go qui démarre en millisecondes et tient dans un conteneur de 44 Mo, sans aucune compilation native à entretenir. Le natif rattrape la JVM, il ne rattrape pas un langage qui n'a jamais eu ce problème.
 
 ---
 
 *Merci à [Yannick Serge Obam](https://www.linkedin.com/in/yannick-serge-obam/) pour sa relecture exigeante qui a rendu cet article plus juste.*
 
-> *Le repo MboloPay est ouvert sur GitHub ([github.com/bangaromaric/mbolopay](https://github.com/bangaromaric/mbolopay)), la démo tourne sur [https://mbolopay.banga.ga](https://mbolopay.banga.ga), et si tu veux qu'on parle de ton archi Spring/GCP — mission consulting, coaching d'équipe, ou juste un café au prochain meetup GDG Libreville — écris-moi via [https://ban.ga/](https://ban.ga/). Mbolo.*
+> *Le repo MboloPay est ouvert sur GitHub ([github.com/bangaromaric/mbolopay](https://github.com/bangaromaric/mbolopay)), la démo tourne sur [https://mbolopay.banga.ga](https://mbolopay.banga.ga), et si tu veux qu'on parle de ton archi Spring/GCP (mission consulting, coaching d'équipe, ou juste un café au prochain meetup GDG Libreville), écris-moi via [https://ban.ga/](https://ban.ga/). Mbolo.*
 
 #Java #SpringBoot #SpringNative #GraalVM #GCP #CloudRun #AfricaTech #DDD

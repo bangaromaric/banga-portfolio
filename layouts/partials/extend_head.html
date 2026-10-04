@@ -20,7 +20,7 @@
 <meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e0e0c" media="(prefers-color-scheme: dark)">
 
-{{- /* Pages noindex (ex: /bienvenue/) — bloque crawl + indexation */ -}}
+{{- /* Pages noindex (ex: /bienvenue/), bloque crawl + indexation */ -}}
 {{- if .Params.noindex }}
 <meta name="robots" content="noindex,nofollow">
 {{- end }}
@@ -32,7 +32,7 @@
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 <link rel="dns-prefetch" href="https://www.clarity.ms">
 
-{{- /* Microsoft Clarity — heatmaps + session recordings (free, unlimited).
+{{- /* Microsoft Clarity : heatmaps + session recordings (free, unlimited).
        Chargé async, ne bloque pas le rendu. Privacy : anonymisé par défaut, RGPD compliant.
        Dashboard : https://clarity.microsoft.com/projects/view/wvk1kd8mss/ */ -}}
 <script>

@@ -129,7 +129,7 @@
     border-left: 2px solid var(--terracotta);
 }
 
-/* Tableaux éditoriaux dans le corps de l'article — style §11 :
+/* Tableaux éditoriaux dans le corps de l'article, style §11 :
    séparateurs fins (pas de bordures verticales), header mono uppercase
    comme les kickers, dernière colonne monospace pour les chiffres alignés,
    accent terracotta sur le strong (ex. ligne Total). Responsive scroll
